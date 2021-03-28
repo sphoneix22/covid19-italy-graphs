@@ -721,7 +721,8 @@ def vaccini_nazionale():
         "Percentuale dosi somministrate per regioni",
         "/graphs/vaccini/percentuale_somministrazione_regioni.jpg",
         xticks=range(0, 100, 5),
-        horizontal=True
+        horizontal=True,
+        grid="x"
     )
     print("Grafico completato")
 

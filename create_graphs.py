@@ -478,7 +478,7 @@ def nazionale():
         "/graphs/epidemia/andamento_ospedalizzati.jpg",
         soglia=(TOTALE_TERAPIA_INTENSIVA["nazionale"]/100)*30, 
     )
-    summary += "Ospedalizzati ordinari: {}\nTerapie intensive: {}\n".format(data["nazionale"]["terapia_intensiva"].iat[-1], data["nazionale"]["ricoverati_con_sintomi"].iat[-1])
+    summary += "Ospedalizzati ordinari: {}\nTerapie intensive: {}\n".format(data["nazionale"]["ricoverati_con_sintomi"].iat[-1], data["nazionale"]["terapia_intensiva"].iat[-1])
     print("Grafico completato")
 
     # Grafico ingressi in terapia intensiva
@@ -530,7 +530,7 @@ def nazionale():
     print("Grafico completato")
 
     # Grafico variazione totale ospedalizzati
-    print("Grafico variazione positivi con sintomi...")
+    print("Grafico variazione ricoverati con sintomi...")
     delta = create_delta(data["nazionale"]["ricoverati_con_sintomi"])
     grafico_verticale(
         data["nazionale"]["data"],
@@ -538,7 +538,7 @@ def nazionale():
         "Variazione ospedalizzati ordinari",
         "/graphs/epidemia/variazione_ospedalizzati_ordinari.jpg"
     )
-    summary += "Variazione positivi con sintomi: {}\n".format(delta[-1])
+    summary += "Variazione ricoverati con sintomi: {}\n".format(delta[-1])
     print("Grafico completato")
 
     # Grafico deceduti
@@ -661,14 +661,14 @@ def regioni():
         print("Grafico completato")
 
         # Grafico variazione totale ospedalizzati
-        print("Grafico variazione positivi con sintomi...")
+        print("Grafico variazione ricoverati con sintomi...")
         grafico_verticale(
             data["regioni"][regione]["data"],
             create_delta(data["regioni"][regione]["ricoverati_con_sintomi"]),
             "Variazione ospedalizzati ordinari",
             f"/graphs/epidemia/variazione_ospedalizzati_ordinari_{denominazione_regione}.jpg"
         )
-        summary += "Variazione positivi con sintomi: {}\n".format(create_delta(data["regioni"][regione]["ricoverati_con_sintomi"])[-1])
+        summary += "Variazione ricoverati con sintomi: {}\n".format(create_delta(data["regioni"][regione]["ricoverati_con_sintomi"])[-1])
         print("Grafico completato")
 
         # Grafico deceduti

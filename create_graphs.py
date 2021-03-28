@@ -665,7 +665,7 @@ def regioni():
         grafico_verticale(
             data["regioni"][regione]["data"],
             create_delta(data["regioni"][regione]["ricoverati_con_sintomi"]),
-            "Variazione ospedalizzati ordinari",
+            f"Variazione ospedalizzati ordinari {denominazione_regione}",
             f"/graphs/epidemia/variazione_ospedalizzati_ordinari_{denominazione_regione}.jpg"
         )
         summary += "Variazione ricoverati con sintomi: {}\n".format(create_delta(data["regioni"][regione]["ricoverati_con_sintomi"])[-1])

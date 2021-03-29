@@ -1,13 +1,13 @@
 DATI NAZIONALI 2021-03-28 17:00:00
 
 Nuovi positivi: 19611
-Ospedalizzati ordinari: 3679
-Terapie intensive: 28701
+Ospedalizzati ordinari: 28701
+Terapie intensive: 3679
 Ingressi TI: 217.0
 Variazione totale totale positivi: 1357
 Variazione totale ospedalizzati: 124
 Variazione TI: 44
-Variazione positivi con sintomi: 80
+Variazione ricoverati con sintomi: 80
 Deceduti totali: 107933
 Deceduti giornalieri: 297
 Incidenza: 243.30881885441892
@@ -22,7 +22,7 @@ Ingressi TI: 20.0
 Variazione totale positivi: -10
 Variazione totale ospedalizzati: 18
 Variazione TI: 9
-Variazione positivi con sintomi: 9
+Variazione ricoverati con sintomi: 9
 Deceduti totali: 10190
 Deceduti giornalieri: 10
 Incidenza: 341.01739717578585
@@ -35,7 +35,7 @@ Ingressi TI: 0.0
 Variazione totale positivi: 29
 Variazione totale ospedalizzati: 5
 Variazione TI: 0
-Variazione positivi con sintomi: 5
+Variazione ricoverati con sintomi: 5
 Deceduti totali: 420
 Deceduti giornalieri: 0
 Incidenza: 377.4973207287618
@@ -48,7 +48,7 @@ Ingressi TI: 53.0
 Variazione totale positivi: -3936
 Variazione totale ospedalizzati: -39
 Variazione TI: 16
-Variazione positivi con sintomi: -55
+Variazione ricoverati con sintomi: -55
 Deceduti totali: 30462
 Deceduti giornalieri: 75
 Incidenza: 284.7839393705494
@@ -61,7 +61,7 @@ Ingressi TI: 19.0
 Variazione totale positivi: 418
 Variazione totale ospedalizzati: 44
 Variazione TI: 13
-Variazione positivi con sintomi: 31
+Variazione ricoverati con sintomi: 31
 Deceduti totali: 10528
 Deceduti giornalieri: 11
 Incidenza: 248.15884297476623
@@ -74,7 +74,7 @@ Ingressi TI: 7.0
 Variazione totale positivi: -225
 Variazione totale ospedalizzati: 19
 Variazione TI: 2
-Variazione positivi con sintomi: 17
+Variazione ricoverati con sintomi: 17
 Deceduti totali: 3264
 Deceduti giornalieri: 23
 Incidenza: 368.3419884995722
@@ -87,7 +87,7 @@ Ingressi TI: 4.0
 Variazione totale positivi: 92
 Variazione totale ospedalizzati: 18
 Variazione TI: 1
-Variazione positivi con sintomi: 17
+Variazione ricoverati con sintomi: 17
 Deceduti totali: 3847
 Deceduti giornalieri: 6
 Incidenza: 195.16980953892445
@@ -100,7 +100,7 @@ Ingressi TI: 19.0
 Variazione totale positivi: 693
 Variazione totale ospedalizzati: -24
 Variazione TI: 1
-Variazione positivi con sintomi: -25
+Variazione ricoverati con sintomi: -25
 Deceduti totali: 11737
 Deceduti giornalieri: 31
 Incidenza: 320.0631524383647
@@ -113,7 +113,7 @@ Ingressi TI: 18.0
 Variazione totale positivi: 258
 Variazione totale ospedalizzati: 9
 Variazione TI: 0
-Variazione positivi con sintomi: 9
+Variazione ricoverati con sintomi: 9
 Deceduti totali: 5266
 Deceduti giornalieri: 27
 Incidenza: 251.28941884413368
@@ -126,7 +126,7 @@ Ingressi TI: 5.0
 Variazione totale positivi: -124
 Variazione totale ospedalizzati: -4
 Variazione TI: 3
-Variazione positivi con sintomi: -7
+Variazione ricoverati con sintomi: -7
 Deceduti totali: 1247
 Deceduti giornalieri: 4
 Incidenza: 147.90298391684334
@@ -139,7 +139,7 @@ Ingressi TI: 12.0
 Variazione totale positivi: -69
 Variazione totale ospedalizzati: -7
 Variazione TI: -1
-Variazione positivi con sintomi: -6
+Variazione ricoverati con sintomi: -6
 Deceduti totali: 2591
 Deceduti giornalieri: 12
 Incidenza: 252.86380656216286
@@ -152,7 +152,7 @@ Ingressi TI: 21.0
 Variazione totale positivi: 1145
 Variazione totale ospedalizzati: 15
 Variazione TI: 6
-Variazione positivi con sintomi: 9
+Variazione ricoverati con sintomi: 9
 Deceduti totali: 6529
 Deceduti giornalieri: 14
 Incidenza: 214.20504890803898
@@ -165,7 +165,7 @@ Ingressi TI: 1.0
 Variazione totale positivi: 253
 Variazione totale ospedalizzati: -16
 Variazione TI: -6
-Variazione positivi con sintomi: -10
+Variazione ricoverati con sintomi: -10
 Deceduti totali: 2083
 Deceduti giornalieri: 9
 Incidenza: 156.57591806736167
@@ -178,7 +178,7 @@ Ingressi TI: 0.0
 Variazione totale positivi: 5
 Variazione totale ospedalizzati: -2
 Variazione TI: -1
-Variazione positivi con sintomi: -1
+Variazione ricoverati con sintomi: -1
 Deceduti totali: 434
 Deceduti giornalieri: 3
 Incidenza: 85.18681201666467
@@ -191,7 +191,7 @@ Ingressi TI: 10.0
 Variazione totale positivi: 561
 Variazione totale ospedalizzati: -5
 Variazione TI: -3
-Variazione positivi con sintomi: -2
+Variazione ricoverati con sintomi: -2
 Deceduti totali: 5207
 Deceduti giornalieri: 18
 Incidenza: 237.02137709087464
@@ -204,7 +204,7 @@ Ingressi TI: 14.0
 Variazione totale positivi: 1243
 Variazione totale ospedalizzati: 33
 Variazione TI: 7
-Variazione positivi con sintomi: 26
+Variazione ricoverati con sintomi: 26
 Deceduti totali: 4693
 Deceduti giornalieri: 14
 Incidenza: 308.80491133368156
@@ -217,7 +217,7 @@ Ingressi TI: 0.0
 Variazione totale positivi: 87
 Variazione totale ospedalizzati: 0
 Variazione TI: -1
-Variazione positivi con sintomi: 1
+Variazione ricoverati con sintomi: 1
 Deceduti totali: 436
 Deceduti giornalieri: 3
 Incidenza: 142.79155686176694
@@ -230,7 +230,7 @@ Ingressi TI: 2.0
 Variazione totale positivi: 275
 Variazione totale ospedalizzati: 15
 Variazione TI: -1
-Variazione positivi con sintomi: 16
+Variazione ricoverati con sintomi: 16
 Deceduti totali: 800
 Deceduti giornalieri: 5
 Incidenza: 137.21483968724098
@@ -243,7 +243,7 @@ Ingressi TI: 5.0
 Variazione totale positivi: 588
 Variazione totale ospedalizzati: 33
 Variazione TI: 2
-Variazione positivi con sintomi: 31
+Variazione ricoverati con sintomi: 31
 Deceduti totali: 4583
 Deceduti giornalieri: 25
 Incidenza: 119.21342115033158
@@ -256,7 +256,7 @@ Ingressi TI: 1.0
 Variazione totale positivi: 233
 Variazione totale ospedalizzati: 10
 Variazione TI: -2
-Variazione positivi con sintomi: 12
+Variazione ricoverati con sintomi: 12
 Deceduti totali: 1226
 Deceduti giornalieri: 3
 Incidenza: 88.91668698782158
@@ -269,7 +269,7 @@ Ingressi TI: 1.0
 Variazione totale positivi: -36
 Variazione totale ospedalizzati: -2
 Variazione TI: -2
-Variazione positivi con sintomi: 0
+Variazione ricoverati con sintomi: 0
 Deceduti totali: 1113
 Deceduti giornalieri: 3
 Incidenza: 152.63478045373645
@@ -282,7 +282,7 @@ Ingressi TI: 5.0
 Variazione totale positivi: -123
 Variazione totale ospedalizzati: 4
 Variazione TI: 1
-Variazione positivi con sintomi: 3
+Variazione ricoverati con sintomi: 3
 Deceduti totali: 1277
 Deceduti giornalieri: 1
 Incidenza: 251.3636155291745

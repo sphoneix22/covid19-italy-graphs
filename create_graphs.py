@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
+from numpy import median
 import pandas as pd
 import os
+
+# CONSTANTI
+############################################################################################
 
 # URL da cui scaricare i dati necessari
 URLS = {
@@ -64,8 +68,8 @@ FASCE_POPOLAZIONE = {
         "Toscana": 130759,
         "Umbria": 30749,
         "Valle d'Aosta": 4706,
-        "Veneto": 186250        
-        },
+        "Veneto": 186250
+    },
     "20-29": {
         "nazionale": 6084382,
         "Abruzzo": 130083,
@@ -88,8 +92,8 @@ FASCE_POPOLAZIONE = {
         "Toscana": 339743,
         "Umbria": 339743,
         "Valle d'Aosta": 11870,
-        "Veneto": 481226        
-        },
+        "Veneto": 481226
+    },
     "30-39": {
         "nazionale": 7552646,
         "Abruzzo": 150713,
@@ -112,8 +116,8 @@ FASCE_POPOLAZIONE = {
         "Toscana": 401488,
         "Umbria": 97163,
         "Valle d'Aosta": 13174,
-        "Veneto": 532841        
-        },
+        "Veneto": 532841
+    },
     "40-49": {
         "nazionale": 8937229,
         "Abruzzo": 190060,
@@ -136,8 +140,8 @@ FASCE_POPOLAZIONE = {
         "Toscana": 556667,
         "Umbria": 127832,
         "Valle d'Aosta": 18555,
-        "Veneto": 742052        
-        },
+        "Veneto": 742052
+    },
     "50-59": {
         "nazionale": 9414195,
         "Abruzzo": 204157,
@@ -160,8 +164,8 @@ FASCE_POPOLAZIONE = {
         "Toscana": 587110,
         "Umbria": 135299,
         "Valle d'Aosta": 20757,
-        "Veneto": 799460        
-        },
+        "Veneto": 799460
+    },
     "60-69": {
         "nazionale": 7364364,
         "Abruzzo": 167705,
@@ -184,8 +188,8 @@ FASCE_POPOLAZIONE = {
         "Toscana": 463253,
         "Umbria": 110539,
         "Valle d'Aosta": 16060,
-        "Veneto": 603210        
-        },
+        "Veneto": 603210
+    },
     "70-79": {
         "nazionale": 5968373,
         "Abruzzo": 130572,
@@ -208,8 +212,8 @@ FASCE_POPOLAZIONE = {
         "Toscana": 410151,
         "Umbria": 95004,
         "Valle d'Aosta": 13089,
-        "Veneto": 494443        
-        },
+        "Veneto": 494443
+    },
     "80-89": {
         "nazionale": 3628160,
         "Abruzzo": 84488,
@@ -232,8 +236,8 @@ FASCE_POPOLAZIONE = {
         "Toscana": 259653,
         "Umbria": 62778,
         "Valle d'Aosta": 7800,
-        "Veneto": 293030        
-        },
+        "Veneto": 293030
+    },
     "90+": {
         "nazionale": 791543,
         "Abruzzo": 19515,
@@ -256,8 +260,8 @@ FASCE_POPOLAZIONE = {
         "Toscana": 60936,
         "Umbria": 15139,
         "Valle d'Aosta": 1764,
-        "Veneto": 65510        
-        },
+        "Veneto": 65510
+    },
     "totale": {
         "nazionale": 59641488,
         "Abruzzo": 1293941,
@@ -282,60 +286,107 @@ FASCE_POPOLAZIONE = {
         "Valle d'Aosta": 125034,
         "Veneto": 4879133
     }
-    }
+}
 
 # Contiene tutti i dati elaborati
 data = {}
 
+
+############################################################################################
+
+# UTILS
+############################################################################################
 def download_csv(name, url):
     dataframe = pd.read_csv(url)
 
     for col in DATETIME_COLUMNS:
         if col in dataframe:
             dataframe[col] = pd.to_datetime(dataframe[col], format="%Y-%m-%dT%H:%M:%S")
-    
+
     # Codici ISTAT delle regioni
     # 01 PIEMONTE 02 VALLE D’AOSTA 03 LOMBARDIA 04 TRENTINO A. A. 05 VENETO 06 FRIULI V. G 07 LIGURIA 08 EMILIA ROMAGNA 09 TOSCANA
     # 10 UMBRIA 11 MARCHE 12 LAZIO 13 ABRUZZI 14 MOLISE 15 CAMPANIA 16 PUGLIE 17 BASILICATA 18 CALABRIA 19 SICILIA 20 SARDEGNA
     # 21 BOLZANO 22 TRENTO
     if name == "regioni":
         data["regioni"] = {}
-        for codice_regione in [x for x in range(1,23) if x != 4]:
+        for codice_regione in [x for x in range(1, 23) if x != 4]:
             data_regione = dataframe[dataframe["codice_regione"] == codice_regione]
             data["regioni"][codice_regione] = data_regione
     elif name == "somministrazioni_vaccini_summary":
         data["somministrazioni_vaccini_summary"] = {"nazionale": dataframe}
         data["somministrazioni_vaccini_summary"]["regioni"] = {}
-        for codice_regione in [x for x in range(1,22) if x != 4]:
+        for codice_regione in [x for x in range(1, 22) if x != 4]:
             data_regione = dataframe[dataframe["codice_regione_ISTAT"] == codice_regione]
             data["somministrazioni_vaccini_summary"]["regioni"][codice_regione] = data_regione
-        data["somministrazioni_vaccini_summary"]["regioni"][21] = dataframe[dataframe["nome_area"] == "Provincia Autonoma Trento"]
-        data["somministrazioni_vaccini_summary"]["regioni"][22] = dataframe[dataframe["nome_area"] == "Provincia Autonoma Bolzano / Bozen"]
+        data["somministrazioni_vaccini_summary"]["regioni"][21] = dataframe[
+            dataframe["nome_area"] == "Provincia Autonoma Trento"]
+        data["somministrazioni_vaccini_summary"]["regioni"][22] = dataframe[
+            dataframe["nome_area"] == "Provincia Autonoma Bolzano / Bozen"]
     elif name == "somministrazioni_vaccini":
         data["somministrazioni_vaccini"] = {"nazionale": dataframe}
         data["somministrazioni_vaccini"]["regioni"] = {}
         # In questo dataset le P.A. hanno lo stesso codice istat (4) ma differente denominazione 
-        for codice_regione in [x for x in range(1,22) if x != 4]:
+        for codice_regione in [x for x in range(1, 22) if x != 4]:
             data_regione = dataframe[dataframe["codice_regione_ISTAT"] == codice_regione]
             data["somministrazioni_vaccini"]["regioni"][codice_regione] = data_regione
-        data["somministrazioni_vaccini"]["regioni"][21] = dataframe[dataframe["nome_area"] == "Provincia Autonoma Trento"]
-        data["somministrazioni_vaccini"]["regioni"][22] = dataframe[dataframe["nome_area"] == "Provincia Autonoma Bolzano / Bozen"]
+        data["somministrazioni_vaccini"]["regioni"][21] = dataframe[
+            dataframe["nome_area"] == "Provincia Autonoma Trento"]
+        data["somministrazioni_vaccini"]["regioni"][22] = dataframe[
+            dataframe["nome_area"] == "Provincia Autonoma Bolzano / Bozen"]
     else:
         data[name] = dataframe
 
-def grafico_base(x, y, title, output, xlabel=None, ylabel=None, media_mobile=None, legend=None, color=None, grid="y", hline=None, vline=None, marker=None):
+
+def create_media_mobile(data):
+    count = []
+    result = []
+
+    for el in data:
+        count.append(el)
+        result.append(sum(count) / len(count))
+        if len(count) == 7:
+            count.pop(0)
+    return result
+
+
+def create_delta(data):
+    latest = 0
+    delta = []
+
+    for row in data:
+        delta.append(row - latest)
+        latest = row
+
+    return delta
+
+
+def create_incidenza(data, regione):
+    count = []
+    result = []
+    for row in data:
+        count.append(row)
+        result.append((sum(count) / FASCE_POPOLAZIONE["totale"][regione]) * 100000)
+        if len(count) == 7:
+            count.pop(0)
+    return result
+
+
+# GRAFICI
+############################################################################################
+def plot(x, y, title, output, xlabel=None, ylabel=None, media_mobile=None, legend=None, color=None, grid="y",
+         hline=None, vline=None, marker=None):
     fig, ax = plt.subplots()
     line, = ax.plot(x, y, marker=marker)
     if media_mobile:
         ax.plot(x, media_mobile, color="orange")
         ax.legend(legend, prop={"size": 7})
-    
+
     if color:
         line.set_color(color)
 
     if grid:
         ax.grid(axis=grid)
-    
+
     if hline:
         plt.axhline(hline, 0, 1, color="red")
 
@@ -347,8 +398,9 @@ def grafico_base(x, y, title, output, xlabel=None, ylabel=None, media_mobile=Non
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
 
-    fig.savefig(CWD+output, dpi=200)
+    fig.savefig(CWD + output, dpi=200)
     plt.close('all')
+
 
 def stackplot(x, y1, y2, title, label, output, soglia=None, yticks=None):
     fig, ax = plt.subplots()
@@ -359,38 +411,41 @@ def stackplot(x, y1, y2, title, label, output, soglia=None, yticks=None):
     if yticks:
         ax.set_yticks(yticks)
     ax.set_title(title)
-    ax.legend(label, loc="upper left", prop={"size":7})
+    ax.legend(label, loc="upper left", prop={"size": 7})
     ax.grid(axis="y")
     fig.autofmt_xdate()
-    fig.savefig(CWD+output, dpi=200)
+    fig.savefig(CWD + output, dpi=200)
     plt.close('all')
 
-def grafico_verticale(x, y, title, output):
+
+def deltaplot(x, y, title, output):
     fig, ax = plt.subplots()
-    color = ["orange" if x>=0 else "red" for x in y]
+    color = ["orange" if x >= 0 else "red" for x in y]
     plt.vlines(x=x, ymin=0, ymax=y, color=color, alpha=0.7)
     ax.set_title(title)
     fig.autofmt_xdate()
     ax.grid(axis="y")
-    fig.savefig(CWD+output, dpi=200)
+    fig.savefig(CWD + output, dpi=200)
     plt.close('all')
 
-def istogramma(x, y, title, output, horizontal=False, xticks=None, yticks=None, grid="y", bottom=None, ylabel=None, label1=None, label2=None, xticklabels=None):
+
+def barplot(x, y, title, output, horizontal=False, xticks=None, yticks=None, grid="y", bottom=None, ylabel=None,
+            label1=None, label2=None, xticklabels=None):
     fig, ax = plt.subplots()
 
     if horizontal:
         ax.barh(x, y, label=label1)
     else:
         ax.bar(x, y, label=label1)
-    
+
     plt.title(title)
 
     if grid:
         ax.grid(axis=grid)
-    
+
     if xticks:
         plt.xticks(xticks)
-    
+
     if yticks:
         plt.yticks(yticks)
 
@@ -401,62 +456,35 @@ def istogramma(x, y, title, output, horizontal=False, xticks=None, yticks=None, 
 
     if label1 or label2:
         plt.legend()
-    
+
     if ylabel:
         ax.set_ylabel(ylabel)
 
     if xticklabels:
         ax.set_xticklabels(xticklabels)
 
-    fig.savefig(CWD+output, dpi=200)
+    fig.savefig(CWD + output, dpi=200)
 
     plt.close('all')
 
-def torta(slices, labels, title, output):
+
+def pieplot(slices, labels, title, output):
     fig, ax = plt.subplots()
     ax.pie(slices, labels=labels)
     plt.title(title)
 
-    fig.savefig(CWD+output, dpi=200)
+    fig.savefig(CWD + output, dpi=200)
     plt.close('all')
 
-def create_media_mobile(data):
-    count = []
-    result = []
-    
-    for el in data:
-        count.append(el)
-        result.append(sum(count)/len(count))
-        if len(count) == 7:
-            count.pop(0)
-    return result
 
-def create_delta(data):
-    latest = 0
-    delta = []
+############################################################################################
 
-    for row in data:
-        delta.append(row-latest)
-        latest = row
-    
-    return delta
-
-def create_incidenza(data, regione):
-    count = []
-    result = []
-    for row in data:
-        count.append(row)
-        result.append((sum(count)/FASCE_POPOLAZIONE["totale"][regione])*100000)
-        if len(count) == 7:
-            count.pop(0)
-    return result
-
-def nazionale():
+def epidemia():
     os.makedirs(f"{CWD}/graphs/epidemia", exist_ok=True)
     summary = "DATI NAZIONALI {}\n\n".format(data["nazionale"]["data"].iat[-1])
     # Grafico nuovi positivi
     print("Grafico nuovi positivi...")
-    grafico_base(
+    plot(
         data["nazionale"]["data"],
         data["nazionale"]["nuovi_positivi"],
         "Andamento contagi giornalieri",
@@ -465,7 +493,6 @@ def nazionale():
         legend=["Contagi giornalieri", "Media mobile settimanale"]
     )
     summary += "Nuovi positivi: {}\n".format(data["nazionale"]["nuovi_positivi"].iat[-1])
-    print("Grafico completato")
 
     # Stackplot ospedalizzati
     print("Grafico ospedalizzati...")
@@ -476,14 +503,14 @@ def nazionale():
         "Andamento ospedalizzati",
         ["Soglia critica TI", "Terapie intensive", "Ricoverati con sintomi"],
         "/graphs/epidemia/andamento_ospedalizzati.jpg",
-        soglia=(TOTALE_TERAPIA_INTENSIVA["nazionale"]/100)*30, 
+        soglia=(TOTALE_TERAPIA_INTENSIVA["nazionale"] / 100) * 30,
     )
-    summary += "Ospedalizzati ordinari: {}\nTerapie intensive: {}\n".format(data["nazionale"]["ricoverati_con_sintomi"].iat[-1], data["nazionale"]["terapia_intensiva"].iat[-1])
-    print("Grafico completato")
+    summary += "Ospedalizzati ordinari: {}\nTerapie intensive: {}\n".format(
+        data["nazionale"]["ricoverati_con_sintomi"].iat[-1], data["nazionale"]["terapia_intensiva"].iat[-1])
 
     # Grafico ingressi in terapia intensiva
     print("Grafico ingressi TI...")
-    grafico_base(
+    plot(
         data["nazionale"]["data"],
         data["nazionale"]["ingressi_terapia_intensiva"],
         "Ingressi giornalieri in terapia intensiva",
@@ -492,58 +519,53 @@ def nazionale():
         legend=["Ingressi TI", "Media mobile settimanale"],
     )
     summary += "Ingressi TI: {}\n".format(data["nazionale"]["ingressi_terapia_intensiva"].iat[-1])
-    print("Grafico completato")
 
     # Grafico variazione totale positivi
     print("Grafico variazione totale positivi...")
-    grafico_verticale(
+    deltaplot(
         data["nazionale"]["data"],
         data["nazionale"]["variazione_totale_positivi"],
         "Variazione giornaliera totale positivi",
         "/graphs/epidemia/variazione_totale_positivi.jpg"
     )
     summary += "Variazione totale totale positivi: {}\n".format(data["nazionale"]["variazione_totale_positivi"].iat[-1])
-    print("Grafico completato")
 
     # Grafico variazione totale ospedalizzati
     print("Grafico variazione totale ospedalizzati...")
     delta = create_delta(data["nazionale"]["totale_ospedalizzati"])
-    grafico_verticale(
+    deltaplot(
         data["nazionale"]["data"],
         delta,
         "Variazione totale ospedalizzati",
         "/graphs/epidemia/variazione_totale_ospedalizzati.jpg"
     )
     summary += "Variazione totale ospedalizzati: {}\n".format(delta[-1])
-    print("Grafico completato")
 
     # Grafico variazione occupazione TI
     print("Grafico variazione TI")
     delta = create_delta(data["nazionale"]["terapia_intensiva"])
-    grafico_verticale(
+    deltaplot(
         data["nazionale"]["data"],
         delta,
         "Variazione occupazione TI",
         "/graphs/epidemia/variazione_ti.jpg"
     )
     summary += "Variazione TI: {}\n".format(delta[-1])
-    print("Grafico completato")
 
     # Grafico variazione totale ospedalizzati
     print("Grafico variazione ricoverati con sintomi...")
     delta = create_delta(data["nazionale"]["ricoverati_con_sintomi"])
-    grafico_verticale(
+    deltaplot(
         data["nazionale"]["data"],
         delta,
         "Variazione ospedalizzati ordinari",
         "/graphs/epidemia/variazione_ospedalizzati_ordinari.jpg"
     )
     summary += "Variazione ricoverati con sintomi: {}\n".format(delta[-1])
-    print("Grafico completato")
 
     # Grafico deceduti
     print("Grafico deceduti...")
-    grafico_base(
+    plot(
         data["nazionale"]["data"],
         data["nazionale"]["deceduti"],
         "Andamento deceduti",
@@ -551,12 +573,11 @@ def nazionale():
         color="black"
     )
     summary += "Deceduti totali: {}\n".format(data["nazionale"]["deceduti"].iat[-1])
-    print("Grafico completato")
 
     # Grafico deceduti giornalieri
     print("Grafico deceduti giornalieri...")
     delta = create_delta(data["nazionale"]["deceduti"])
-    grafico_base(
+    plot(
         data["nazionale"]["data"],
         delta,
         "Deceduti giornalieri",
@@ -566,11 +587,10 @@ def nazionale():
         color="black"
     )
     summary += "Deceduti giornalieri: {}\n".format(delta[-1])
-    print("Grafico completato")
 
     print("Grafico incidenza...")
     incidenza = create_incidenza(data["nazionale"]["nuovi_positivi"], "nazionale")
-    grafico_base(
+    plot(
         data["nazionale"]["data"],
         incidenza,
         "Incidenza di nuovi positivi ogni 100000 abitanti\nnell'arco di 7 giorni",
@@ -578,18 +598,14 @@ def nazionale():
         hline=250
     )
     summary += f"Incidenza: {incidenza[-1]}\n\n"
-    print("Grafico completato")
 
-    return summary
-
-def regioni():
-    summary = "DATI REGIONI\n\n"
+    summary += "DATI REGIONI\n\n"
     for regione in data["regioni"].keys():
         denominazione_regione = data["regioni"][regione]["denominazione_regione"].iloc[0]
         summary += f"{denominazione_regione}\n"
         print(f"Regione {regione}...")
         print("Grafico nuovi positivi...")
-        grafico_base(
+        plot(
             data["regioni"][regione]["data"],
             data["regioni"][regione]["nuovi_positivi"],
             f"Andamento contagi giornalieri {denominazione_regione}",
@@ -598,7 +614,6 @@ def regioni():
             legend=["Contagi giornalieri", "Media mobile settimanale"]
         )
         summary += "Nuovi positivi: {}\n".format(data["regioni"][regione]["nuovi_positivi"].iat[-1])
-        print("Grafico completato")
 
         # Stackplot ospedalizzati
         print("Grafico ospedalizzati...")
@@ -609,14 +624,15 @@ def regioni():
             f"Andamento ospedalizzati {denominazione_regione}",
             ["Soglia critica TI", "Terapie intensive", "Ricoverati con sintomi"],
             f"/graphs/epidemia/andamento_ospedalizzati_{denominazione_regione}.jpg",
-            soglia=(TOTALE_TERAPIA_INTENSIVA[denominazione_regione]/100)*30
+            soglia=(TOTALE_TERAPIA_INTENSIVA[denominazione_regione] / 100) * 30
         )
-        summary += "TI: {}\nRicoverati con sintomi: {}\n".format(data["regioni"][regione]["terapia_intensiva"].iat[-1], data["regioni"][regione]["ricoverati_con_sintomi"].iat[-1])
-        print("Grafico completato")
+        summary += "TI: {}\nRicoverati con sintomi: {}\n".format(data["regioni"][regione]["terapia_intensiva"].iat[-1],
+                                                                 data["regioni"][regione]["ricoverati_con_sintomi"].iat[
+                                                                     -1])
 
         # Grafico ingressi in terapia intensiva
         print("Grafico ingressi TI...")
-        grafico_base(
+        plot(
             data["regioni"][regione]["data"],
             data["regioni"][regione]["ingressi_terapia_intensiva"],
             f"Ingressi giornalieri in terapia intensiva {denominazione_regione}",
@@ -625,55 +641,53 @@ def regioni():
             legend=["Ingressi TI", "Media mobile settimanale"],
         )
         summary += "Ingressi TI: {}\n".format(data["regioni"][regione]["ingressi_terapia_intensiva"].iat[-1])
-        print("Grafico completato")
 
         # Grafico variazione totale positivi
         print("Grafico variazione totale positivi...")
-        grafico_verticale(
+        deltaplot(
             data["regioni"][regione]["data"],
             data["regioni"][regione]["variazione_totale_positivi"],
             f"Variazione giornaliera totale positivi {denominazione_regione}",
             f"/graphs/epidemia/variazione_totale_positivi_{denominazione_regione}.jpg"
         )
-        summary += "Variazione totale positivi: {}\n".format(data["regioni"][regione]["variazione_totale_positivi"].iat[-1])
-        print("Grafico completato")
+        summary += "Variazione totale positivi: {}\n".format(
+            data["regioni"][regione]["variazione_totale_positivi"].iat[-1])
 
         # Grafico variazione totale ospedalizzati
         print("Grafico variazione totale ospedalizzati...")
-        grafico_verticale(
+        deltaplot(
             data["regioni"][regione]["data"],
             create_delta(data["regioni"][regione]["totale_ospedalizzati"]),
             f"Variazione totale ospedalizzati {denominazione_regione}",
             f"/graphs/epidemia/variazione_totale_ospedalizzati_{denominazione_regione}.jpg"
         )
-        summary += "Variazione totale ospedalizzati: {}\n".format(create_delta(data["regioni"][regione]["totale_ospedalizzati"])[-1])
-        print("Grafico completato")
+        summary += "Variazione totale ospedalizzati: {}\n".format(
+            create_delta(data["regioni"][regione]["totale_ospedalizzati"])[-1])
 
         # Grafico variazione occupazione TI
         print("Grafico variazione TI")
-        grafico_verticale(
+        deltaplot(
             data["regioni"][regione]["data"],
             create_delta(data["regioni"][regione]["terapia_intensiva"]),
             f"Variazione occupazione TI {denominazione_regione}",
             f"/graphs/epidemia/variazione_ti_{denominazione_regione}.jpg"
         )
         summary += "Variazione TI: {}\n".format(create_delta(data["regioni"][regione]["terapia_intensiva"])[-1])
-        print("Grafico completato")
 
         # Grafico variazione totale ospedalizzati
         print("Grafico variazione ricoverati con sintomi...")
-        grafico_verticale(
+        deltaplot(
             data["regioni"][regione]["data"],
             create_delta(data["regioni"][regione]["ricoverati_con_sintomi"]),
             f"Variazione ospedalizzati ordinari {denominazione_regione}",
             f"/graphs/epidemia/variazione_ospedalizzati_ordinari_{denominazione_regione}.jpg"
         )
-        summary += "Variazione ricoverati con sintomi: {}\n".format(create_delta(data["regioni"][regione]["ricoverati_con_sintomi"])[-1])
-        print("Grafico completato")
+        summary += "Variazione ricoverati con sintomi: {}\n".format(
+            create_delta(data["regioni"][regione]["ricoverati_con_sintomi"])[-1])
 
         # Grafico deceduti
         print("Grafico deceduti...")
-        grafico_base(
+        plot(
             data["regioni"][regione]["data"],
             data["regioni"][regione]["deceduti"],
             f"Andamento deceduti {denominazione_regione}",
@@ -681,11 +695,10 @@ def regioni():
             color="black"
         )
         summary += "Deceduti totali: {}\n".format(data["regioni"][regione]["deceduti"].iat[-1])
-        print("Grafico completato")
 
         # Grafico deceduti giornalieri
         print("Grafico deceduti giornalieri...")
-        grafico_base(
+        plot(
             data["regioni"][regione]["data"],
             create_delta(data["regioni"][regione]["deceduti"]),
             f"Deceduti giornalieri {denominazione_regione}",
@@ -695,11 +708,10 @@ def regioni():
             color="black"
         )
         summary += "Deceduti giornalieri: {}\n".format(create_delta(data["regioni"][regione]["deceduti"])[-1])
-        print("Grafico completato")
 
         print("Grafico incidenza...")
         incidenza = create_incidenza(data["regioni"][regione]["nuovi_positivi"], denominazione_regione)
-        grafico_base(
+        plot(
             data["regioni"][regione]["data"],
             incidenza,
             f"Incidenza di nuovi positivi ogni 100000 abitanti\nnell'arco di 7 giorni in {denominazione_regione}",
@@ -707,15 +719,16 @@ def regioni():
             hline=250
         )
         summary += f"Incidenza: {incidenza[-1]}\n\n"
-        print("Grafico completato")
-    
+
     return summary
 
-def vaccini_nazionale():
+
+def vaccini():
     os.makedirs(f"{CWD}/graphs/vaccini", exist_ok=True)
+    summary = "DATI VACCINAZIONE\n\nDATI NAZIONALI\n"
 
     print("Grafico percentuale somministrazione...")
-    istogramma(
+    barplot(
         data["vaccini_summary"]["area"],
         data["vaccini_summary"]["percentuale_somministrazione"],
         "Percentuale dosi somministrate per regioni",
@@ -724,42 +737,50 @@ def vaccini_nazionale():
         horizontal=True,
         grid="x"
     )
-    print("Grafico completato")
+
+    summary += "Percentuale somministrazione:\n"
+    for i in range(0, 21):
+        regione = data["vaccini_summary"]["area"][i]
+        perc = data["vaccini_summary"]["percentuale_somministrazione"][i]
+        summary += f"{regione}: {perc}%\n"
 
     print("Grafico popolazione vaccinata seconda dose...")
     vaccinati_seconda_dose = data["anagrafica_vaccini_summary"]["seconda_dose"].sum()
     popolazione_totale = FASCE_POPOLAZIONE["totale"]['nazionale']
-    torta(
+    pieplot(
         [
             popolazione_totale,
             vaccinati_seconda_dose
         ],
         [
             f"Totale popolazione\n ({popolazione_totale})",
-            f"Persone vaccinate\n ({vaccinati_seconda_dose}, {round((vaccinati_seconda_dose/popolazione_totale)*100, 2)}%)"
+            f"Persone vaccinate\n ({vaccinati_seconda_dose}, {round((vaccinati_seconda_dose / popolazione_totale) * 100, 2)}%)"
         ],
         "Persone che hanno completato il ciclo di vaccinazione\nsul totale della popolazione",
         "/graphs/vaccini/percentuale_vaccinati.jpg"
     )
+    summary += f"\nPercentuale popolazione vaccinata con la seconda dose: {vaccinati_seconda_dose} ({round((vaccinati_seconda_dose / popolazione_totale) * 100, 2)}%)\n"
 
     print("Grafico popolazione vaccinata prima dose...")
     vaccinati_prima_dose = data["anagrafica_vaccini_summary"]["prima_dose"].sum()
-    torta(
+    pieplot(
         [
             popolazione_totale,
             vaccinati_prima_dose
         ],
         [
             f"Totale popolazione\n ({popolazione_totale})",
-            f"Persone vaccinate\n ({vaccinati_prima_dose}, {round((vaccinati_prima_dose/popolazione_totale)*100, 2)}%)"
+            f"Persone vaccinate\n ({vaccinati_prima_dose}, {round((vaccinati_prima_dose / popolazione_totale) * 100, 2)}%)"
         ],
         "Persone che hanno ricevuto almeno una dose\nsul totale della popolazione",
         "/graphs/vaccini/percentuale_vaccinati_prima_dose.jpg"
     )
+    summary += f"\nPercentuale popolazione vaccinata con la seconda dose: {vaccinati_prima_dose} ({round((vaccinati_prima_dose / popolazione_totale) * 100, 2)}%)\n"
 
     print("Grafico vaccinazioni giornaliere...")
-    somministrazioni = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")["totale"].sum().to_dict()
-    grafico_base(
+    somministrazioni = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")[
+        "totale"].sum().to_dict()
+    plot(
         somministrazioni.keys(),
         somministrazioni.values(),
         "Vaccinazioni giornaliere",
@@ -768,11 +789,14 @@ def vaccini_nazionale():
         legend=["Vaccinazioni giornaliere", "Media mobile settimanale"],
         marker="."
     )
-    print("Grafico completato")    
+
+    summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\n\n"
 
     print("Grafico vaccinazione giornaliere, prima e seconda dose...")
-    prima_dose = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")["prima_dose"].sum().to_dict()
-    seconda_dose = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")["seconda_dose"].sum().to_dict()
+    prima_dose = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")[
+        "prima_dose"].sum().to_dict()
+    seconda_dose = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")[
+        "seconda_dose"].sum().to_dict()
     stackplot(
         somministrazioni.keys(),
         prima_dose.values(),
@@ -782,18 +806,18 @@ def vaccini_nazionale():
         "/graphs/vaccini/vaccinazioni_giornaliere_dosi.jpg",
         yticks=range(25000, 250000, 25000)
     )
-    print("Grafico completato")
 
     print("Grafico fasce popolazione...")
-    y_values_prima_dose  = []
+    y_values_prima_dose = []
     y_values_seconda_dose = []
     for index, row in data["anagrafica_vaccini_summary"].iterrows():
-        perc_prima_dose = (row["prima_dose"]-row["seconda_dose"])/FASCE_POPOLAZIONE[row["fascia_anagrafica"]]["nazionale"]
-        perc_seconda_dose = row["seconda_dose"]/FASCE_POPOLAZIONE[row["fascia_anagrafica"]]["nazionale"]
-        y_values_prima_dose.append(perc_prima_dose*100)
-        y_values_seconda_dose.append(perc_seconda_dose*100)
-    
-    istogramma(
+        perc_prima_dose = (row["prima_dose"] - row["seconda_dose"]) / FASCE_POPOLAZIONE[row["fascia_anagrafica"]][
+            "nazionale"]
+        perc_seconda_dose = row["seconda_dose"] / FASCE_POPOLAZIONE[row["fascia_anagrafica"]]["nazionale"]
+        y_values_prima_dose.append(perc_prima_dose * 100)
+        y_values_seconda_dose.append(perc_seconda_dose * 100)
+
+    barplot(
         data["anagrafica_vaccini_summary"]["fascia_anagrafica"],
         y_values_prima_dose,
         "Somministrazione vaccini per fascia d'età",
@@ -803,11 +827,17 @@ def vaccini_nazionale():
         label1="Prima dose",
         label2="Seconda dose"
     )
-    print("Grafico completato")
+
+    summary += "Percentuali fascia anagrafica:\n"
+
+    for i in range(len(data["anagrafica_vaccini_summary"]["fascia_anagrafica"])):
+        fascia = data["anagrafica_vaccini_summary"]["fascia_anagrafica"].iat[i]
+        summary += f"{fascia}: {y_values_seconda_dose[i]}% ({y_values_prima_dose[i]}%)\n"
 
     print("Grafico somministrazione categorie...")
-    x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari", "categoria_personale_non_sanitario", "categoria_ospiti_rsa", "categoria_over80", "categoria_forze_armate", "categoria_personale_scolastico"]
-    istogramma(
+    x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari", "categoria_personale_non_sanitario",
+                "categoria_ospiti_rsa", "categoria_over80", "categoria_forze_armate", "categoria_personale_scolastico"]
+    barplot(
         x_values,
         [data["anagrafica_vaccini_summary"][x].sum() for x in x_values],
         "Somministrazione vaccini per categoria",
@@ -816,71 +846,44 @@ def vaccini_nazionale():
         ylabel="in milioni di dosi",
         xticklabels=["Altro", "OSS", "Personale \nnon sanitario", "RSA", "Over 80", "FA", "Personale\nscolastico"]
     )
-    print("Grafico completato")
 
     print("Grafico consegne vaccino...")
     consegne = data["consegne_vaccini"].groupby("data_consegna")["numero_dosi"].sum().to_dict()
-    grafico_base(
+    media_mobile = create_media_mobile(consegne.values())
+    plot(
         consegne.keys(),
         consegne.values(),
         "Dosi di vaccino consegnate",
         "/graphs/vaccini/consegne_vaccini.jpg",
-        media_mobile=create_media_mobile(consegne.values()),
+        media_mobile=media_mobile,
         legend=["Consegne vaccini", "Media mobile settimanale"],
         marker="."
     )
-    print("Grafico completato")
+
+    summary += f"\nMedia consegne vaccino:\n{media_mobile[-1]}\n\n"
 
     print("Grafico consegne totali vaccini")
     fornitori = data["consegne_vaccini"].groupby("fornitore")["numero_dosi"].sum().to_dict()
-    istogramma(
+    barplot(
         fornitori.keys(),
         fornitori.values(),
         "Consegne totali vaccini per fornitore",
         "/graphs/vaccini/consegne_totali_vaccini.jpg",
     )
-    print("Grafico completato")
 
-def vaccini_regioni():
+    summary += "Consegne totali:\n"
+    for el in fornitori:
+        summary += f"{el}: {fornitori[el]}\n"
 
     for regione in data["somministrazioni_vaccini_summary"]["regioni"].keys():
         print(f"Regione {regione}")
         denominazione_regione = data["regioni"][regione]["denominazione_regione"].iloc[0]
 
-        print("Grafico popolazione vaccinata seconda dose...")
-        vaccinati_seconda_dose = data["somministrazioni_vaccini_summary"]["regioni"][regione]["seconda_dose"].sum()
-        popolazione_totale = FASCE_POPOLAZIONE["totale"][denominazione_regione]
-        torta(
-            [
-                popolazione_totale,
-                vaccinati_seconda_dose
-            ],
-            [
-                f"Totale popolazione\n ({popolazione_totale})",
-                f"Persone vaccinate\n ({vaccinati_seconda_dose}, {round((vaccinati_seconda_dose/popolazione_totale)*100, 2)}%)"
-            ],
-            f"Persone che hanno completato il ciclo di vaccinazione\nsul totale della popolazione in {denominazione_regione}",
-            f"/graphs/vaccini/percentuale_vaccinati_{denominazione_regione}.jpg"
-        )
-
-        print("Grafico popolazione vaccinata prima dose...")
-        vaccinati_prima_dose = data["somministrazioni_vaccini_summary"]["regioni"][regione]["prima_dose"].sum()
-        torta(
-            [
-                popolazione_totale,
-                vaccinati_prima_dose
-            ],
-            [
-                f"Totale popolazione\n ({popolazione_totale})",
-                f"Persone vaccinate\n ({vaccinati_prima_dose}, {round((vaccinati_prima_dose/popolazione_totale)*100, 2)}%)"
-            ],
-            f"Persone che hanno ricevuto almeno una dose\nsul totale della popolazione in {denominazione_regione}",
-            f"/graphs/vaccini/percentuale_vaccinati_prima_dose_{denominazione_regione}.jpg"
-        )
-
         print("Grafico vaccinazioni giornaliere...")
-        somministrazioni = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")["totale"].sum().to_dict()
-        grafico_base(
+        somministrazioni = \
+            data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")[
+                "totale"].sum().to_dict()
+        plot(
             somministrazioni.keys(),
             somministrazioni.values(),
             f"Vaccinazioni giornaliere in {denominazione_regione}",
@@ -889,11 +892,12 @@ def vaccini_regioni():
             legend=["Vaccinazioni giornaliere", "Media mobile settimanale"],
             marker="."
         )
-        print("Grafico completato")    
 
         print("Grafico vaccinazione giornaliere, prima e seconda dose...")
-        prima_dose = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")["prima_dose"].sum().to_dict()
-        seconda_dose = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")["seconda_dose"].sum().to_dict()
+        prima_dose = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")[
+            "prima_dose"].sum().to_dict()
+        seconda_dose = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")[
+            "seconda_dose"].sum().to_dict()
         stackplot(
             somministrazioni.keys(),
             prima_dose.values(),
@@ -902,23 +906,22 @@ def vaccini_regioni():
             ["Prima dose", "Seconda dose"],
             f"/graphs/vaccini/vaccinazioni_giornaliere_dosi_{denominazione_regione}.jpg"
         )
-        print("Grafico completato")
 
         print("Grafico fasce popolazione...")
         dataframe = data["somministrazioni_vaccini"]["regioni"][regione]
-        y_values_prima_dose  = []
+        y_values_prima_dose = []
         y_values_seconda_dose = []
         for fascia in FASCE_POPOLAZIONE:
             if fascia == "totale":
                 continue
             prima_dose = dataframe[dataframe["fascia_anagrafica"] == fascia]["prima_dose"].sum()
             seconda_dose = dataframe[dataframe["fascia_anagrafica"] == fascia]["seconda_dose"].sum()
-            perc_prima_dose = (prima_dose-seconda_dose)/FASCE_POPOLAZIONE[fascia][denominazione_regione]
-            perc_seconda_dose = (seconda_dose/FASCE_POPOLAZIONE[fascia][denominazione_regione])
-            y_values_prima_dose.append(perc_prima_dose*100)
-            y_values_seconda_dose.append(perc_seconda_dose*100)
+            perc_prima_dose = (prima_dose - seconda_dose) / FASCE_POPOLAZIONE[fascia][denominazione_regione]
+            perc_seconda_dose = (seconda_dose / FASCE_POPOLAZIONE[fascia][denominazione_regione])
+            y_values_prima_dose.append(perc_prima_dose * 100)
+            y_values_seconda_dose.append(perc_seconda_dose * 100)
 
-        istogramma(
+        barplot(
             data["anagrafica_vaccini_summary"]["fascia_anagrafica"],
             y_values_prima_dose,
             f"Somministrazione vacini per fascia d'età in {denominazione_regione}",
@@ -928,11 +931,12 @@ def vaccini_regioni():
             label1="Prima dose",
             label2="Seconda dose"
         )
-        print("Grafico completato")
 
         print("Grafico somministrazione categorie...")
-        x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari", "categoria_personale_non_sanitario", "categoria_ospiti_rsa", "categoria_over80", "categoria_forze_armate", "categoria_personale_scolastico"]
-        istogramma(
+        x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari",
+                    "categoria_personale_non_sanitario", "categoria_ospiti_rsa", "categoria_over80",
+                    "categoria_forze_armate", "categoria_personale_scolastico"]
+        barplot(
             x_values,
             [data["somministrazioni_vaccini"]["regioni"][regione][x].sum() for x in x_values],
             f"Somministrazione vaccini per categoria in {denominazione_regione}",
@@ -941,18 +945,19 @@ def vaccini_regioni():
             ylabel="in milioni di dosi",
             xticklabels=["Altro", "OSS", "Personale \nnon sanitario", "RSA", "Over 80", "FA", "Personale\nscolastico"]
         )
-        print("Grafico completato")
 
         print("Grafico consegne vaccino...")
         if regione == 21:
-            consegne_regione = data["consegne_vaccini"][data["consegne_vaccini"]["nome_area"] == "Provincia Autonoma Trento"]
+            consegne_regione = data["consegne_vaccini"][
+                data["consegne_vaccini"]["nome_area"] == "Provincia Autonoma Trento"]
         elif regione == 22:
-            consegne_regione = data["consegne_vaccini"][data["consegne_vaccini"]["nome_area"] == "Provincia Autonoma Bolzano / Bozen"]
+            consegne_regione = data["consegne_vaccini"][
+                data["consegne_vaccini"]["nome_area"] == "Provincia Autonoma Bolzano / Bozen"]
         else:
             consegne_regione = data["consegne_vaccini"][data["consegne_vaccini"]["codice_regione_ISTAT"] == regione]
 
         consegne = consegne_regione.groupby("data_consegna")["numero_dosi"].sum().to_dict()
-        grafico_base(
+        plot(
             consegne.keys(),
             consegne.values(),
             f"Dosi di vaccino consegnate in {denominazione_regione}",
@@ -961,17 +966,17 @@ def vaccini_regioni():
             legend=["Consegne vaccini", "Media mobile settimanale"],
             marker="."
         )
-        print("Grafico completato")
 
         print("Grafico consegne totali vaccini")
         fornitori = consegne_regione.groupby("fornitore")["numero_dosi"].sum().to_dict()
-        istogramma(
+        barplot(
             fornitori.keys(),
             fornitori.values(),
             f"Consegne totali vaccini per fornitore in {denominazione_regione}",
             f"/graphs/vaccini/consegne_totali_vaccini_{denominazione_regione}.jpg",
         )
-        print("Grafico completato")
+
+    return summary
 
 
 if __name__ == "__main__":
@@ -981,23 +986,20 @@ if __name__ == "__main__":
         download_csv(url_name, URLS[url_name])
     CWD = os.path.abspath(os.path.dirname(__file__))
     os.makedirs(f"{CWD}/graphs", exist_ok=True)
-    
+
     print("Dati caricati con successo.\n-----------------------------")
+
+    print("Inizio generazione grafici epidemia...")
+    sum_epidemia = epidemia()
+
+    print("-----------------------------\nInizio generazione grafici vaccini...")
+    sum_vaccini = vaccini()
+
+    with open(f"{CWD}/summary_epidemia.txt", 'w') as f:
+        f.write(sum_epidemia)
     
-    print("Inizio generazione grafici nazionali...")
-    sum_nazionale = nazionale()
-    
-    print("-----------------------------\nInizio generazione grafici regionali...")
-    sum_regioni = regioni()
+    with open(f"{CWD}/summary_vaccini.txt", "w") as f:
+        f.write(sum_vaccini)
 
-    print("-----------------------------\nInizio generazione grafici vaccini nazionali...")
-    vaccini_nazionale()
-
-    print("-----------------------------\nInizio generazione grafici vaccini regioanli...")
-    vaccini_regioni()
-
-    with open(f"{CWD}/summary.txt", 'w') as f:
-        f.write(sum_nazionale)
-        f.write(sum_regioni)
-
-    print("-----------------------------\nScript completato con successo. I risultati si trovano nella cartella graphs.")
+    print(
+        "-----------------------------\nScript completato con successo. I risultati si trovano nella cartella graphs.")

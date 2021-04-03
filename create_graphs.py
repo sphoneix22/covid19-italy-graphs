@@ -2,8 +2,10 @@ import matplotlib.pyplot as plt
 from numpy import median
 import pandas as pd
 import os
+import json
+import urllib.request as request
 
-# CONSTANTI
+# COSTANTI
 ############################################################################################
 
 # URL da cui scaricare i dati necessari
@@ -374,7 +376,7 @@ def create_incidenza(data, regione):
 # GRAFICI
 ############################################################################################
 def plot(x, y, title, output, xlabel=None, ylabel=None, media_mobile=None, legend=None, color=None, grid="y",
-         hline=None, vline=None, marker=None):
+         hline=None, vline=None, marker=None, footer=None):
     fig, ax = plt.subplots()
     line, = ax.plot(x, y, marker=marker)
     if media_mobile:
@@ -392,17 +394,18 @@ def plot(x, y, title, output, xlabel=None, ylabel=None, media_mobile=None, legen
 
     if vline:
         plt.axvline(vline, 0, 1, color="red")
-
+    
     fig.autofmt_xdate()
     ax.set_title(title)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
+    plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
 
     fig.savefig(CWD + output, dpi=200)
     plt.close('all')
 
 
-def stackplot(x, y1, y2, title, label, output, soglia=None, yticks=None):
+def stackplot(x, y1, y2, title, label, output, soglia=None, yticks=None, footer=None):
     fig, ax = plt.subplots()
     ax.stackplot(x, y1, y2, labels=label)
 
@@ -414,23 +417,26 @@ def stackplot(x, y1, y2, title, label, output, soglia=None, yticks=None):
     ax.legend(label, loc="upper left", prop={"size": 7})
     ax.grid(axis="y")
     fig.autofmt_xdate()
+    plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
     fig.savefig(CWD + output, dpi=200)
     plt.close('all')
 
 
-def deltaplot(x, y, title, output):
+def deltaplot(x, y, title, output, footer=None):
     fig, ax = plt.subplots()
     color = ["orange" if x >= 0 else "red" for x in y]
     plt.vlines(x=x, ymin=0, ymax=y, color=color, alpha=0.7)
     ax.set_title(title)
     fig.autofmt_xdate()
     ax.grid(axis="y")
+    plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
+
     fig.savefig(CWD + output, dpi=200)
     plt.close('all')
 
 
 def barplot(x, y, title, output, horizontal=False, xticks=None, yticks=None, grid="y", bottom=None, ylabel=None,
-            label1=None, label2=None, xticklabels=None):
+            label1=None, label2=None, xticklabels=None, footer=None):
     fig, ax = plt.subplots()
 
     if horizontal:
@@ -463,15 +469,18 @@ def barplot(x, y, title, output, horizontal=False, xticks=None, yticks=None, gri
     if xticklabels:
         ax.set_xticklabels(xticklabels)
 
+    plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
+
     fig.savefig(CWD + output, dpi=200)
 
     plt.close('all')
 
 
-def pieplot(slices, labels, title, output):
+def pieplot(slices, labels, title, output, footer=None):
     fig, ax = plt.subplots()
     ax.pie(slices, labels=labels)
     plt.title(title)
+    plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
 
     fig.savefig(CWD + output, dpi=200)
     plt.close('all')
@@ -481,7 +490,8 @@ def pieplot(slices, labels, title, output):
 
 def epidemia():
     os.makedirs(f"{CWD}/graphs/epidemia", exist_ok=True)
-    summary = "DATI NAZIONALI {}\n\n".format(data["nazionale"]["data"].iat[-1])
+    last_update = data["nazionale"]["data"].iat[-1]
+    summary = f"DATI NAZIONALI {last_update}\n\n"
     # Grafico nuovi positivi
     print("Grafico nuovi positivi...")
     plot(
@@ -490,7 +500,8 @@ def epidemia():
         "Andamento contagi giornalieri",
         "/graphs/epidemia/nuovi_positivi.jpg",
         media_mobile=create_media_mobile(data["nazionale"]["nuovi_positivi"]),
-        legend=["Contagi giornalieri", "Media mobile settimanale"]
+        legend=["Contagi giornalieri", "Media mobile settimanale"],
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
     summary += "Nuovi positivi: {}\n".format(data["nazionale"]["nuovi_positivi"].iat[-1])
 
@@ -504,6 +515,7 @@ def epidemia():
         ["Soglia critica TI", "Terapie intensive", "Ricoverati con sintomi"],
         "/graphs/epidemia/andamento_ospedalizzati.jpg",
         soglia=(TOTALE_TERAPIA_INTENSIVA["nazionale"] / 100) * 30,
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
     summary += "Ospedalizzati ordinari: {}\nTerapie intensive: {}\n".format(
         data["nazionale"]["ricoverati_con_sintomi"].iat[-1], data["nazionale"]["terapia_intensiva"].iat[-1])
@@ -517,6 +529,7 @@ def epidemia():
         "/graphs/epidemia/ingressi_ti.jpg",
         media_mobile=create_media_mobile(data["nazionale"]["ingressi_terapia_intensiva"]),
         legend=["Ingressi TI", "Media mobile settimanale"],
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
     summary += "Ingressi TI: {}\n".format(data["nazionale"]["ingressi_terapia_intensiva"].iat[-1])
 
@@ -526,7 +539,8 @@ def epidemia():
         data["nazionale"]["data"],
         data["nazionale"]["variazione_totale_positivi"],
         "Variazione giornaliera totale positivi",
-        "/graphs/epidemia/variazione_totale_positivi.jpg"
+        "/graphs/epidemia/variazione_totale_positivi.jpg",
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
     summary += "Variazione totale totale positivi: {}\n".format(data["nazionale"]["variazione_totale_positivi"].iat[-1])
 
@@ -537,7 +551,8 @@ def epidemia():
         data["nazionale"]["data"],
         delta,
         "Variazione totale ospedalizzati",
-        "/graphs/epidemia/variazione_totale_ospedalizzati.jpg"
+        "/graphs/epidemia/variazione_totale_ospedalizzati.jpg",
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
     summary += "Variazione totale ospedalizzati: {}\n".format(delta[-1])
 
@@ -548,7 +563,8 @@ def epidemia():
         data["nazionale"]["data"],
         delta,
         "Variazione occupazione TI",
-        "/graphs/epidemia/variazione_ti.jpg"
+        "/graphs/epidemia/variazione_ti.jpg",
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
     summary += "Variazione TI: {}\n".format(delta[-1])
 
@@ -559,7 +575,8 @@ def epidemia():
         data["nazionale"]["data"],
         delta,
         "Variazione ospedalizzati ordinari",
-        "/graphs/epidemia/variazione_ospedalizzati_ordinari.jpg"
+        "/graphs/epidemia/variazione_ospedalizzati_ordinari.jpg",
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
     summary += "Variazione ricoverati con sintomi: {}\n".format(delta[-1])
 
@@ -570,7 +587,8 @@ def epidemia():
         data["nazionale"]["deceduti"],
         "Andamento deceduti",
         "/graphs/epidemia/deceduti.jpg",
-        color="black"
+        color="black",
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
     summary += "Deceduti totali: {}\n".format(data["nazionale"]["deceduti"].iat[-1])
 
@@ -584,7 +602,8 @@ def epidemia():
         "/graphs/epidemia/deceduti_giornalieri.jpg",
         media_mobile=create_media_mobile(create_delta(data["nazionale"]["deceduti"])),
         legend=["Deceduti giornalieri", "Media mobile settimanale"],
-        color="black"
+        color="black",
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
     summary += "Deceduti giornalieri: {}\n".format(delta[-1])
 
@@ -595,7 +614,8 @@ def epidemia():
         incidenza,
         "Incidenza di nuovi positivi ogni 100000 abitanti\nnell'arco di 7 giorni",
         "/graphs/epidemia/incidenza_contagio.jpg",
-        hline=250
+        hline=250,
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
     summary += f"Incidenza: {incidenza[-1]}\n\n"
 
@@ -611,7 +631,8 @@ def epidemia():
             f"Andamento contagi giornalieri {denominazione_regione}",
             f"/graphs/epidemia/nuovi_positivi_{denominazione_regione}.jpg",
             media_mobile=create_media_mobile(data["regioni"][regione]["nuovi_positivi"]),
-            legend=["Contagi giornalieri", "Media mobile settimanale"]
+            legend=["Contagi giornalieri", "Media mobile settimanale"],
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
         summary += "Nuovi positivi: {}\n".format(data["regioni"][regione]["nuovi_positivi"].iat[-1])
 
@@ -624,7 +645,8 @@ def epidemia():
             f"Andamento ospedalizzati {denominazione_regione}",
             ["Soglia critica TI", "Terapie intensive", "Ricoverati con sintomi"],
             f"/graphs/epidemia/andamento_ospedalizzati_{denominazione_regione}.jpg",
-            soglia=(TOTALE_TERAPIA_INTENSIVA[denominazione_regione] / 100) * 30
+            soglia=(TOTALE_TERAPIA_INTENSIVA[denominazione_regione] / 100) * 30,
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
         summary += "TI: {}\nRicoverati con sintomi: {}\n".format(data["regioni"][regione]["terapia_intensiva"].iat[-1],
                                                                  data["regioni"][regione]["ricoverati_con_sintomi"].iat[
@@ -639,6 +661,7 @@ def epidemia():
             f"/graphs/epidemia/ingressi_ti_{denominazione_regione}.jpg",
             media_mobile=create_media_mobile(data["regioni"][regione]["ingressi_terapia_intensiva"]),
             legend=["Ingressi TI", "Media mobile settimanale"],
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
         summary += "Ingressi TI: {}\n".format(data["regioni"][regione]["ingressi_terapia_intensiva"].iat[-1])
 
@@ -648,7 +671,8 @@ def epidemia():
             data["regioni"][regione]["data"],
             data["regioni"][regione]["variazione_totale_positivi"],
             f"Variazione giornaliera totale positivi {denominazione_regione}",
-            f"/graphs/epidemia/variazione_totale_positivi_{denominazione_regione}.jpg"
+            f"/graphs/epidemia/variazione_totale_positivi_{denominazione_regione}.jpg",
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
         summary += "Variazione totale positivi: {}\n".format(
             data["regioni"][regione]["variazione_totale_positivi"].iat[-1])
@@ -659,7 +683,8 @@ def epidemia():
             data["regioni"][regione]["data"],
             create_delta(data["regioni"][regione]["totale_ospedalizzati"]),
             f"Variazione totale ospedalizzati {denominazione_regione}",
-            f"/graphs/epidemia/variazione_totale_ospedalizzati_{denominazione_regione}.jpg"
+            f"/graphs/epidemia/variazione_totale_ospedalizzati_{denominazione_regione}.jpg",
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
         summary += "Variazione totale ospedalizzati: {}\n".format(
             create_delta(data["regioni"][regione]["totale_ospedalizzati"])[-1])
@@ -670,7 +695,8 @@ def epidemia():
             data["regioni"][regione]["data"],
             create_delta(data["regioni"][regione]["terapia_intensiva"]),
             f"Variazione occupazione TI {denominazione_regione}",
-            f"/graphs/epidemia/variazione_ti_{denominazione_regione}.jpg"
+            f"/graphs/epidemia/variazione_ti_{denominazione_regione}.jpg",
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
         summary += "Variazione TI: {}\n".format(create_delta(data["regioni"][regione]["terapia_intensiva"])[-1])
 
@@ -680,7 +706,8 @@ def epidemia():
             data["regioni"][regione]["data"],
             create_delta(data["regioni"][regione]["ricoverati_con_sintomi"]),
             f"Variazione ospedalizzati ordinari {denominazione_regione}",
-            f"/graphs/epidemia/variazione_ospedalizzati_ordinari_{denominazione_regione}.jpg"
+            f"/graphs/epidemia/variazione_ospedalizzati_ordinari_{denominazione_regione}.jpg",
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
         summary += "Variazione ricoverati con sintomi: {}\n".format(
             create_delta(data["regioni"][regione]["ricoverati_con_sintomi"])[-1])
@@ -692,7 +719,8 @@ def epidemia():
             data["regioni"][regione]["deceduti"],
             f"Andamento deceduti {denominazione_regione}",
             f"/graphs/epidemia/deceduti_{denominazione_regione}.jpg",
-            color="black"
+            color="black",
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
         summary += "Deceduti totali: {}\n".format(data["regioni"][regione]["deceduti"].iat[-1])
 
@@ -705,7 +733,8 @@ def epidemia():
             f"/graphs/epidemia/deceduti_giornalieri_{denominazione_regione}.jpg",
             media_mobile=create_media_mobile(create_delta(data["regioni"][regione]["deceduti"])),
             legend=["Deceduti giornalieri", "Media mobile settimanale"],
-            color="black"
+            color="black",
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
         summary += "Deceduti giornalieri: {}\n".format(create_delta(data["regioni"][regione]["deceduti"])[-1])
 
@@ -716,7 +745,8 @@ def epidemia():
             incidenza,
             f"Incidenza di nuovi positivi ogni 100000 abitanti\nnell'arco di 7 giorni in {denominazione_regione}",
             f"/graphs/epidemia/incidenza_contagio_{denominazione_regione}.jpg",
-            hline=250
+            hline=250,
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
         summary += f"Incidenza: {incidenza[-1]}\n\n"
 
@@ -725,7 +755,10 @@ def epidemia():
 
 def vaccini():
     os.makedirs(f"{CWD}/graphs/vaccini", exist_ok=True)
-    summary = "DATI VACCINAZIONE\n\nDATI NAZIONALI\n"
+    last_update = json.loads(request.urlopen("https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/last-update-dataset.json").read())["ultimo_aggiornamento"]
+    last_update = pd.to_datetime(last_update).strftime("%d-%m %H:%m")
+
+    summary = f"DATI VACCINAZIONE\n\nDATI NAZIONALI\nUltimo aggiornamento:\n{last_update}\n"
 
     print("Grafico percentuale somministrazione...")
     barplot(
@@ -735,7 +768,8 @@ def vaccini():
         "/graphs/vaccini/percentuale_somministrazione_regioni.jpg",
         xticks=range(0, 100, 5),
         horizontal=True,
-        grid="x"
+        grid="x",
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
 
     summary += "Percentuale somministrazione:\n"
@@ -757,7 +791,8 @@ def vaccini():
             f"Persone vaccinate\n ({vaccinati_seconda_dose}, {round((vaccinati_seconda_dose / popolazione_totale) * 100, 2)}%)"
         ],
         "Persone che hanno completato il ciclo di vaccinazione\nsul totale della popolazione",
-        "/graphs/vaccini/percentuale_vaccinati.jpg"
+        "/graphs/vaccini/percentuale_vaccinati.jpg",
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
     summary += f"\nPercentuale popolazione vaccinata con la seconda dose: {vaccinati_seconda_dose} ({round((vaccinati_seconda_dose / popolazione_totale) * 100, 2)}%)\n"
 
@@ -773,7 +808,8 @@ def vaccini():
             f"Persone vaccinate\n ({vaccinati_prima_dose}, {round((vaccinati_prima_dose / popolazione_totale) * 100, 2)}%)"
         ],
         "Persone che hanno ricevuto almeno una dose\nsul totale della popolazione",
-        "/graphs/vaccini/percentuale_vaccinati_prima_dose.jpg"
+        "/graphs/vaccini/percentuale_vaccinati_prima_dose.jpg",
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
     summary += f"\nPercentuale popolazione vaccinata con la seconda dose: {vaccinati_prima_dose} ({round((vaccinati_prima_dose / popolazione_totale) * 100, 2)}%)\n"
 
@@ -787,7 +823,8 @@ def vaccini():
         "/graphs/vaccini/vaccinazioni_giornaliere.jpg",
         media_mobile=create_media_mobile(somministrazioni.values()),
         legend=["Vaccinazioni giornaliere", "Media mobile settimanale"],
-        marker="."
+        marker=".",
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
 
     summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\n\n"
@@ -804,7 +841,8 @@ def vaccini():
         "Vaccinazioni giornaliere",
         ["Prima dose", "Seconda dose"],
         "/graphs/vaccini/vaccinazioni_giornaliere_dosi.jpg",
-        yticks=range(25000, 250000, 25000)
+        yticks=range(25000, 250000, 25000),
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
 
     print("Grafico fasce popolazione...")
@@ -825,7 +863,8 @@ def vaccini():
         grid=None,
         bottom=y_values_seconda_dose,
         label1="Prima dose",
-        label2="Seconda dose"
+        label2="Seconda dose",
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
 
     summary += "Percentuali fascia anagrafica:\n"
@@ -844,7 +883,8 @@ def vaccini():
         "/graphs/vaccini/somministrazione_categorie.jpg",
         grid=None,
         ylabel="in milioni di dosi",
-        xticklabels=["Altro", "OSS", "Personale \nnon sanitario", "RSA", "Over 80", "FA", "Personale\nscolastico"]
+        xticklabels=["Altro", "OSS", "Personale \nnon sanitario", "RSA", "Over 80", "FA", "Personale\nscolastico"],
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
 
     print("Grafico consegne vaccino...")
@@ -857,7 +897,8 @@ def vaccini():
         "/graphs/vaccini/consegne_vaccini.jpg",
         media_mobile=media_mobile,
         legend=["Consegne vaccini", "Media mobile settimanale"],
-        marker="."
+        marker=".",
+        footer= f"Ultimo aggiornamento: {last_update}"
     )
 
     summary += f"\nMedia consegne vaccino:\n{media_mobile[-1]}\n\n"
@@ -869,7 +910,8 @@ def vaccini():
         fornitori.values(),
         "Consegne totali vaccini per fornitore",
         "/graphs/vaccini/consegne_totali_vaccini.jpg",
-    )
+        footer= f"Ultimo aggiornamento: {last_update}"
+   )
 
     summary += "Consegne totali:\n"
     for el in fornitori:
@@ -890,7 +932,8 @@ def vaccini():
             f"/graphs/vaccini/vaccinazioni_giornaliere_{denominazione_regione}.jpg",
             media_mobile=create_media_mobile(somministrazioni.values()),
             legend=["Vaccinazioni giornaliere", "Media mobile settimanale"],
-            marker="."
+            marker=".",
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
 
         print("Grafico vaccinazione giornaliere, prima e seconda dose...")
@@ -904,7 +947,8 @@ def vaccini():
             seconda_dose.values(),
             f"Vaccinazioni giornaliere in {denominazione_regione}",
             ["Prima dose", "Seconda dose"],
-            f"/graphs/vaccini/vaccinazioni_giornaliere_dosi_{denominazione_regione}.jpg"
+            f"/graphs/vaccini/vaccinazioni_giornaliere_dosi_{denominazione_regione}.jpg",
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
 
         print("Grafico fasce popolazione...")
@@ -929,7 +973,8 @@ def vaccini():
             grid=None,
             bottom=y_values_seconda_dose,
             label1="Prima dose",
-            label2="Seconda dose"
+            label2="Seconda dose",
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
 
         print("Grafico somministrazione categorie...")
@@ -943,7 +988,8 @@ def vaccini():
             f"/graphs/vaccini/somministrazione_categorie_{denominazione_regione}.jpg",
             grid=None,
             ylabel="in milioni di dosi",
-            xticklabels=["Altro", "OSS", "Personale \nnon sanitario", "RSA", "Over 80", "FA", "Personale\nscolastico"]
+            xticklabels=["Altro", "OSS", "Personale \nnon sanitario", "RSA", "Over 80", "FA", "Personale\nscolastico"],
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
 
         print("Grafico consegne vaccino...")
@@ -964,16 +1010,8 @@ def vaccini():
             f"/graphs/vaccini/consegne_vaccini_{denominazione_regione}.jpg",
             media_mobile=create_media_mobile(consegne.values()),
             legend=["Consegne vaccini", "Media mobile settimanale"],
-            marker="."
-        )
-
-        print("Grafico consegne totali vaccini")
-        fornitori = consegne_regione.groupby("fornitore")["numero_dosi"].sum().to_dict()
-        barplot(
-            fornitori.keys(),
-            fornitori.values(),
-            f"Consegne totali vaccini per fornitore in {denominazione_regione}",
-            f"/graphs/vaccini/consegne_totali_vaccini_{denominazione_regione}.jpg",
+            marker=".",
+            footer= f"Ultimo aggiornamento: {last_update}"
         )
 
     return summary
@@ -986,6 +1024,7 @@ if __name__ == "__main__":
         download_csv(url_name, URLS[url_name])
     CWD = os.path.abspath(os.path.dirname(__file__))
     os.makedirs(f"{CWD}/graphs", exist_ok=True)
+    plt.style.use("seaborn-dark")
 
     print("Dati caricati con successo.\n-----------------------------")
 

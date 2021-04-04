@@ -585,6 +585,50 @@
 <img src="graphs/vaccini/somministrazione_fascia_eta_Valle%20d'Aosta.jpg" width="600" height="500"></img>
 ### somministrazione_fascia_eta_Veneto
 <img src="graphs/vaccini/somministrazione_fascia_eta_Veneto.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Abruzzo
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Abruzzo.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Basilicata
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Basilicata.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Calabria
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Calabria.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Campania
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Campania.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Emilia-Romagna
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Emilia-Romagna.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Friuli%20Venezia%20Giulia
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Friuli%20Venezia%20Giulia.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Lazio
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Lazio.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Liguria
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Liguria.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Lombardia
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Lombardia.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Marche
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Marche.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Molise
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Molise.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_P.A.%20Bolzano
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_P.A.%20Bolzano.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_P.A.%20Trento
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_P.A.%20Trento.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Piemonte
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Piemonte.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Puglia
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Puglia.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Sardegna
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Sardegna.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Sicilia
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Sicilia.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Toscana
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Toscana.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Umbria
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Umbria.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Valle%20d'Aosta
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Valle%20d'Aosta.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fornitore_Veneto
+<img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Veneto.jpg" width="600" height="500"></img>
 ### vaccinazioni_giornaliere
 <img src="graphs/vaccini/vaccinazioni_giornaliere.jpg" width="600" height="500"></img>
 ### vaccinazioni_giornaliere_Abruzzo

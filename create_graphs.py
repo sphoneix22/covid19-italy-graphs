@@ -4,6 +4,7 @@ import pandas as pd
 import os
 import json
 import urllib.request as request
+import numpy as np
 
 # COSTANTI
 ############################################################################################
@@ -467,6 +468,7 @@ def barplot(x, y, title, output, horizontal=False, xticks=None, yticks=None, gri
         ax.set_ylabel(ylabel)
 
     if xticklabels:
+        plt.xticks([0,1,2,3,4,5,6])
         ax.set_xticklabels(xticklabels)
 
     plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
@@ -485,6 +487,37 @@ def pieplot(slices, labels, title, output, footer=None):
     fig.savefig(CWD + output, dpi=200)
     plt.close('all')
 
+def grafico_vaccini_fornitore(pfizer, moderna, astrazeneca, media_mobile, title, footer, output):
+    fig, ax = plt.subplots()
+    
+    new_astrazeneca = {}
+    new_moderna = {}
+    for x_value in pfizer.keys():
+        if x_value not in astrazeneca.keys():
+            new_astrazeneca[x_value] = 0
+        else:
+            new_astrazeneca[x_value] = astrazeneca[x_value]
+        if x_value not in moderna.keys():
+            new_moderna[x_value] = 0
+        else:
+            new_moderna[x_value] = moderna[x_value]
+    
+    moderna_array = np.array(list(new_moderna.values()))
+    pfizer_array = np.array(list(pfizer.values()))
+
+    ax.bar(pfizer.keys(), pfizer.values(), label="Pfizer/BioNTech")
+    ax.bar(pfizer.keys(), new_moderna.values(), bottom=list(pfizer.values()), label="Moderna")
+    ax.bar(pfizer.keys(), new_astrazeneca.values(), bottom=moderna_array+pfizer_array, label="AstraZeneca")    
+    ax.grid(axis="y")
+    ax.plot(media_mobile[0], media_mobile[1], color="black", linewidth=1, label="Media mobile settimanale")
+    plt.title(title)
+    plt.legend()
+    plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
+    fig.autofmt_xdate()
+
+    fig.savefig(CWD + output, dpi=200)
+
+    plt.close("all")
 
 ############################################################################################
 
@@ -756,7 +789,7 @@ def epidemia():
 def vaccini():
     os.makedirs(f"{CWD}/graphs/vaccini", exist_ok=True)
     last_update = json.loads(request.urlopen("https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/last-update-dataset.json").read())["ultimo_aggiornamento"]
-    last_update = pd.to_datetime(last_update).strftime("%d-%m %H:%m")
+    last_update = pd.to_datetime(last_update).strftime("%d-%m alle %H:%M %Z")
 
     summary = f"DATI VACCINAZIONE\n\nDATI NAZIONALI\nUltimo aggiornamento:\n{last_update}\n"
 
@@ -844,6 +877,27 @@ def vaccini():
         yticks=range(25000, 250000, 25000),
         footer= f"Ultimo aggiornamento: {last_update}"
     )
+
+    print("Grafico somministrazioni giornaliere per fornitore")
+    astrazeneca = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]["fornitore"] == "AstraZeneca"]
+    astrazeneca = (astrazeneca.groupby("data_somministrazione")["prima_dose"].sum() + astrazeneca.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
+
+    pfizer = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]["fornitore"] == "Pfizer/BioNTech"]
+    pfizer = (pfizer.groupby("data_somministrazione")["prima_dose"].sum() + pfizer.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
+
+    moderna = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]["fornitore"] == "Moderna"]
+    moderna = (moderna.groupby("data_somministrazione")["prima_dose"].sum() + moderna.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
+
+    grafico_vaccini_fornitore(
+        pfizer,
+        moderna,
+        astrazeneca,
+        [somministrazioni.keys(), create_media_mobile(somministrazioni.values())],
+        "Somministrazioni giornaliere per fornitore",
+        f"Ultimo aggiornamento: {last_update}",
+        "/graphs/vaccini/somministrazioni_giornaliere_fornitore.jpg"
+    )
+
 
     print("Grafico fasce popolazione...")
     y_values_prima_dose = []
@@ -951,8 +1005,32 @@ def vaccini():
             footer= f"Ultimo aggiornamento: {last_update}"
         )
 
-        print("Grafico fasce popolazione...")
         dataframe = data["somministrazioni_vaccini"]["regioni"][regione]
+        
+        print("Grafico somministrazioni giornaliere per fornitore")
+        astrazeneca = dataframe[dataframe["fornitore"] == "AstraZeneca"]
+        astrazeneca = (astrazeneca.groupby("data_somministrazione")["prima_dose"].sum() + astrazeneca.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
+    
+        pfizer = dataframe[dataframe["fornitore"] == "Pfizer/BioNTech"]
+        pfizer = (pfizer.groupby("data_somministrazione")["prima_dose"].sum() + pfizer.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
+    
+        moderna = dataframe[dataframe["fornitore"] == "Moderna"]
+        moderna = (moderna.groupby("data_somministrazione")["prima_dose"].sum() + moderna.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
+
+        
+        grafico_vaccini_fornitore(
+            pfizer,
+            moderna,
+            astrazeneca,
+            [somministrazioni.keys(), create_media_mobile(somministrazioni.values())],
+            f"Somministrazioni giornaliere per fornitore - {denominazione_regione}",
+            f"Ultimo aggiornamento: {last_update}",
+            f"/graphs/vaccini/somministrazioni_giornaliere_fornitore_{denominazione_regione}.jpg"
+        )
+
+
+        print("Grafico fasce popolazione...")
+        
         y_values_prima_dose = []
         y_values_seconda_dose = []
         for fascia in FASCE_POPOLAZIONE:

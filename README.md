@@ -449,48 +449,6 @@
 <img src="graphs/vaccini/consegne_totali_vaccini.jpg" width="600" height="500"></img>
 ### consegne_vaccini
 <img src="graphs/vaccini/consegne_vaccini.jpg" width="600" height="500"></img>
-### consegne_vaccini_Abruzzo
-<img src="graphs/vaccini/consegne_vaccini_Abruzzo.jpg" width="600" height="500"></img>
-### consegne_vaccini_Basilicata
-<img src="graphs/vaccini/consegne_vaccini_Basilicata.jpg" width="600" height="500"></img>
-### consegne_vaccini_Calabria
-<img src="graphs/vaccini/consegne_vaccini_Calabria.jpg" width="600" height="500"></img>
-### consegne_vaccini_Campania
-<img src="graphs/vaccini/consegne_vaccini_Campania.jpg" width="600" height="500"></img>
-### consegne_vaccini_Emilia-Romagna
-<img src="graphs/vaccini/consegne_vaccini_Emilia-Romagna.jpg" width="600" height="500"></img>
-### consegne_vaccini_Friuli%20Venezia%20Giulia
-<img src="graphs/vaccini/consegne_vaccini_Friuli%20Venezia%20Giulia.jpg" width="600" height="500"></img>
-### consegne_vaccini_Lazio
-<img src="graphs/vaccini/consegne_vaccini_Lazio.jpg" width="600" height="500"></img>
-### consegne_vaccini_Liguria
-<img src="graphs/vaccini/consegne_vaccini_Liguria.jpg" width="600" height="500"></img>
-### consegne_vaccini_Lombardia
-<img src="graphs/vaccini/consegne_vaccini_Lombardia.jpg" width="600" height="500"></img>
-### consegne_vaccini_Marche
-<img src="graphs/vaccini/consegne_vaccini_Marche.jpg" width="600" height="500"></img>
-### consegne_vaccini_Molise
-<img src="graphs/vaccini/consegne_vaccini_Molise.jpg" width="600" height="500"></img>
-### consegne_vaccini_P.A.%20Bolzano
-<img src="graphs/vaccini/consegne_vaccini_P.A.%20Bolzano.jpg" width="600" height="500"></img>
-### consegne_vaccini_P.A.%20Trento
-<img src="graphs/vaccini/consegne_vaccini_P.A.%20Trento.jpg" width="600" height="500"></img>
-### consegne_vaccini_Piemonte
-<img src="graphs/vaccini/consegne_vaccini_Piemonte.jpg" width="600" height="500"></img>
-### consegne_vaccini_Puglia
-<img src="graphs/vaccini/consegne_vaccini_Puglia.jpg" width="600" height="500"></img>
-### consegne_vaccini_Sardegna
-<img src="graphs/vaccini/consegne_vaccini_Sardegna.jpg" width="600" height="500"></img>
-### consegne_vaccini_Sicilia
-<img src="graphs/vaccini/consegne_vaccini_Sicilia.jpg" width="600" height="500"></img>
-### consegne_vaccini_Toscana
-<img src="graphs/vaccini/consegne_vaccini_Toscana.jpg" width="600" height="500"></img>
-### consegne_vaccini_Umbria
-<img src="graphs/vaccini/consegne_vaccini_Umbria.jpg" width="600" height="500"></img>
-### consegne_vaccini_Valle%20d'Aosta
-<img src="graphs/vaccini/consegne_vaccini_Valle%20d'Aosta.jpg" width="600" height="500"></img>
-### consegne_vaccini_Veneto
-<img src="graphs/vaccini/consegne_vaccini_Veneto.jpg" width="600" height="500"></img>
 ### percentuale_somministrazione_regioni
 <img src="graphs/vaccini/percentuale_somministrazione_regioni.jpg" width="600" height="500"></img>
 ### percentuale_vaccinati

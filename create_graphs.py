@@ -946,7 +946,7 @@ def vaccini():
         footer=f"Ultimo aggiornamento: {last_update}"
     )
 
-    summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\n\n"
+    summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\nL'altro ieri: {list(somministrazioni.values())[-3]}\n\n"
 
     print("Grafico vaccinazione giornaliere, prima e seconda dose...")
     prima_dose = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")[
@@ -1021,17 +1021,24 @@ def vaccini():
     print("Grafico somministrazione categorie...")
     x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari", "categoria_personale_non_sanitario",
                 "categoria_ospiti_rsa", "categoria_over80", "categoria_forze_armate", "categoria_personale_scolastico"]
+    xlabels = ["Altro", "OSS", "Personale \nnon sanitario", "RSA", "Over 80", "FA", "Personale\nscolastico"]
+    values_categorie = [data["anagrafica_vaccini_summary"][x].sum() for x in x_values]
     barplot(
         x_values,
-        [data["anagrafica_vaccini_summary"][x].sum() for x in x_values],
+        values_categorie,
         "Somministrazione vaccini per categoria",
         "/graphs/vaccini/somministrazione_categorie.jpg",
         grid=None,
         ylabel="in milioni di dosi",
-        xticklabels=["Altro", "OSS", "Personale \nnon sanitario",
-                     "RSA", "Over 80", "FA", "Personale\nscolastico"],
+        xticklabels=xlabels,
         footer=f"Ultimo aggiornamento: {last_update}"
     )
+
+    summary += "\nCategorie:\n"
+    for i in range(len(xlabels)):
+        categoria = xlabels[i]
+        summary += f"{categoria}: {values_categorie[i]} ({(values_categorie[i]/sum(somministrazioni.values()))*100}%)\n"
+
 
     print("Grafico consegne vaccino...")
     consegne = data["consegne_vaccini"].groupby(
@@ -1070,10 +1077,12 @@ def vaccini():
     summary += "Consegne totali:\n"
     for el in fornitori:
         summary += f"{el}: {fornitori[el]}\n"
-
+    
+    summary  += "\nDATI REGIONALI\n\n"
     for regione in data["somministrazioni_vaccini_summary"]["regioni"].keys():
         print(f"Regione {regione}")
         denominazione_regione = data["regioni"][regione]["denominazione_regione"].iloc[0]
+        summary += f"\n{denominazione_regione}\n"
 
         print("Grafico vaccinazioni giornaliere...")
         somministrazioni = \
@@ -1089,6 +1098,7 @@ def vaccini():
             marker=".",
             footer=f"Ultimo aggiornamento: {last_update}"
         )
+        summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\nL'altro ieri: {list(somministrazioni.values())[-3]}\n\n"
 
         print("Grafico vaccinazione giornaliere, prima e seconda dose...")
         prima_dose = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")[
@@ -1160,14 +1170,20 @@ def vaccini():
             footer=f"Ultimo aggiornamento: {last_update}"
         )
 
+        for i in range(len(data["anagrafica_vaccini_summary"]["fascia_anagrafica"])):
+            fascia = data["anagrafica_vaccini_summary"]["fascia_anagrafica"].iat[i]
+            summary += f"{fascia}: {y_values_seconda_dose[i]}% ({y_values_prima_dose[i]} %)\n"
+        
         print("Grafico somministrazione categorie...")
+
         x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari",
                     "categoria_personale_non_sanitario", "categoria_ospiti_rsa", "categoria_over80",
                     "categoria_forze_armate", "categoria_personale_scolastico"]
+        xlabels = ["Altro", "OSS", "Personale \nnon sanitario", "RSA", "Over 80", "FA", "Personale\nscolastico"]
+        values_categorie = [data["somministrazioni_vaccini"]["regioni"][regione][x].sum() for x in x_values]
         barplot(
             x_values,
-            [data["somministrazioni_vaccini"]["regioni"][regione][x].sum()
-             for x in x_values],
+            values_categorie,
             f"Somministrazione vaccini per categoria in {denominazione_regione}",
             f"/graphs/vaccini/somministrazione_categorie_{denominazione_regione}.jpg",
             grid=None,
@@ -1176,6 +1192,11 @@ def vaccini():
                          "RSA", "Over 80", "FA", "Personale\nscolastico"],
             footer=f"Ultimo aggiornamento: {last_update}"
         )
+        summary += "\nCategorie:\n"
+        for i in range(len(xlabels)):
+            categoria = xlabels[i]
+            summary += f"{categoria}: {values_categorie[i]} ({(values_categorie[i]/sum(somministrazioni.values()))*100} %)\n"
+        
 
     return summary
 

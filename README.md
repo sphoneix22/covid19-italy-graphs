@@ -587,50 +587,6 @@
 <img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Valle%20d'Aosta.jpg" width="600" height="500"></img>
 ### somministrazioni_giornaliere_fornitore_Veneto
 <img src="graphs/vaccini/somministrazioni_giornaliere_fornitore_Veneto.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere
-<img src="graphs/vaccini/vaccinazioni_giornaliere.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Abruzzo
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Abruzzo.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Basilicata
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Basilicata.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Calabria
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Calabria.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Campania
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Campania.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Emilia-Romagna
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Emilia-Romagna.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Friuli%20Venezia%20Giulia
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Friuli%20Venezia%20Giulia.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Lazio
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Lazio.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Liguria
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Liguria.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Lombardia
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Lombardia.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Marche
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Marche.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Molise
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Molise.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_P.A.%20Bolzano
-<img src="graphs/vaccini/vaccinazioni_giornaliere_P.A.%20Bolzano.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_P.A.%20Trento
-<img src="graphs/vaccini/vaccinazioni_giornaliere_P.A.%20Trento.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Piemonte
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Piemonte.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Puglia
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Puglia.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Sardegna
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Sardegna.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Sicilia
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Sicilia.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Toscana
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Toscana.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Umbria
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Umbria.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Valle%20d'Aosta
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Valle%20d'Aosta.jpg" width="600" height="500"></img>
-### vaccinazioni_giornaliere_Veneto
-<img src="graphs/vaccini/vaccinazioni_giornaliere_Veneto.jpg" width="600" height="500"></img>
 ### vaccinazioni_giornaliere_dosi
 <img src="graphs/vaccini/vaccinazioni_giornaliere_dosi.jpg" width="600" height="500"></img>
 ### vaccinazioni_giornaliere_dosi_Abruzzo

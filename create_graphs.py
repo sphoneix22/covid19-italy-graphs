@@ -18,11 +18,12 @@ URLS = {
     "anagrafica_vaccini_summary": "https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/anagrafica-vaccini-summary-latest.csv",
     "somministrazioni_vaccini_summary": "https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-summary-latest.csv",
     "consegne_vaccini": "https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/consegne-vaccini-latest.csv",
-    "somministrazioni_vaccini": "https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-latest.csv"
+    "somministrazioni_vaccini": "https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-latest.csv",
+    "monitoraggi_iss": "https://raw.githubusercontent.com/sphoneix22/monitoraggi-ISS/main/dati/monitoraggio-nazionale.csv"
 }
 
 # Colonne che necessitano la conversione in formato datetime (tutti i csv)
-DATETIME_COLUMNS = ["data", "data_somministrazione", "data_consegna"]
+DATETIME_COLUMNS = ["data", "data_somministrazione", "data_consegna", "inizio_range", "fine_range", "data_report"]
 
 TOTALE_TERAPIA_INTENSIVA = {
     "nazionale": 9059,
@@ -380,6 +381,18 @@ def create_incidenza(data, regione):
     return result
 
 
+def shape_adjust(data):
+    start = min([list(x.keys())[0] for x in data])
+    end = max([list(x.keys())[-1] for x in data])
+    current = start
+
+    while current <= end:
+        for el in data:
+            if current not in el.keys():
+                el[current] = 0
+        current = current + timedelta(days=1)
+    return data 
+
 # GRAFICI
 ############################################################################################
 def plot(x, y, title, output, xlabel=None, ylabel=None, media_mobile=None, legend=None, color=None, grid="y",
@@ -494,32 +507,32 @@ def pieplot(slices, labels, title, output, footer=None):
     plt.close('all')
 
 
-def grafico_vaccini_fornitore(pfizer, moderna, astrazeneca, media_mobile, title, footer, output):
+
+def grafico_vaccini_fascia_eta(data, media_mobile, title, footer, output):
     fig, ax = plt.subplots()
 
-    new_astrazeneca = {}
-    new_moderna = {}
-    for x_value in pfizer.keys():
-        if x_value not in astrazeneca.keys():
-            new_astrazeneca[x_value] = 0
-        else:
-            new_astrazeneca[x_value] = astrazeneca[x_value]
-        if x_value not in moderna.keys():
-            new_moderna[x_value] = 0
-        else:
-            new_moderna[x_value] = moderna[x_value]
-
-    moderna_array = np.array(list(new_moderna.values()))
-    pfizer_array = np.array(list(pfizer.values()))
-
-    ax.bar(pfizer.keys(), pfizer.values(), label="Pfizer/BioNTech")
-    ax.bar(pfizer.keys(), new_moderna.values(),
-           bottom=list(pfizer.values()), label="Moderna")
-    ax.bar(pfizer.keys(), new_astrazeneca.values(),
-           bottom=moderna_array+pfizer_array, label="AstraZeneca")
-    ax.grid(axis="y")
-    ax.plot(media_mobile[0], media_mobile[1], color="black",
-            linewidth=1, label="Media mobile settimanale")
+    start = min([min(list(x.keys())) for x in data])
+    end = max([max(list(x.keys())) for x in data])
+    ordered_data = [{}, {}, {}, {}, {}, {}, {}, {}, {}]
+    current = start
+    while current <= end:
+        for index in range(len(data)):
+            ordered_data[index][current] = data[index][current]
+        current = current + timedelta(days=1)
+    
+    xvalues = np.array(list(ordered_data[4].keys()))
+    arrays = [np.array(list(x.values())) for x in ordered_data]
+    ax.bar(xvalues, arrays[0], label="16-19")
+    ax.bar(xvalues, arrays[1], label="20-29", bottom=arrays[0])
+    ax.bar(xvalues, arrays[2], label="30-39", bottom=arrays[0]+arrays[1])
+    ax.bar(xvalues, arrays[3], label="40-49", bottom=arrays[0]+arrays[1]+arrays[2])
+    ax.bar(xvalues, arrays[4], label="50-59", bottom=arrays[0]+arrays[1]+arrays[2]+arrays[3])
+    ax.bar(xvalues, arrays[5], label="60-69", bottom=arrays[0]+arrays[1]+arrays[2]+arrays[3]+arrays[4])
+    ax.bar(xvalues, arrays[6], label="70-79", bottom=arrays[0]+arrays[1]+arrays[2]+arrays[3]+arrays[4]+arrays[5])
+    ax.bar(xvalues, arrays[7], label="80-89", bottom=arrays[0]+arrays[1]+arrays[2]+arrays[3]+arrays[4]+arrays[5]+arrays[6])
+    ax.bar(xvalues, arrays[8], label="90+", bottom=arrays[0]+arrays[1]+arrays[2]+arrays[3]+arrays[4]+arrays[5]+arrays[6]+arrays[7])
+    ax.grid("y")
+    ax.plot(media_mobile[0], media_mobile[1], color="black", linewidth=1, label="Media mobile settimanale")
     plt.title(title)
     plt.legend()
     plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
@@ -531,27 +544,9 @@ def grafico_vaccini_fornitore(pfizer, moderna, astrazeneca, media_mobile, title,
     plt.close("all")
 
 
-def grafico_consegne_vaccini(pfizer, moderna, astrazeneca, media_mobile, title, footer, output):
+def grafico_vaccini_fornitore(pfizer, moderna, astrazeneca, media_mobile, title, footer, output):
     fig, ax = plt.subplots()
 
-    start_pfizer = list(pfizer.keys())[0]
-    start_astrazeneca = list(astrazeneca.keys())[0]
-    start_moderna = list(moderna.keys())[0]
-    end_pfizer = list(pfizer.keys())[-1]
-    end_astrazeneca = list(astrazeneca.keys())[-1]
-    end_moderna = list(moderna.keys())[-1]
-    start = min(start_pfizer, start_astrazeneca, start_moderna)
-    end = max(end_pfizer, end_moderna, end_astrazeneca)
-    current = start
-
-    while current <= end:
-        if current not in pfizer.keys():
-            pfizer[current] = 0
-        if current not in astrazeneca.keys():
-            astrazeneca[current] = 0
-        if current not in moderna.keys():
-            moderna[current] = 0
-        current = current + timedelta(days=1)
     x_pfizer = list(pfizer.keys())
     x_pfizer.sort()
 
@@ -725,6 +720,15 @@ def epidemia():
     )
     summary += f"Incidenza: {incidenza[-1]}\n\n"
 
+#    print("Grafico rt")
+#    plot(
+#        data["monitoraggi_iss"]["data_report"],
+#        data["monitoraggi_iss"]["rt_puntuale"],
+#        "Andamento Rt nazionale",
+#        "/graphs/epidemia/rt.jpg",
+#        footer=f"Ultimo aggiornamento: {last_update}"
+#    )
+#
     summary += "DATI REGIONI\n\n"
     for regione in data["regioni"].keys():
         denominazione_regione = data["regioni"][regione]["denominazione_regione"].iloc[0]
@@ -932,23 +936,10 @@ def vaccini():
     )
     summary += f"\nPercentuale popolazione vaccinata con la seconda dose: {vaccinati_prima_dose} ({round((vaccinati_prima_dose / popolazione_totale) * 100, 2)}%)\n"
 
-    print("Grafico vaccinazioni giornaliere...")
-    somministrazioni = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")[
-        "totale"].sum().to_dict()
-    plot(
-        somministrazioni.keys(),
-        somministrazioni.values(),
-        "Vaccinazioni giornaliere",
-        "/graphs/vaccini/vaccinazioni_giornaliere.jpg",
-        media_mobile=create_media_mobile(somministrazioni.values()),
-        legend=["Vaccinazioni giornaliere", "Media mobile settimanale"],
-        marker=".",
-        footer=f"Ultimo aggiornamento: {last_update}"
-    )
-
-    summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\nL'altro ieri: {list(somministrazioni.values())[-3]}\n\n"
 
     print("Grafico vaccinazione giornaliere, prima e seconda dose...")
+    somministrazioni = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")[
+        "totale"].sum().to_dict()
     prima_dose = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")[
         "prima_dose"].sum().to_dict()
     seconda_dose = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")[
@@ -962,6 +953,9 @@ def vaccini():
         "/graphs/vaccini/vaccinazioni_giornaliere_dosi.jpg",
         footer=f"Ultimo aggiornamento: {last_update}"
     )
+    
+    summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\nL'altro ieri: {list(somministrazioni.values())[-3]}\n\n"
+
 
     print("Grafico somministrazioni giornaliere per fornitore")
     astrazeneca = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]
@@ -978,16 +972,39 @@ def vaccini():
                                                             ["nazionale"]["fornitore"] == "Moderna"]
     moderna = (moderna.groupby("data_somministrazione")["prima_dose"].sum(
     ) + moderna.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
+    adjusted = shape_adjust([pfizer, moderna, astrazeneca])
 
+    media_mobile_somministrazioni = create_media_mobile(somministrazioni.values())
     grafico_vaccini_fornitore(
-        pfizer,
-        moderna,
-        astrazeneca,
-        [somministrazioni.keys(), create_media_mobile(somministrazioni.values())],
+        adjusted[0],
+        adjusted[1],
+        adjusted[2],
+        [somministrazioni.keys(), media_mobile_somministrazioni],
         "Somministrazioni giornaliere per fornitore",
         f"Ultimo aggiornamento: {last_update}",
         "/graphs/vaccini/somministrazioni_giornaliere_fornitore.jpg"
     )
+
+    print("Grafico somministrazioni giornaliere per fascia d'età")
+    somministrazioni_fasce = []
+    for i in range(len(data["anagrafica_vaccini_summary"]["fascia_anagrafica"])):
+        fascia = data["anagrafica_vaccini_summary"]["fascia_anagrafica"].iat[i]
+        prima_dose = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["prima_dose"].sum().to_dict()
+        seconda_dose = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["seconda_dose"].sum().to_dict()
+        result = {}
+        for date in prima_dose.keys():
+            result[date] = prima_dose[date] + seconda_dose[date]
+        somministrazioni_fasce.append(result)
+    adjusted = shape_adjust(somministrazioni_fasce)
+
+    grafico_vaccini_fascia_eta(
+        adjusted,
+        [somministrazioni.keys(), media_mobile_somministrazioni],
+        "Somministrazioni giornaliere per fascia d'età",
+        f"Ultimo aggiornamento: {last_update}",
+        "/graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica.jpg"
+    )
+    
 
     print("Grafico fasce popolazione...")
     y_values_prima_dose = []
@@ -1049,13 +1066,13 @@ def vaccini():
                                                 == "Moderna"].groupby("data_consegna")["numero_dosi"].sum().to_dict()
     consegne_pfizer = data["consegne_vaccini"][data["consegne_vaccini"]["fornitore"]
                                                == "Pfizer/BioNTech"].groupby("data_consegna")["numero_dosi"].sum().to_dict()
-
+    adjusted = shape_adjust([consegne_pfizer, consegne_moderna, consegne_astrazeneca])
     media_mobile = create_media_mobile(consegne.values())
 
-    grafico_consegne_vaccini(
-        consegne_pfizer,
-        consegne_moderna,
-        consegne_astrazeneca,
+    grafico_vaccini_fornitore(
+        adjusted[0],
+        adjusted[1],
+        adjusted[2],
         [consegne.keys(), media_mobile],
         "Consegne vaccini",
         f"Ultimo aggiornamento: {last_update}",
@@ -1083,24 +1100,12 @@ def vaccini():
         print(f"Regione {regione}")
         denominazione_regione = data["regioni"][regione]["denominazione_regione"].iloc[0]
         summary += f"\n{denominazione_regione}\n"
+        
 
-        print("Grafico vaccinazioni giornaliere...")
+        print("Grafico vaccinazione giornaliere, prima e seconda dose...")
         somministrazioni = \
             data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")[
                 "totale"].sum().to_dict()
-        plot(
-            somministrazioni.keys(),
-            somministrazioni.values(),
-            f"Vaccinazioni giornaliere in {denominazione_regione}",
-            f"/graphs/vaccini/vaccinazioni_giornaliere_{denominazione_regione}.jpg",
-            media_mobile=create_media_mobile(somministrazioni.values()),
-            legend=["Vaccinazioni giornaliere", "Media mobile settimanale"],
-            marker=".",
-            footer=f"Ultimo aggiornamento: {last_update}"
-        )
-        summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\nL'altro ieri: {list(somministrazioni.values())[-3]}\n\n"
-
-        print("Grafico vaccinazione giornaliere, prima e seconda dose...")
         prima_dose = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")[
             "prima_dose"].sum().to_dict()
         seconda_dose = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")[
@@ -1114,6 +1119,9 @@ def vaccini():
             f"/graphs/vaccini/vaccinazioni_giornaliere_dosi_{denominazione_regione}.jpg",
             footer=f"Ultimo aggiornamento: {last_update}"
         )
+
+        summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\nL'altro ieri: {list(somministrazioni.values())[-3]}\n\n"
+
 
         dataframe = data["somministrazioni_vaccini"]["regioni"][regione]
 
@@ -1129,15 +1137,38 @@ def vaccini():
         moderna = dataframe[dataframe["fornitore"] == "Moderna"]
         moderna = (moderna.groupby("data_somministrazione")["prima_dose"].sum(
         ) + moderna.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
+        adjusted = shape_adjust([pfizer, moderna, astrazeneca])
+
+        media_mobile_somministrazioni = create_media_mobile(somministrazioni.values())
 
         grafico_vaccini_fornitore(
             pfizer,
             moderna,
             astrazeneca,
-            [somministrazioni.keys(), create_media_mobile(somministrazioni.values())],
+            [somministrazioni.keys(), media_mobile_somministrazioni],
             f"Somministrazioni giornaliere per fornitore - {denominazione_regione}",
             f"Ultimo aggiornamento: {last_update}",
             f"/graphs/vaccini/somministrazioni_giornaliere_fornitore_{denominazione_regione}.jpg"
+        )
+
+        print("Grafico somministrazioni giornaliere per fascia d'età")
+        somministrazioni_fasce = []
+        for i in range(len(data["anagrafica_vaccini_summary"]["fascia_anagrafica"])):
+            fascia = data["anagrafica_vaccini_summary"]["fascia_anagrafica"].iat[i]
+            prima_dose = data["somministrazioni_vaccini"]["regioni"][regione][data["somministrazioni_vaccini"]["regioni"][regione]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["prima_dose"].sum().to_dict()
+            seconda_dose = data["somministrazioni_vaccini"]["regioni"][regione][data["somministrazioni_vaccini"]["regioni"][regione]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["seconda_dose"].sum().to_dict()
+            result = {}
+            for date in prima_dose.keys():
+                result[date] = prima_dose[date] + seconda_dose[date]
+            somministrazioni_fasce.append(result)
+        adjusted = shape_adjust(somministrazioni_fasce)
+
+        grafico_vaccini_fascia_eta(
+            adjusted,
+            [somministrazioni.keys(), media_mobile_somministrazioni],
+            f"Somministrazioni giornaliere per fascia d'età - {denominazione_regione}",
+            f"Ultimo aggiornamento: {last_update}",
+            f"/graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_{denominazione_regione}.jpg"
         )
 
         print("Grafico fasce popolazione...")

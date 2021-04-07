@@ -543,6 +543,50 @@
 <img src="graphs/vaccini/somministrazione_fascia_eta_Valle%20d'Aosta.jpg" width="600" height="500"></img>
 ### somministrazione_fascia_eta_Veneto
 <img src="graphs/vaccini/somministrazione_fascia_eta_Veneto.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Abruzzo
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Abruzzo.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Basilicata
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Basilicata.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Calabria
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Calabria.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Campania
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Campania.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Emilia-Romagna
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Emilia-Romagna.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Friuli%20Venezia%20Giulia
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Friuli%20Venezia%20Giulia.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Lazio
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Lazio.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Liguria
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Liguria.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Lombardia
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Lombardia.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Marche
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Marche.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Molise
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Molise.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_P.A.%20Bolzano
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_P.A.%20Bolzano.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_P.A.%20Trento
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_P.A.%20Trento.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Piemonte
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Piemonte.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Puglia
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Puglia.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Sardegna
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Sardegna.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Sicilia
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Sicilia.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Toscana
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Toscana.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Umbria
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Umbria.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Valle%20d'Aosta
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Valle%20d'Aosta.jpg" width="600" height="500"></img>
+### somministrazioni_giornaliere_fascia_anagrafica_Veneto
+<img src="graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_Veneto.jpg" width="600" height="500"></img>
 ### somministrazioni_giornaliere_fornitore
 <img src="graphs/vaccini/somministrazioni_giornaliere_fornitore.jpg" width="600" height="500"></img>
 ### somministrazioni_giornaliere_fornitore_Abruzzo

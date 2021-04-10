@@ -959,7 +959,7 @@ def vaccini():
 
     print("Grafico somministrazioni giornaliere per fornitore")
     astrazeneca = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]
-                                                                ["nazionale"]["fornitore"] == "AstraZeneca"]
+                                                                ["nazionale"]["fornitore"] == "Vaxzevria (AstraZeneca)"]
     astrazeneca = (astrazeneca.groupby("data_somministrazione")["prima_dose"].sum(
     ) + astrazeneca.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
 
@@ -1061,7 +1061,7 @@ def vaccini():
     consegne = data["consegne_vaccini"].groupby(
         "data_consegna")["numero_dosi"].sum().to_dict()
     consegne_astrazeneca = data["consegne_vaccini"][data["consegne_vaccini"]["fornitore"]
-                                                    == "AstraZeneca"].groupby("data_consegna")["numero_dosi"].sum().to_dict()
+                                                    == "Vaxzevria (AstraZeneca)"].groupby("data_consegna")["numero_dosi"].sum().to_dict()
     consegne_moderna = data["consegne_vaccini"][data["consegne_vaccini"]["fornitore"]
                                                 == "Moderna"].groupby("data_consegna")["numero_dosi"].sum().to_dict()
     consegne_pfizer = data["consegne_vaccini"][data["consegne_vaccini"]["fornitore"]
@@ -1126,7 +1126,7 @@ def vaccini():
         dataframe = data["somministrazioni_vaccini"]["regioni"][regione]
 
         print("Grafico somministrazioni giornaliere per fornitore")
-        astrazeneca = dataframe[dataframe["fornitore"] == "AstraZeneca"]
+        astrazeneca = dataframe[dataframe["fornitore"] == "Vaxzevria (AstraZeneca)"]
         astrazeneca = (astrazeneca.groupby("data_somministrazione")["prima_dose"].sum(
         ) + astrazeneca.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
 

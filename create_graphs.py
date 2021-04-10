@@ -5,7 +5,7 @@ import json
 import urllib.request as request
 import numpy as np
 from time import time
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 # COSTANTI
 ############################################################################################
@@ -382,6 +382,10 @@ def create_incidenza(data, regione):
 
 
 def shape_adjust(data):
+    for el in data:
+        if len(el) == 0:
+            el[datetime.now()] = 0
+
     start = min([list(x.keys())[0] for x in data])
     end = max([list(x.keys())[-1] for x in data])
     current = start
@@ -491,7 +495,7 @@ def barplot(x, y, title, output, horizontal=False, xticks=None, yticks=None, gri
         ax.set_xticklabels(xticklabels)
 
     plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
-
+    plt.tight_layout()
     fig.savefig(CWD + output, dpi=200)
 
     plt.close('all')
@@ -544,7 +548,7 @@ def grafico_vaccini_fascia_eta(data, media_mobile, title, footer, output):
     plt.close("all")
 
 
-def grafico_vaccini_fornitore(pfizer, moderna, astrazeneca, media_mobile, title, footer, output):
+def grafico_vaccini_fornitore(pfizer, moderna, astrazeneca, janssen, media_mobile, title, footer, output):
     fig, ax = plt.subplots()
 
     x_pfizer = list(pfizer.keys())
@@ -553,19 +557,23 @@ def grafico_vaccini_fornitore(pfizer, moderna, astrazeneca, media_mobile, title,
     y_pfizer = []
     y_moderna = []
     y_astrazeneca = []
+    y_janssen = []
     for x_value in x_pfizer:
         y_pfizer.append(pfizer[x_value])
         y_moderna.append(moderna[x_value])
         y_astrazeneca.append(astrazeneca[x_value])
+        y_janssen.append(janssen[x_value])
 
     moderna_array = np.array(y_moderna)
     pfizer_array = np.array(y_pfizer)
+    astrazeneca_array = np.array(y_astrazeneca)
 
     ax.bar(x_pfizer, y_pfizer, label="Pfizer/BioNTech")
     ax.bar(x_pfizer, y_moderna,
            bottom=y_pfizer, label="Moderna")
     ax.bar(x_pfizer, y_astrazeneca,
            bottom=moderna_array+pfizer_array, label="AstraZeneca")
+    ax.bar(x_pfizer, y_janssen, bottom=astrazeneca_array+moderna_array+pfizer_array, label="Janssen")
     ax.grid(axis="y")
     ax.plot(media_mobile[0], media_mobile[1], color="black",
             linewidth=1, label="Media mobile settimanale")
@@ -972,13 +980,20 @@ def vaccini():
                                                             ["nazionale"]["fornitore"] == "Moderna"]
     moderna = (moderna.groupby("data_somministrazione")["prima_dose"].sum(
     ) + moderna.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
-    adjusted = shape_adjust([pfizer, moderna, astrazeneca])
+
+    janssen = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]
+                                                            ["nazionale"]["fornitore"] == "Janssen"]
+    janssen = (janssen.groupby("data_somministrazione")["prima_dose"].sum(
+    ) + janssen.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
+
+    adjusted = shape_adjust([pfizer, moderna, astrazeneca, janssen])
 
     media_mobile_somministrazioni = create_media_mobile(somministrazioni.values())
     grafico_vaccini_fornitore(
         adjusted[0],
         adjusted[1],
         adjusted[2],
+        adjusted[3],
         [somministrazioni.keys(), media_mobile_somministrazioni],
         "Somministrazioni giornaliere per fornitore",
         f"Ultimo aggiornamento: {last_update}",
@@ -1066,13 +1081,16 @@ def vaccini():
                                                 == "Moderna"].groupby("data_consegna")["numero_dosi"].sum().to_dict()
     consegne_pfizer = data["consegne_vaccini"][data["consegne_vaccini"]["fornitore"]
                                                == "Pfizer/BioNTech"].groupby("data_consegna")["numero_dosi"].sum().to_dict()
-    adjusted = shape_adjust([consegne_pfizer, consegne_moderna, consegne_astrazeneca])
+    consegne_janssen = data["consegne_vaccini"][data["consegne_vaccini"]["fornitore"]
+                                               == "Janssen"].groupby("data_consegna")["numero_dosi"].sum().to_dict()
+    adjusted = shape_adjust([consegne_pfizer, consegne_moderna, consegne_astrazeneca, consegne_janssen])
     media_mobile = create_media_mobile(consegne.values())
 
     grafico_vaccini_fornitore(
         adjusted[0],
         adjusted[1],
         adjusted[2],
+        adjusted[3],
         [consegne.keys(), media_mobile],
         "Consegne vaccini",
         f"Ultimo aggiornamento: {last_update}",
@@ -1137,14 +1155,20 @@ def vaccini():
         moderna = dataframe[dataframe["fornitore"] == "Moderna"]
         moderna = (moderna.groupby("data_somministrazione")["prima_dose"].sum(
         ) + moderna.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
-        adjusted = shape_adjust([pfizer, moderna, astrazeneca])
+
+        janssen = dataframe[dataframe["fornitore"] == "Janssen"]
+        janssen = (janssen.groupby("data_somministrazione")["prima_dose"].sum(
+        ) + janssen.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
+
+        adjusted = shape_adjust([pfizer, moderna, astrazeneca, janssen])
 
         media_mobile_somministrazioni = create_media_mobile(somministrazioni.values())
 
         grafico_vaccini_fornitore(
-            pfizer,
-            moderna,
-            astrazeneca,
+            adjusted[0],
+            adjusted[1],
+            adjusted[2],
+            adjusted[3],
             [somministrazioni.keys(), media_mobile_somministrazioni],
             f"Somministrazioni giornaliere per fornitore - {denominazione_regione}",
             f"Ultimo aggiornamento: {last_update}",

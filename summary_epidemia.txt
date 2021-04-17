@@ -1,289 +1,289 @@
-DATI NAZIONALI 2021-04-16 17:00:00
+DATI NAZIONALI 2021-04-17 17:00:00
 
-Nuovi positivi: 15943
-Ospedalizzati ordinari: 24743
-Terapie intensive: 3366
-Ingressi TI: 199.0
-Variazione totale totale positivi: -3285
-Variazione totale ospedalizzati: -895
-Variazione TI: -51
-Variazione ricoverati con sintomi: -844
-Deceduti totali: 116366
-Deceduti giornalieri: 429
-Incidenza: 177.1149639995568
+Nuovi positivi: 15370
+Ospedalizzati ordinari: 24100
+Terapie intensive: 3340
+Ingressi TI: 163.0
+Variazione totale totale positivi: -1430
+Variazione totale ospedalizzati: -669
+Variazione TI: -26
+Variazione ricoverati con sintomi: -643
+Deceduti totali: 116676
+Deceduti giornalieri: 310
+Incidenza: 173.43128662383472
 
 DATI REGIONI
 
 Piemonte
-Nuovi positivi: 1200
-TI: 292
-Ricoverati con sintomi: 3193
-Ingressi TI: 3.0
+Nuovi positivi: 865
+TI: 290
+Ricoverati con sintomi: 3125
+Ingressi TI: 22.0
 Variazione totale positivi: -969
-Variazione totale ospedalizzati: -138
-Variazione TI: -19
-Variazione ricoverati con sintomi: -119
-Deceduti totali: 10899
-Deceduti giornalieri: 38
-Incidenza: 191.0133495947896
+Variazione totale ospedalizzati: -70
+Variazione TI: -2
+Variazione ricoverati con sintomi: -68
+Deceduti totali: 10924
+Deceduti giornalieri: 25
+Incidenza: 181.68883635409676
 
 Valle d'Aosta
-Nuovi positivi: 30
-TI: 14
-Ricoverati con sintomi: 62
-Ingressi TI: 2.0
-Variazione totale positivi: -46
-Variazione totale ospedalizzati: 3
-Variazione TI: 2
-Variazione ricoverati con sintomi: 1
-Deceduti totali: 437
-Deceduti giornalieri: 0
-Incidenza: 291.1208151382824
+Nuovi positivi: 38
+TI: 12
+Ricoverati con sintomi: 61
+Ingressi TI: 1.0
+Variazione totale positivi: -27
+Variazione totale ospedalizzati: -3
+Variazione TI: -2
+Variazione ricoverati con sintomi: -1
+Deceduti totali: 439
+Deceduti giornalieri: 2
+Incidenza: 259.1295167714382
 
 Lombardia
-Nuovi positivi: 2431
-TI: 728
-Ricoverati con sintomi: 5131
-Ingressi TI: 44.0
-Variazione totale positivi: -523
-Variazione totale ospedalizzati: -267
-Variazione TI: -11
-Variazione ricoverati con sintomi: -256
-Deceduti totali: 32146
-Deceduti giornalieri: 87
-Incidenza: 155.1118602433563
+Nuovi positivi: 2546
+TI: 723
+Ricoverati con sintomi: 4901
+Ingressi TI: 15.0
+Variazione totale positivi: 406
+Variazione totale ospedalizzati: -235
+Variazione TI: -5
+Variazione ricoverati con sintomi: -230
+Deceduti totali: 32220
+Deceduti giornalieri: 74
+Incidenza: 150.84364138106
 
 Veneto
-Nuovi positivi: 906
-TI: 237
-Ricoverati con sintomi: 1323
-Ingressi TI: 10.0
-Variazione totale positivi: -853
-Variazione totale ospedalizzati: -80
-Variazione TI: -7
-Variazione ricoverati con sintomi: -73
-Deceduti totali: 11064
-Deceduti giornalieri: 23
-Incidenza: 132.5440400989274
+Nuovi positivi: 940
+TI: 234
+Ricoverati con sintomi: 1244
+Ingressi TI: 19.0
+Variazione totale positivi: -836
+Variazione totale ospedalizzati: -82
+Variazione TI: -3
+Variazione ricoverati con sintomi: -79
+Deceduti totali: 11088
+Deceduti giornalieri: 24
+Incidenza: 130.20755941680622
 
 Friuli Venezia Giulia
-Nuovi positivi: 392
-TI: 59
-Ricoverati con sintomi: 416
-Ingressi TI: 3.0
-Variazione totale positivi: -360
-Variazione totale ospedalizzati: -35
-Variazione TI: -6
-Variazione ricoverati con sintomi: -29
-Deceduti totali: 3579
-Deceduti giornalieri: 21
-Incidenza: 160.66774110109634
+Nuovi positivi: 155
+TI: 57
+Ricoverati con sintomi: 396
+Ingressi TI: 5.0
+Variazione totale positivi: -153
+Variazione totale ospedalizzati: -22
+Variazione TI: -2
+Variazione ricoverati con sintomi: -20
+Deceduti totali: 3588
+Deceduti giornalieri: 9
+Incidenza: 141.0195188921387
 
 Liguria
-Nuovi positivi: 323
-TI: 83
-Ricoverati con sintomi: 595
-Ingressi TI: 5.0
-Variazione totale positivi: 52
+Nuovi positivi: 321
+TI: 78
+Ricoverati con sintomi: 579
+Ingressi TI: 2.0
+Variazione totale positivi: -30
+Variazione totale ospedalizzati: -21
+Variazione TI: -5
+Variazione ricoverati con sintomi: -16
+Deceduti totali: 4067
+Deceduti giornalieri: 14
+Incidenza: 153.001063727927
+
+Emilia-Romagna
+Nuovi positivi: 1076
+TI: 299
+Ricoverati con sintomi: 2292
+Ingressi TI: 10.0
+Variazione totale positivi: -429
+Variazione totale ospedalizzati: -87
+Variazione TI: -14
+Variazione ricoverati con sintomi: -73
+Deceduti totali: 12587
+Deceduti giornalieri: 30
+Incidenza: 167.2446455840447
+
+Toscana
+Nuovi positivi: 1150
+TI: 278
+Ricoverati con sintomi: 1537
+Ingressi TI: 13.0
+Variazione totale positivi: -186
+Variazione totale ospedalizzati: -20
+Variazione TI: 0
+Variazione ricoverati con sintomi: -20
+Deceduti totali: 5824
+Deceduti giornalieri: 20
+Incidenza: 206.7403193723587
+
+Umbria
+Nuovi positivi: 114
+TI: 33
+Ricoverati con sintomi: 237
+Ingressi TI: 2.0
+Variazione totale positivi: -114
 Variazione totale ospedalizzati: -22
 Variazione TI: -1
 Variazione ricoverati con sintomi: -21
-Deceduti totali: 4053
-Deceduti giornalieri: 7
-Incidenza: 158.83779526319725
-
-Emilia-Romagna
-Nuovi positivi: 1275
-TI: 313
-Ricoverati con sintomi: 2365
-Ingressi TI: 15.0
-Variazione totale positivi: -1146
-Variazione totale ospedalizzati: -98
-Variazione TI: 1
-Variazione ricoverati con sintomi: -99
-Deceduti totali: 12557
-Deceduti giornalieri: 42
-Incidenza: 177.3026211890857
-
-Toscana
-Nuovi positivi: 1239
-TI: 278
-Ricoverati con sintomi: 1557
-Ingressi TI: 14.0
-Variazione totale positivi: -230
-Variazione totale ospedalizzati: -84
-Variazione TI: -8
-Variazione ricoverati con sintomi: -76
-Deceduti totali: 5804
-Deceduti giornalieri: 20
-Incidenza: 207.47152039712338
-
-Umbria
-Nuovi positivi: 133
-TI: 34
-Ricoverati con sintomi: 258
-Ingressi TI: 3.0
-Variazione totale positivi: -72
-Variazione totale ospedalizzati: -1
-Variazione TI: -1
-Variazione ricoverati con sintomi: 0
-Deceduti totali: 1315
-Deceduti giornalieri: 5
-Incidenza: 94.46484287462722
+Deceduti totali: 1319
+Deceduti giornalieri: 4
+Incidenza: 90.09785500451063
 
 Marche
-Nuovi positivi: 326
-TI: 108
-Ricoverati con sintomi: 610
-Ingressi TI: 4.0
-Variazione totale positivi: -39
-Variazione totale ospedalizzati: -32
-Variazione TI: -4
-Variazione ricoverati con sintomi: -28
-Deceduti totali: 2830
-Deceduti giornalieri: 13
-Incidenza: 146.76017008313764
+Nuovi positivi: 341
+TI: 101
+Ricoverati con sintomi: 577
+Ingressi TI: 1.0
+Variazione totale positivi: -68
+Variazione totale ospedalizzati: -40
+Variazione TI: -7
+Variazione ricoverati con sintomi: -33
+Deceduti totali: 2836
+Deceduti giornalieri: 6
+Incidenza: 141.93427259842187
 
 Lazio
-Nuovi positivi: 1474
-TI: 382
-Ricoverati con sintomi: 2859
+Nuovi positivi: 1378
+TI: 385
+Ricoverati con sintomi: 2771
 Ingressi TI: 19.0
-Variazione totale positivi: 382
-Variazione totale ospedalizzati: -79
-Variazione TI: -5
-Variazione ricoverati con sintomi: -74
-Deceduti totali: 7240
-Deceduti giornalieri: 39
-Incidenza: 163.19474607780114
+Variazione totale positivi: -185
+Variazione totale ospedalizzati: -85
+Variazione TI: 3
+Variazione ricoverati con sintomi: -88
+Deceduti totali: 7265
+Deceduti giornalieri: 25
+Incidenza: 161.71794916343796
 
 Abruzzo
-Nuovi positivi: 210
-TI: 57
-Ricoverati con sintomi: 525
-Ingressi TI: 4.0
-Variazione totale positivi: -336
-Variazione totale ospedalizzati: -11
-Variazione TI: 1
-Variazione ricoverati con sintomi: -12
-Deceduti totali: 2315
-Deceduti giornalieri: 17
-Incidenza: 112.06075083794393
+Nuovi positivi: 180
+TI: 54
+Ricoverati con sintomi: 515
+Ingressi TI: 2.0
+Variazione totale positivi: -25
+Variazione totale ospedalizzati: -13
+Variazione TI: -3
+Variazione ricoverati con sintomi: -10
+Deceduti totali: 2329
+Deceduti giornalieri: 14
+Incidenza: 107.57832080442616
 
 Molise
-Nuovi positivi: 42
+Nuovi positivi: 33
 TI: 15
-Ricoverati con sintomi: 51
-Ingressi TI: 0.0
-Variazione totale positivi: 16
-Variazione totale ospedalizzati: 2
-Variazione TI: -1
-Variazione ricoverati con sintomi: 3
-Deceduti totali: 461
-Deceduti giornalieri: 1
-Incidenza: 88.51442186106563
+Ricoverati con sintomi: 52
+Ingressi TI: 1.0
+Variazione totale positivi: 7
+Variazione totale ospedalizzati: 1
+Variazione TI: 0
+Variazione ricoverati con sintomi: 1
+Deceduti totali: 463
+Deceduti giornalieri: 2
+Incidenza: 81.52644118782361
 
 Campania
-Nuovi positivi: 1994
-TI: 131
-Ricoverati con sintomi: 1507
-Ingressi TI: 15.0
-Variazione totale positivi: 443
-Variazione totale ospedalizzati: -55
-Variazione TI: -5
-Variazione ricoverati con sintomi: -50
-Deceduti totali: 5922
-Deceduti giornalieri: 31
-Incidenza: 233.99274142821704
+Nuovi positivi: 2232
+TI: 145
+Ricoverati con sintomi: 1532
+Ingressi TI: 20.0
+Variazione totale positivi: 283
+Variazione totale ospedalizzati: 39
+Variazione TI: 14
+Variazione ricoverati con sintomi: 25
+Deceduti totali: 5934
+Deceduti giornalieri: 12
+Incidenza: 236.8463114456343
 
 Puglia
-Nuovi positivi: 1537
-TI: 283
-Ricoverati con sintomi: 1895
-Ingressi TI: 31.0
-Variazione totale positivi: -132
-Variazione totale ospedalizzati: 9
-Variazione TI: 6
-Variazione ricoverati con sintomi: 3
-Deceduti totali: 5410
-Deceduti giornalieri: 50
-Incidenza: 254.4959217667243
+Nuovi positivi: 1525
+TI: 285
+Ricoverati con sintomi: 1906
+Ingressi TI: 9.0
+Variazione totale positivi: -79
+Variazione totale ospedalizzati: 13
+Variazione TI: 2
+Variazione ricoverati con sintomi: 11
+Deceduti totali: 5421
+Deceduti giornalieri: 11
+Incidenza: 247.4385356050191
 
 Basilicata
-Nuovi positivi: 176
-TI: 15
-Ricoverati con sintomi: 171
-Ingressi TI: 2.0
-Variazione totale positivi: 102
-Variazione totale ospedalizzati: 6
-Variazione TI: 2
-Variazione ricoverati con sintomi: 4
-Deceduti totali: 496
-Deceduti giornalieri: 0
-Incidenza: 231.53922068344738
+Nuovi positivi: 216
+TI: 14
+Ricoverati con sintomi: 166
+Ingressi TI: 0.0
+Variazione totale positivi: 93
+Variazione totale ospedalizzati: -6
+Variazione TI: -1
+Variazione ricoverati con sintomi: -5
+Deceduti totali: 497
+Deceduti giornalieri: 1
+Incidenza: 239.67291696038347
 
 Calabria
-Nuovi positivi: 433
-TI: 45
-Ricoverati con sintomi: 474
-Ingressi TI: 4.0
-Variazione totale positivi: 189
-Variazione totale ospedalizzati: -3
-Variazione TI: -3
-Variazione ricoverati con sintomi: 0
-Deceduti totali: 926
-Deceduti giornalieri: 5
-Incidenza: 179.82060176019343
+Nuovi positivi: 472
+TI: 50
+Ricoverati con sintomi: 453
+Ingressi TI: 8.0
+Variazione totale positivi: 168
+Variazione totale ospedalizzati: -16
+Variazione TI: 5
+Variazione ricoverati con sintomi: -21
+Deceduti totali: 932
+Deceduti giornalieri: 6
+Incidenza: 179.55662553917142
 
 Sicilia
-Nuovi positivi: 1370
+Nuovi positivi: 1301
 TI: 189
-Ricoverati con sintomi: 1210
-Ingressi TI: 9.0
-Variazione totale positivi: 101
-Variazione totale ospedalizzati: -3
-Variazione TI: 5
-Variazione ricoverati con sintomi: -8
-Deceduti totali: 5128
-Deceduti giornalieri: 21
-Incidenza: 188.80928108891982
+Ricoverati con sintomi: 1216
+Ingressi TI: 11.0
+Variazione totale positivi: 602
+Variazione totale ospedalizzati: 6
+Variazione TI: 0
+Variazione ricoverati con sintomi: 6
+Deceduti totali: 5152
+Deceduti giornalieri: 24
+Incidenza: 190.28611631308087
 
 Sardegna
-Nuovi positivi: 348
-TI: 57
-Ricoverati con sintomi: 359
-Ingressi TI: 8.0
-Variazione totale positivi: 99
-Variazione totale ospedalizzati: 12
-Variazione TI: 3
-Variazione ricoverati con sintomi: 9
-Deceduti totali: 1307
-Deceduti giornalieri: 5
-Incidenza: 158.66013163144436
+Nuovi positivi: 320
+TI: 55
+Ricoverati con sintomi: 364
+Ingressi TI: 3.0
+Variazione totale positivi: 103
+Variazione totale ospedalizzati: 3
+Variazione TI: -2
+Variazione ricoverati con sintomi: 5
+Deceduti totali: 1313
+Deceduti giornalieri: 6
+Incidenza: 152.14495219409528
 
 P.A. Bolzano
-Nuovi positivi: 41
-TI: 13
-Ricoverati con sintomi: 63
-Ingressi TI: 3.0
-Variazione totale positivi: 41
-Variazione totale ospedalizzati: -10
-Variazione TI: 1
-Variazione ricoverati con sintomi: -11
+Nuovi positivi: 79
+TI: 12
+Ricoverati con sintomi: 60
+Ingressi TI: 0.0
+Variazione totale positivi: 79
+Variazione totale ospedalizzati: -4
+Variazione TI: -1
+Variazione ricoverati con sintomi: -3
 Deceduti totali: 1155
 Deceduti giornalieri: 0
-Incidenza: 74.15834966694453
+Incidenza: 72.65640840786718
 
 P.A. Trento
-Nuovi positivi: 63
-TI: 33
-Ricoverati con sintomi: 119
-Ingressi TI: 1.0
-Variazione totale positivi: -4
-Variazione totale ospedalizzati: -9
-Variazione TI: -1
-Variazione ricoverati con sintomi: -8
-Deceduti totali: 1322
-Deceduti giornalieri: 4
-Incidenza: 120.27318146399597
+Nuovi positivi: 88
+TI: 31
+Ricoverati con sintomi: 116
+Ingressi TI: 0.0
+Variazione totale positivi: -70
+Variazione totale ospedalizzati: -5
+Variazione TI: -2
+Variazione ricoverati con sintomi: -3
+Deceduti totali: 1323
+Deceduti giornalieri: 1
+Incidenza: 116.78965943988634
 

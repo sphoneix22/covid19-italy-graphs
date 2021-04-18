@@ -293,6 +293,29 @@ FASCE_POPOLAZIONE = {
     }
 }
 
+# ultimo aggiornamento 3/3/21
+CONSEGNE_VACCINI = {
+    # comprende anche le dosi iniziali di PF/BT
+    "Q1": {
+        "Janssen": 0,
+        "Moderna": 1330000,
+        "Pfizer/BioNTech": 7808000,
+        "AstraZeneca": 5352250
+    },
+    "Dosi aggiuntive": {
+        "Janssen": 0,
+        "Moderna": 0,
+        "Pfizer/BioNTech": 6642991,
+        "AstraZeneca": 0
+    },
+    "Q2": {
+        "Jannsen": 7307292,
+        "Moderna": 4650000,
+        "Pfizer/BioNTech": 18180515,
+        "AstraZeneca": 10042500
+    }
+}
+
 # Contiene tutti i dati elaborati
 data = {}
 
@@ -586,6 +609,34 @@ def grafico_vaccini_fornitore(pfizer, moderna, astrazeneca, janssen, media_mobil
     fig.savefig(CWD + output, dpi=200)
 
     plt.close("all")
+
+
+def grafico_consegne_totale(consegne, consegne_previste, footer, output):
+    fig, ax = plt.subplots()
+
+    x_axis = np.arange(len(consegne.keys()))
+
+    ax.ticklabel_format(useOffset=False, style='plain')
+    ax.bar(x_axis - 0.2, consegne.values(), 0.35, label="Consegne avvenute")
+
+    fig.savefig("test.jpg")
+
+    plt.title("Consegne totali vaccini")
+
+    ax.grid()
+
+    ax.bar(x_axis + 0.2, consegne_previste["Q2"].values(), 0.35, label="Q2", bottom=np.array(list(consegne_previste["Q1"].values()))+np.array(list(consegne_previste["Dosi aggiuntive"].values())))
+    ax.bar(x_axis + 0.2, consegne_previste["Q1"].values(), 0.35, label="Q1")
+    ax.bar(x_axis + 0.2, consegne_previste["Dosi aggiuntive"].values(), 0.35, label="Dosi aggiuntive (Q1/Q2)", bottom=list(consegne_previste["Q1"].values()))
+
+    plt.xticks(x_axis, ["Janssen", "Moderna", "Pfizer/BioNTech", "AstraZeneca"])
+    plt.legend()
+
+    plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
+    plt.tight_layout()
+    fig.savefig(CWD + output, dpi=200)
+
+    plt.close('all')
 
 ############################################################################################
 
@@ -1101,12 +1152,11 @@ def vaccini():
     print("Grafico consegne totali vaccini")
     fornitori = data["consegne_vaccini"].groupby(
         "fornitore")["numero_dosi"].sum().to_dict()
-    barplot(
-        fornitori.keys(),
-        fornitori.values(),
-        "Consegne totali vaccini per fornitore",
-        "/graphs/vaccini/consegne_totali_vaccini.jpg",
-        footer=f"Ultimo aggiornamento: {last_update}"
+    grafico_consegne_totale(
+        fornitori,
+        CONSEGNE_VACCINI,
+        f"Ultimo aggiornamento: {last_update}",
+        "/graphs/vaccini/consegne_totali_vaccini.jpg"
     )
 
     summary += "Consegne totali:\n"

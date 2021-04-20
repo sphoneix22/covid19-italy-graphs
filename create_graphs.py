@@ -517,7 +517,7 @@ def barplot(x, y, title, output, horizontal=False, xticks=None, yticks=None, gri
         ax.set_ylabel(ylabel)
 
     if xticklabels:
-        plt.xticks([0, 1, 2, 3, 4, 5, 6])
+        plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
         ax.set_xticklabels(xticklabels)
 
     plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
@@ -1116,9 +1116,9 @@ def vaccini():
 
     print("Grafico somministrazione categorie...")
     x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari", "categoria_personale_non_sanitario",
-                "categoria_ospiti_rsa", "categoria_over80", "categoria_forze_armate", "categoria_personale_scolastico"]
+                "categoria_ospiti_rsa", "categoria_over80", "categoria_70_79", "categoria_60_69", "categoria_soggetti_fragili", "categoria_forze_armate", "categoria_personale_scolastico"]
     xlabels = ["Altro", "OSS", "Personale \nnon sanitario",
-               "RSA", "Over 80", "FA", "Personale\nscolastico"]
+               "RSA", "Over 80", "70-79", "60-69", "Soggetti fragili", "FA", "Personale\nscolastico"]
     values_categorie = [data["anagrafica_vaccini_summary"][x].sum()
                         for x in x_values]
     barplot(
@@ -1299,10 +1299,10 @@ def vaccini():
         print("Grafico somministrazione categorie...")
 
         x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari",
-                    "categoria_personale_non_sanitario", "categoria_ospiti_rsa", "categoria_over80",
+                    "categoria_personale_non_sanitario", "categoria_ospiti_rsa", "categoria_over80", "categoria_70_79", "categoria_60_69", "categoria_soggetti_fragili",
                     "categoria_forze_armate", "categoria_personale_scolastico"]
         xlabels = ["Altro", "OSS", "Personale \nnon sanitario",
-                   "RSA", "Over 80", "FA", "Personale\nscolastico"]
+                   "RSA", "Over 80", "70-79", "60-69", "Soggetti fragili", "FA", "Personale\nscolastico"]
         values_categorie = [data["somministrazioni_vaccini"]
                             ["regioni"][regione][x].sum() for x in x_values]
         barplot(
@@ -1312,8 +1312,7 @@ def vaccini():
             f"/graphs/vaccini/somministrazione_categorie_{denominazione_regione}.jpg",
             grid="y",
             ylabel="in milioni di dosi",
-            xticklabels=["Altro", "OSS", "Personale \nnon sanitario",
-                         "RSA", "Over 80", "FA", "Personale\nscolastico"],
+            xticklabels=xlabels,
             footer=f"Ultimo aggiornamento: {last_update}"
         )
         summary += "\nCategorie:\n"

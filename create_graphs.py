@@ -23,7 +23,8 @@ URLS = {
 }
 
 # Colonne che necessitano la conversione in formato datetime (tutti i csv)
-DATETIME_COLUMNS = ["data", "data_somministrazione", "data_consegna", "inizio_range", "fine_range", "data_report"]
+DATETIME_COLUMNS = ["data", "data_somministrazione",
+                    "data_consegna", "inizio_range", "fine_range", "data_report"]
 
 TOTALE_TERAPIA_INTENSIVA = {
     "nazionale": 9059,
@@ -418,10 +419,12 @@ def shape_adjust(data):
             if current not in el.keys():
                 el[current] = 0
         current = current + timedelta(days=1)
-    return data 
+    return data
 
 # GRAFICI
 ############################################################################################
+
+
 def plot(x, y, title, output, xlabel=None, ylabel=None, media_mobile=None, legend=None, color=None, grid="y",
          hline=None, vline=None, marker=None, footer=None):
     fig, ax = plt.subplots()
@@ -534,7 +537,6 @@ def pieplot(slices, labels, title, output, footer=None):
     plt.close('all')
 
 
-
 def grafico_vaccini_fascia_eta(data, media_mobile, title, footer, output):
     fig, ax = plt.subplots()
 
@@ -546,20 +548,27 @@ def grafico_vaccini_fascia_eta(data, media_mobile, title, footer, output):
         for index in range(len(data)):
             ordered_data[index][current] = data[index][current]
         current = current + timedelta(days=1)
-    
+
     xvalues = np.array(list(ordered_data[4].keys()))
     arrays = [np.array(list(x.values())) for x in ordered_data]
     ax.bar(xvalues, arrays[0], label="16-19")
     ax.bar(xvalues, arrays[1], label="20-29", bottom=arrays[0])
     ax.bar(xvalues, arrays[2], label="30-39", bottom=arrays[0]+arrays[1])
-    ax.bar(xvalues, arrays[3], label="40-49", bottom=arrays[0]+arrays[1]+arrays[2])
-    ax.bar(xvalues, arrays[4], label="50-59", bottom=arrays[0]+arrays[1]+arrays[2]+arrays[3])
-    ax.bar(xvalues, arrays[5], label="60-69", bottom=arrays[0]+arrays[1]+arrays[2]+arrays[3]+arrays[4])
-    ax.bar(xvalues, arrays[6], label="70-79", bottom=arrays[0]+arrays[1]+arrays[2]+arrays[3]+arrays[4]+arrays[5])
-    ax.bar(xvalues, arrays[7], label="80-89", bottom=arrays[0]+arrays[1]+arrays[2]+arrays[3]+arrays[4]+arrays[5]+arrays[6])
-    ax.bar(xvalues, arrays[8], label="90+", bottom=arrays[0]+arrays[1]+arrays[2]+arrays[3]+arrays[4]+arrays[5]+arrays[6]+arrays[7])
+    ax.bar(xvalues, arrays[3], label="40-49",
+           bottom=arrays[0]+arrays[1]+arrays[2])
+    ax.bar(xvalues, arrays[4], label="50-59",
+           bottom=arrays[0]+arrays[1]+arrays[2]+arrays[3])
+    ax.bar(xvalues, arrays[5], label="60-69",
+           bottom=arrays[0]+arrays[1]+arrays[2]+arrays[3]+arrays[4])
+    ax.bar(xvalues, arrays[6], label="70-79", bottom=arrays[0] +
+           arrays[1]+arrays[2]+arrays[3]+arrays[4]+arrays[5])
+    ax.bar(xvalues, arrays[7], label="80-89", bottom=arrays[0] +
+           arrays[1]+arrays[2]+arrays[3]+arrays[4]+arrays[5]+arrays[6])
+    ax.bar(xvalues, arrays[8], label="90+", bottom=arrays[0]+arrays[1] +
+           arrays[2]+arrays[3]+arrays[4]+arrays[5]+arrays[6]+arrays[7])
     ax.grid("y")
-    ax.plot(media_mobile[0], media_mobile[1], color="black", linewidth=1, label="Media mobile settimanale")
+    ax.plot(media_mobile[0], media_mobile[1], color="black",
+            linewidth=1, label="Media mobile settimanale")
     plt.title(title)
     plt.legend()
     plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
@@ -596,7 +605,8 @@ def grafico_vaccini_fornitore(pfizer, moderna, astrazeneca, janssen, media_mobil
            bottom=y_pfizer, label="Moderna")
     ax.bar(x_pfizer, y_astrazeneca,
            bottom=moderna_array+pfizer_array, label="AstraZeneca")
-    ax.bar(x_pfizer, y_janssen, bottom=astrazeneca_array+moderna_array+pfizer_array, label="Janssen")
+    ax.bar(x_pfizer, y_janssen, bottom=astrazeneca_array +
+           moderna_array+pfizer_array, label="Janssen")
     ax.grid(axis="y")
     ax.plot(media_mobile[0], media_mobile[1], color="black",
             linewidth=1, label="Media mobile settimanale")
@@ -625,11 +635,14 @@ def grafico_consegne_totale(consegne, consegne_previste, footer, output):
 
     ax.grid()
 
-    ax.bar(x_axis + 0.2, consegne_previste["Q2"].values(), 0.35, label="Q2", bottom=np.array(list(consegne_previste["Q1"].values()))+np.array(list(consegne_previste["Dosi aggiuntive"].values())))
+    ax.bar(x_axis + 0.2, consegne_previste["Q2"].values(), 0.35, label="Q2", bottom=np.array(list(
+        consegne_previste["Q1"].values()))+np.array(list(consegne_previste["Dosi aggiuntive"].values())))
     ax.bar(x_axis + 0.2, consegne_previste["Q1"].values(), 0.35, label="Q1")
-    ax.bar(x_axis + 0.2, consegne_previste["Dosi aggiuntive"].values(), 0.35, label="Dosi aggiuntive (Q1/Q2)", bottom=list(consegne_previste["Q1"].values()))
+    ax.bar(x_axis + 0.2, consegne_previste["Dosi aggiuntive"].values(
+    ), 0.35, label="Dosi aggiuntive (Q1/Q2)", bottom=list(consegne_previste["Q1"].values()))
 
-    plt.xticks(x_axis, ["Janssen", "Moderna", "Pfizer/BioNTech", "AstraZeneca"])
+    plt.xticks(x_axis, ["Janssen", "Moderna",
+               "Pfizer/BioNTech", "AstraZeneca"])
     plt.legend()
 
     plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
@@ -995,7 +1008,6 @@ def vaccini():
     )
     summary += f"\nPercentuale popolazione vaccinata con la seconda dose: {vaccinati_prima_dose} ({round((vaccinati_prima_dose / popolazione_totale) * 100, 2)}%)\n"
 
-
     print("Grafico vaccinazione giornaliere, prima e seconda dose...")
     somministrazioni = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")[
         "totale"].sum().to_dict()
@@ -1012,9 +1024,8 @@ def vaccini():
         "/graphs/vaccini/vaccinazioni_giornaliere_dosi.jpg",
         footer=f"Ultimo aggiornamento: {last_update}"
     )
-    
-    summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\nL'altro ieri: {list(somministrazioni.values())[-3]}\n\n"
 
+    summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\nL'altro ieri: {list(somministrazioni.values())[-3]}\n\n"
 
     print("Grafico somministrazioni giornaliere per fornitore")
     astrazeneca = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]
@@ -1039,7 +1050,8 @@ def vaccini():
 
     adjusted = shape_adjust([pfizer, moderna, astrazeneca, janssen])
 
-    media_mobile_somministrazioni = create_media_mobile(somministrazioni.values())
+    media_mobile_somministrazioni = create_media_mobile(
+        somministrazioni.values())
     grafico_vaccini_fornitore(
         adjusted[0],
         adjusted[1],
@@ -1055,8 +1067,10 @@ def vaccini():
     somministrazioni_fasce = []
     for i in range(len(data["anagrafica_vaccini_summary"]["fascia_anagrafica"])):
         fascia = data["anagrafica_vaccini_summary"]["fascia_anagrafica"].iat[i]
-        prima_dose = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["prima_dose"].sum().to_dict()
-        seconda_dose = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["seconda_dose"].sum().to_dict()
+        prima_dose = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]
+                                                                   ["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["prima_dose"].sum().to_dict()
+        seconda_dose = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]
+                                                                     ["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["seconda_dose"].sum().to_dict()
         result = {}
         for date in prima_dose.keys():
             result[date] = prima_dose[date] + seconda_dose[date]
@@ -1070,7 +1084,6 @@ def vaccini():
         f"Ultimo aggiornamento: {last_update}",
         "/graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica.jpg"
     )
-    
 
     print("Grafico fasce popolazione...")
     y_values_prima_dose = []
@@ -1104,8 +1117,10 @@ def vaccini():
     print("Grafico somministrazione categorie...")
     x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari", "categoria_personale_non_sanitario",
                 "categoria_ospiti_rsa", "categoria_over80", "categoria_forze_armate", "categoria_personale_scolastico"]
-    xlabels = ["Altro", "OSS", "Personale \nnon sanitario", "RSA", "Over 80", "FA", "Personale\nscolastico"]
-    values_categorie = [data["anagrafica_vaccini_summary"][x].sum() for x in x_values]
+    xlabels = ["Altro", "OSS", "Personale \nnon sanitario",
+               "RSA", "Over 80", "FA", "Personale\nscolastico"]
+    values_categorie = [data["anagrafica_vaccini_summary"][x].sum()
+                        for x in x_values]
     barplot(
         x_values,
         values_categorie,
@@ -1122,7 +1137,6 @@ def vaccini():
         categoria = xlabels[i]
         summary += f"{categoria}: {values_categorie[i]} ({(values_categorie[i]/sum(somministrazioni.values()))*100}%)\n"
 
-
     print("Grafico consegne vaccino...")
     consegne = data["consegne_vaccini"].groupby(
         "data_consegna")["numero_dosi"].sum().to_dict()
@@ -1133,8 +1147,9 @@ def vaccini():
     consegne_pfizer = data["consegne_vaccini"][data["consegne_vaccini"]["fornitore"]
                                                == "Pfizer/BioNTech"].groupby("data_consegna")["numero_dosi"].sum().to_dict()
     consegne_janssen = data["consegne_vaccini"][data["consegne_vaccini"]["fornitore"]
-                                               == "Janssen"].groupby("data_consegna")["numero_dosi"].sum().to_dict()
-    adjusted = shape_adjust([consegne_pfizer, consegne_moderna, consegne_astrazeneca, consegne_janssen])
+                                                == "Janssen"].groupby("data_consegna")["numero_dosi"].sum().to_dict()
+    adjusted = shape_adjust(
+        [consegne_pfizer, consegne_moderna, consegne_astrazeneca, consegne_janssen])
     media_mobile = create_media_mobile(consegne.values())
 
     grafico_vaccini_fornitore(
@@ -1162,13 +1177,12 @@ def vaccini():
     summary += "Consegne totali:\n"
     for el in fornitori:
         summary += f"{el}: {fornitori[el]}\n"
-    
-    summary  += "\nDATI REGIONALI\n\n"
+
+    summary += "\nDATI REGIONALI\n\n"
     for regione in data["somministrazioni_vaccini_summary"]["regioni"].keys():
         print(f"Regione {regione}")
         denominazione_regione = data["regioni"][regione]["denominazione_regione"].iloc[0]
         summary += f"\n{denominazione_regione}\n"
-        
 
         print("Grafico vaccinazione giornaliere, prima e seconda dose...")
         somministrazioni = \
@@ -1190,11 +1204,11 @@ def vaccini():
 
         summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\nL'altro ieri: {list(somministrazioni.values())[-3]}\n\n"
 
-
         dataframe = data["somministrazioni_vaccini"]["regioni"][regione]
 
         print("Grafico somministrazioni giornaliere per fornitore")
-        astrazeneca = dataframe[dataframe["fornitore"] == "Vaxzevria (AstraZeneca)"]
+        astrazeneca = dataframe[dataframe["fornitore"]
+                                == "Vaxzevria (AstraZeneca)"]
         astrazeneca = (astrazeneca.groupby("data_somministrazione")["prima_dose"].sum(
         ) + astrazeneca.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
 
@@ -1212,7 +1226,8 @@ def vaccini():
 
         adjusted = shape_adjust([pfizer, moderna, astrazeneca, janssen])
 
-        media_mobile_somministrazioni = create_media_mobile(somministrazioni.values())
+        media_mobile_somministrazioni = create_media_mobile(
+            somministrazioni.values())
 
         grafico_vaccini_fornitore(
             adjusted[0],
@@ -1229,8 +1244,10 @@ def vaccini():
         somministrazioni_fasce = []
         for i in range(len(data["anagrafica_vaccini_summary"]["fascia_anagrafica"])):
             fascia = data["anagrafica_vaccini_summary"]["fascia_anagrafica"].iat[i]
-            prima_dose = data["somministrazioni_vaccini"]["regioni"][regione][data["somministrazioni_vaccini"]["regioni"][regione]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["prima_dose"].sum().to_dict()
-            seconda_dose = data["somministrazioni_vaccini"]["regioni"][regione][data["somministrazioni_vaccini"]["regioni"][regione]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["seconda_dose"].sum().to_dict()
+            prima_dose = data["somministrazioni_vaccini"]["regioni"][regione][data["somministrazioni_vaccini"]["regioni"]
+                                                                              [regione]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["prima_dose"].sum().to_dict()
+            seconda_dose = data["somministrazioni_vaccini"]["regioni"][regione][data["somministrazioni_vaccini"]["regioni"]
+                                                                                [regione]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["seconda_dose"].sum().to_dict()
             result = {}
             for date in prima_dose.keys():
                 result[date] = prima_dose[date] + seconda_dose[date]
@@ -1278,14 +1295,16 @@ def vaccini():
         for i in range(len(data["anagrafica_vaccini_summary"]["fascia_anagrafica"])):
             fascia = data["anagrafica_vaccini_summary"]["fascia_anagrafica"].iat[i]
             summary += f"{fascia}: {y_values_seconda_dose[i]}% ({y_values_prima_dose[i]} %)\n"
-        
+
         print("Grafico somministrazione categorie...")
 
         x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari",
                     "categoria_personale_non_sanitario", "categoria_ospiti_rsa", "categoria_over80",
                     "categoria_forze_armate", "categoria_personale_scolastico"]
-        xlabels = ["Altro", "OSS", "Personale \nnon sanitario", "RSA", "Over 80", "FA", "Personale\nscolastico"]
-        values_categorie = [data["somministrazioni_vaccini"]["regioni"][regione][x].sum() for x in x_values]
+        xlabels = ["Altro", "OSS", "Personale \nnon sanitario",
+                   "RSA", "Over 80", "FA", "Personale\nscolastico"]
+        values_categorie = [data["somministrazioni_vaccini"]
+                            ["regioni"][regione][x].sum() for x in x_values]
         barplot(
             x_values,
             values_categorie,
@@ -1301,7 +1320,6 @@ def vaccini():
         for i in range(len(xlabels)):
             categoria = xlabels[i]
             summary += f"{categoria}: {values_categorie[i]} ({(values_categorie[i]/sum(somministrazioni.values()))*100} %)\n"
-        
 
     return summary
 

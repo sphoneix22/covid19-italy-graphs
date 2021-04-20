@@ -1117,8 +1117,8 @@ def vaccini():
     print("Grafico somministrazione categorie...")
     x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari", "categoria_personale_non_sanitario",
                 "categoria_ospiti_rsa", "categoria_over80", "categoria_70_79", "categoria_60_69", "categoria_soggetti_fragili", "categoria_forze_armate", "categoria_personale_scolastico"]
-    xlabels = ["Altro", "OSS", "Personale \nnon sanitario",
-               "RSA", "Over 80", "70-79", "60-69", "Soggetti fragili", "FA", "Personale\nscolastico"]
+    xlabels = ["Altro", "OSS", "Personale\nnon\nsanitario",
+               "RSA", "Over 80", "70-79", "60-69", "Soggetti\nfragili", "FA", "Personale\nscolastico"]
     values_categorie = [data["anagrafica_vaccini_summary"][x].sum()
                         for x in x_values]
     barplot(
@@ -1301,8 +1301,8 @@ def vaccini():
         x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari",
                     "categoria_personale_non_sanitario", "categoria_ospiti_rsa", "categoria_over80", "categoria_70_79", "categoria_60_69", "categoria_soggetti_fragili",
                     "categoria_forze_armate", "categoria_personale_scolastico"]
-        xlabels = ["Altro", "OSS", "Personale \nnon sanitario",
-                   "RSA", "Over 80", "70-79", "60-69", "Soggetti fragili", "FA", "Personale\nscolastico"]
+        xlabels = ["Altro", "OSS", "Personale\nnon\nsanitario",
+                   "RSA", "Over 80", "70-79", "60-69", "Soggetti\nfragili", "FA", "Personale\nscolastico"]
         values_categorie = [data["somministrazioni_vaccini"]
                             ["regioni"][regione][x].sum() for x in x_values]
         barplot(

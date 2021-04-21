@@ -426,9 +426,9 @@ def shape_adjust(data):
 
 
 def plot(x, y, title, output, xlabel=None, ylabel=None, media_mobile=None, legend=None, color=None, grid="y",
-         hline=None, vline=None, marker=None, footer=None):
+         hline=None, vline=None, marker=None, footer=None, alpha=0.8):
     fig, ax = plt.subplots()
-    line, = ax.plot(x, y, marker=marker)
+    line, = ax.plot(x, y, linestyle="solid", marker=marker, alpha=alpha)
     if media_mobile:
         ax.plot(x, media_mobile, color="orange")
         ax.legend(legend, prop={"size": 7})
@@ -628,8 +628,6 @@ def grafico_consegne_totale(consegne, consegne_previste, footer, output):
 
     ax.ticklabel_format(useOffset=False, style='plain')
     ax.bar(x_axis - 0.2, consegne.values(), 0.35, label="Consegne avvenute")
-
-    fig.savefig("test.jpg")
 
     plt.title("Consegne totali vaccini")
 

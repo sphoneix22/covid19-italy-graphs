@@ -667,8 +667,11 @@ def epidemia():
         legend=["Contagi giornalieri", "Media mobile settimanale"],
         footer=f"Ultimo aggiornamento: {last_update}"
     )
-    summary += "Nuovi positivi: {}\n".format(
-        data["nazionale"]["nuovi_positivi"].iat[-1])
+    today = data["nazionale"]["nuovi_positivi"].iat[-1]
+    last_week = data["nazionale"]["nuovi_positivi"].iat[-8]
+    delta = round((today-last_week)/last_week*100, 0)
+    summary += "Nuovi positivi: {} ({:+}%)\n".format(
+        today, delta)
 
     # Stackplot ospedalizzati
     print("Grafico ospedalizzati...")
@@ -697,8 +700,14 @@ def epidemia():
         legend=["Ingressi TI", "Media mobile settimanale"],
         footer=f"Ultimo aggiornamento: {last_update}"
     )
-    summary += "Ingressi TI: {}\n".format(
-        data["nazionale"]["ingressi_terapia_intensiva"].iat[-1])
+    today = data["nazionale"]["ingressi_terapia_intensiva"].iat[-1]
+    last_week = data["nazionale"]["ingressi_terapia_intensiva"].iat[-8]
+    if last_week == 0:
+        delta = 0
+    else:
+        delta = round((today-last_week)/last_week*100, 0)
+    summary += "Ingressi TI: {} ({:+}%)\n".format(
+        today, delta)
 
     # Grafico variazione totale positivi
     print("Grafico variazione totale positivi...")
@@ -775,7 +784,11 @@ def epidemia():
         color="black",
         footer=f"Ultimo aggiornamento: {last_update}"
     )
-    summary += "Deceduti giornalieri: {}\n".format(delta[-1])
+    today = delta[-1]
+    last_week = delta[-8]
+    delta_perc = round((today-last_week)/last_week*100, 0)
+    summary += "Deceduti giornalieri: {} ({:+}%)\n".format(
+        delta[-1], delta_perc)
 
     print("Grafico incidenza...")
     incidenza = create_incidenza(
@@ -788,7 +801,10 @@ def epidemia():
         hline=250,
         footer=f"Ultimo aggiornamento: {last_update}"
     )
-    summary += f"Incidenza: {incidenza[-1]}\n\n"
+    today = incidenza[-1]
+    last_week = incidenza[-8]
+    delta = round((today-last_week)/last_week*100, 0)
+    summary += f"Incidenza: {incidenza[-1]} ({delta:+}%)\n\n"
 
 #    print("Grafico rt")
 #    plot(
@@ -815,8 +831,11 @@ def epidemia():
             legend=["Contagi giornalieri", "Media mobile settimanale"],
             footer=f"Ultimo aggiornamento: {last_update}"
         )
-        summary += "Nuovi positivi: {}\n".format(
-            data["regioni"][regione]["nuovi_positivi"].iat[-1])
+        today = data["regioni"][regione]["nuovi_positivi"].iat[-1]
+        last_week = data["regioni"][regione]["nuovi_positivi"].iat[-8]
+        delta = round((today-last_week)/last_week*100, 0)
+        summary += "Nuovi positivi: {} ({:+}%)\n".format(
+            today, delta)
 
         # Stackplot ospedalizzati
         print("Grafico ospedalizzati...")
@@ -847,8 +866,14 @@ def epidemia():
             legend=["Ingressi TI", "Media mobile settimanale"],
             footer=f"Ultimo aggiornamento: {last_update}"
         )
-        summary += "Ingressi TI: {}\n".format(
-            data["regioni"][regione]["ingressi_terapia_intensiva"].iat[-1])
+        today = data["regioni"][regione]["ingressi_terapia_intensiva"].iat[-1]
+        last_week = data["regioni"][regione]["ingressi_terapia_intensiva"].iat[-8]
+        if last_week == 0:
+            delta = 0
+        else:
+            delta = round((today-last_week)/last_week*100, 0)
+        summary += "Ingressi TI: {} ({:+}%)\n".format(
+            today, delta)
 
         # Grafico variazione totale positivi
         print("Grafico variazione totale positivi...")
@@ -913,9 +938,10 @@ def epidemia():
 
         # Grafico deceduti giornalieri
         print("Grafico deceduti giornalieri...")
+        delta = create_delta(data["regioni"][regione]["deceduti"])
         plot(
             data["regioni"][regione]["data"],
-            create_delta(data["regioni"][regione]["deceduti"]),
+            delta,
             f"Deceduti giornalieri {denominazione_regione}",
             f"/graphs/epidemia/deceduti_giornalieri_{denominazione_regione}.jpg",
             media_mobile=create_media_mobile(
@@ -924,8 +950,14 @@ def epidemia():
             color="black",
             footer=f"Ultimo aggiornamento: {last_update}"
         )
-        summary += "Deceduti giornalieri: {}\n".format(
-            create_delta(data["regioni"][regione]["deceduti"])[-1])
+        today = delta[-1]
+        last_week = delta[-8]
+        if last_week == 0:
+            delta_perc = 0
+        else:
+            delta_perc = round((today-last_week)/last_week*100, 0)
+        summary += "Deceduti giornalieri: {} ({:+}%)\n".format(
+            today, delta_perc)
 
         print("Grafico incidenza...")
         incidenza = create_incidenza(
@@ -938,7 +970,10 @@ def epidemia():
             hline=250,
             footer=f"Ultimo aggiornamento: {last_update}"
         )
-        summary += f"Incidenza: {incidenza[-1]}\n\n"
+        today = incidenza[-1]
+        last_week = incidenza[-8]
+        delta_perc = round((today-last_week)/last_week*100, 0)
+        summary += f"Incidenza: {incidenza[-1]} ({delta_perc:+}%)\n\n"
 
     return summary
 
@@ -1022,8 +1057,16 @@ def vaccini():
         "/graphs/vaccini/vaccinazioni_giornaliere_dosi.jpg",
         footer=f"Ultimo aggiornamento: {last_update}"
     )
-
-    summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\nL'altro ieri: {list(somministrazioni.values())[-3]}\n\n"
+    today = list(somministrazioni.values())[-1]
+    yesterday = list(somministrazioni.values())[-2]
+    yeyesterday = list(somministrazioni.values())[-3]
+    last_week_1 = list(somministrazioni.values())[-8]
+    last_week_2 = list(somministrazioni.values())[-9]
+    last_week_3 = list(somministrazioni.values())[-10]
+    delta_perc_1 = round((today-last_week_1)/last_week_1*100, 0)
+    delta_perc_2 = round((yesterday-last_week_2)/last_week_2*100, 0)
+    delta_perc_3 = round((yeyesterday-last_week_3)/last_week_3*100, 0)
+    summary += f"\nVaccinazioni giornaliere:\nOggi:{today} ({delta_perc_1:+}%)\nIeri:{yesterday} ({delta_perc_2:+}%)\nL'altro ieri: {yeyesterday} ({delta_perc_3:+}%)\n\n"
 
     print("Grafico somministrazioni giornaliere per fornitore")
     astrazeneca = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]
@@ -1199,8 +1242,16 @@ def vaccini():
             f"/graphs/vaccini/vaccinazioni_giornaliere_dosi_{denominazione_regione}.jpg",
             footer=f"Ultimo aggiornamento: {last_update}"
         )
-
-        summary += f"\nVaccinazioni giornaliere:\nOggi:{list(somministrazioni.values())[-1]}\nIeri:{list(somministrazioni.values())[-2]}\nL'altro ieri: {list(somministrazioni.values())[-3]}\n\n"
+        today = list(somministrazioni.values())[-1]
+        yesterday = list(somministrazioni.values())[-2]
+        yeyesterday = list(somministrazioni.values())[-3]
+        last_week_1 = list(somministrazioni.values())[-8]
+        last_week_2 = list(somministrazioni.values())[-9]
+        last_week_3 = list(somministrazioni.values())[-10]
+        delta_perc_1 = round((today-last_week_1)/last_week_1*100, 0)
+        delta_perc_2 = round((yesterday-last_week_2)/last_week_2*100, 0)
+        delta_perc_3 = round((yeyesterday-last_week_3)/last_week_3*100, 0)
+        summary += f"\nVaccinazioni giornaliere:\nOggi:{today} ({delta_perc_1:+}%)\nIeri:{yesterday} ({delta_perc_2:+}%)\nL'altro ieri: {yeyesterday} ({delta_perc_3:+}%)\n\n"
 
         dataframe = data["somministrazioni_vaccini"]["regioni"][regione]
 

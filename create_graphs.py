@@ -19,7 +19,8 @@ URLS = {
     "somministrazioni_vaccini_summary": "https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-summary-latest.csv",
     "consegne_vaccini": "https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/consegne-vaccini-latest.csv",
     "somministrazioni_vaccini": "https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-latest.csv",
-    "monitoraggi_iss": "https://raw.githubusercontent.com/sphoneix22/monitoraggi-ISS/main/dati/monitoraggio-nazionale.csv"
+    "monitoraggi_iss": "https://raw.githubusercontent.com/sphoneix22/monitoraggi-ISS/main/dati/monitoraggio-nazionale.csv",
+    "monitoraggi_iss_regioni": "https://raw.githubusercontent.com/sphoneix22/monitoraggi-ISS/main/dati/monitoraggio-regioni.csv"
 }
 
 # Colonne che necessitano la conversione in formato datetime (tutti i csv)
@@ -50,6 +51,30 @@ TOTALE_TERAPIA_INTENSIVA = {
     "Valle d'Aosta": 20,
     "Veneto": 1000
 }
+
+REGIONI = [
+        "Abruzzo", 
+        "Basilicata",
+        "Calabria",
+        "Campania",
+        "Emilia-Romagna",
+        "Friuli Venezia Giulia",
+        "Lazio",
+        "Liguria",
+        "Lombardia",
+        "Marche",
+        "Molise",
+        "P.A. Bolzano",
+        "P.A. Trento", 
+        "Piemonte",
+        "Puglia",
+        "Sardegna",
+        "Sicilia",
+        "Toscana",
+        "Umbria",
+        "Valle d'Aosta",
+        "Veneto"
+]
 
 FASCE_POPOLAZIONE = {
     "16-19": {
@@ -366,6 +391,11 @@ def download_csv(name, url):
             dataframe["nome_area"] == "Provincia Autonoma Trento"]
         data["somministrazioni_vaccini"]["regioni"][22] = dataframe[
             dataframe["nome_area"] == "Provincia Autonoma Bolzano / Bozen"]
+    elif name == "monitoraggi_iss_regioni":
+        data["monitoraggi_iss_regioni"] = {}
+        for regione in REGIONI:
+            data_regione = dataframe[dataframe["regione"] == regione]
+            data["monitoraggi_iss_regioni"][regione] = data_regione
     else:
         data[name] = dataframe
 
@@ -649,6 +679,29 @@ def grafico_consegne_totale(consegne, consegne_previste, footer, output):
 
     plt.close('all')
 
+
+def grafico_rt(x_rt, x_contagi, rt, contagi, title, footer, output):
+    fig, ax = plt.subplots()
+
+    ax.set_ylabel("Positivi giornalieri")
+    ax2 = ax.twinx()
+    ax2.set_ylabel("Valore R")
+    
+    ax.plot(x_contagi, contagi, alpha=0.4, linestyle="dashed")
+    ax2.plot(x_rt, rt, marker=".")
+    ax2.axhline(y=1, color="red", linestyle="dashed")
+    fig.autofmt_xdate()
+
+    ax.legend(["Nuovi positivi giornalieri"])
+    ax2.legend(["Andamento Rt"])
+    plt.title(title)
+    plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
+    plt.grid()
+
+    fig.savefig(CWD + output, dpi=200)
+
+    plt.close('all')
+
 ############################################################################################
 
 
@@ -806,15 +859,17 @@ def epidemia():
     delta = round((today-last_week)/last_week*100, 0)
     summary += f"Incidenza: {incidenza[-1]} ({delta:+}%)\n\n"
 
-#    print("Grafico rt")
-#    plot(
-#        data["monitoraggi_iss"]["data_report"],
-#        data["monitoraggi_iss"]["rt_puntuale"],
-#        "Andamento Rt nazionale",
-#        "/graphs/epidemia/rt.jpg",
-#        footer=f"Ultimo aggiornamento: {last_update}"
-#    )
-#
+    print("Grafico rt")
+    grafico_rt(
+        data["monitoraggi_iss"]["fine_range"],
+        data["nazionale"]["data"],
+        data["monitoraggi_iss"]["rt_puntuale"],
+        data["nazionale"]["nuovi_positivi"],
+        "Andamento Rt nazionale",
+        f"Ultimo aggiornamento: {last_update}",
+        "/graphs/epidemia/rt.jpg",
+    )
+
     summary += "DATI REGIONI\n\n"
     for regione in data["regioni"].keys():
         denominazione_regione = data["regioni"][regione]["denominazione_regione"].iloc[0]
@@ -975,6 +1030,17 @@ def epidemia():
         delta_perc = round((today-last_week)/last_week*100, 0)
         summary += f"Incidenza: {incidenza[-1]} ({delta_perc:+}%)\n\n"
 
+        print("Grafico rt")
+        grafico_rt(
+            data["monitoraggi_iss_regioni"][denominazione_regione]["fine_range"],
+            data["regioni"][regione]["data"],
+            data["monitoraggi_iss_regioni"][denominazione_regione]["rt_puntuale"],
+            data["regioni"][regione]["nuovi_positivi"],
+            f"Andamento Rt - {denominazione_regione}",
+            f"Ultimo aggiornamento: {last_update}",
+            f"/graphs/epidemia/rt_{denominazione_regione}.jpg",
+        )
+
     return summary
 
 
@@ -1039,7 +1105,7 @@ def vaccini():
         "/graphs/vaccini/percentuale_vaccinati_prima_dose.jpg",
         footer=f"Ultimo aggiornamento: {last_update}"
     )
-    summary += f"\nPercentuale popolazione vaccinata con la seconda dose: {vaccinati_prima_dose} ({round((vaccinati_prima_dose / popolazione_totale) * 100, 2)}%)\n"
+    summary += f"\nPercentuale popolazione vaccinata con la prima dose: {vaccinati_prima_dose} ({round((vaccinati_prima_dose / popolazione_totale) * 100, 2)}%)\n"
 
     print("Grafico vaccinazione giornaliere, prima e seconda dose...")
     somministrazioni = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")[

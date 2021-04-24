@@ -436,10 +436,6 @@ def create_incidenza(data, regione):
 
 
 def shape_adjust(data):
-    for el in data:
-        if len(el) == 0:
-            el[datetime.now()] = 0
-
     start = min([list(x.keys())[0] for x in data])
     end = max([list(x.keys())[-1] for x in data])
     current = start
@@ -450,6 +446,19 @@ def shape_adjust(data):
                 el[current] = 0
         current = current + timedelta(days=1)
     return data
+
+def order(data):
+    start = min([list(x.keys())[0] for x in data])
+    end = max([list(x.keys())[-1] for x in data])
+
+    new_data = [{} for x in data]
+    current = start
+    while current <= end:
+        for x in data:
+            new_data[data.index(x)][current] = x[current]
+        current += timedelta(days=1)
+    return new_data
+
 
 # GRAFICI
 ############################################################################################
@@ -485,9 +494,13 @@ def plot(x, y, title, output, xlabel=None, ylabel=None, media_mobile=None, legen
     plt.close('all')
 
 
-def stackplot(x, y1, y2, title, label, output, soglia=None, yticks=None, footer=None):
+def stackplot(x, y1, y2, title, label, output, soglia=None, yticks=None, footer=None, y3=None):
     fig, ax = plt.subplots()
-    ax.stackplot(x, y1, y2, labels=label)
+
+    if y3:
+        ax.stackplot(x, y1, y2, y3, labels=label)
+    else:
+        ax.stackplot(x, y1, y2, labels=label)
 
     if soglia:
         ax.axhline(soglia, color="red")
@@ -564,6 +577,24 @@ def pieplot(slices, labels, title, output, footer=None):
     plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
 
     fig.savefig(CWD + output, dpi=200)
+    plt.close('all')
+
+
+def grafico_vaccinati_fascia_anagrafica(x, prima_dose, seconda_dose, monodose, title, footer, output):
+    fig, ax = plt.subplots()
+
+    ax.bar(x, prima_dose, label="Prima dose")
+    ax.bar(x, seconda_dose, bottom=prima_dose, label="Seconda dose")
+    ax.bar(x, monodose, bottom=np.array(prima_dose)+np.array(seconda_dose), label="Monodose")
+
+    ax.grid()
+
+    plt.title(title)
+    plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
+    plt.legend()
+    
+    fig.savefig(CWD + output, dpi=200)
+
     plt.close('all')
 
 
@@ -1071,13 +1102,17 @@ def vaccini():
         summary += f"{regione}: {perc}%\n"
 
     print("Grafico popolazione vaccinata seconda dose...")
+    
+    janssen = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]
+                                                            ["nazionale"]["fornitore"] == "Janssen"]
+    monodose = janssen["prima_dose"].sum()    
     vaccinati_seconda_dose = data["anagrafica_vaccini_summary"]["seconda_dose"].sum(
     )
     popolazione_totale = FASCE_POPOLAZIONE["totale"]['nazionale']
     pieplot(
         [
             popolazione_totale,
-            vaccinati_seconda_dose
+            vaccinati_seconda_dose+monodose
         ],
         [
             f"Totale popolazione\n ({popolazione_totale})",
@@ -1114,14 +1149,21 @@ def vaccini():
         "prima_dose"].sum().to_dict()
     seconda_dose = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")[
         "seconda_dose"].sum().to_dict()
+    monodose = janssen.groupby("data_somministrazione")["prima_dose"].sum().to_dict()
+    for day in prima_dose:
+        if day in monodose.keys():
+            prima_dose[day] -= monodose[day]
+    adjusted = shape_adjust([prima_dose, seconda_dose, monodose])
+
     stackplot(
         somministrazioni.keys(),
-        prima_dose.values(),
-        seconda_dose.values(),
+        adjusted[0].values(),
+        adjusted[1].values(),
         "Vaccinazioni giornaliere",
-        ["Prima dose", "Seconda dose"],
+        ["Prima dose", "Seconda dose", "Monodose"],
         "/graphs/vaccini/vaccinazioni_giornaliere_dosi.jpg",
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Ultimo aggiornamento: {last_update}",
+        y3=adjusted[2].values()
     )
     today = list(somministrazioni.values())[-1]
     yesterday = list(somministrazioni.values())[-2]
@@ -1150,12 +1192,7 @@ def vaccini():
     moderna = (moderna.groupby("data_somministrazione")["prima_dose"].sum(
     ) + moderna.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
 
-    janssen = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]
-                                                            ["nazionale"]["fornitore"] == "Janssen"]
-    janssen = (janssen.groupby("data_somministrazione")["prima_dose"].sum(
-    ) + janssen.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
-
-    adjusted = shape_adjust([pfizer, moderna, astrazeneca, janssen])
+    adjusted = shape_adjust([pfizer, moderna, astrazeneca, monodose])
 
     media_mobile_somministrazioni = create_media_mobile(
         somministrazioni.values())
@@ -1195,24 +1232,26 @@ def vaccini():
     print("Grafico fasce popolazione...")
     y_values_prima_dose = []
     y_values_seconda_dose = []
+    y_values_monodose = []
     for index, row in data["anagrafica_vaccini_summary"].iterrows():
-        perc_prima_dose = (row["prima_dose"] - row["seconda_dose"]) / FASCE_POPOLAZIONE[row["fascia_anagrafica"]][
+        janssen_fascia = janssen[janssen["fascia_anagrafica"] == row["fascia_anagrafica"]]["prima_dose"].sum()
+        perc_prima_dose = (row["prima_dose"] - row["seconda_dose"] - janssen_fascia) / FASCE_POPOLAZIONE[row["fascia_anagrafica"]][
             "nazionale"]
         perc_seconda_dose = row["seconda_dose"] / \
             FASCE_POPOLAZIONE[row["fascia_anagrafica"]]["nazionale"]
+        perc_monodose = janssen_fascia / FASCE_POPOLAZIONE[row["fascia_anagrafica"]]["nazionale"]
         y_values_prima_dose.append(perc_prima_dose * 100)
         y_values_seconda_dose.append(perc_seconda_dose * 100)
+        y_values_monodose.append(perc_monodose * 100)
 
-    barplot(
+    grafico_vaccinati_fascia_anagrafica(
         data["anagrafica_vaccini_summary"]["fascia_anagrafica"],
         y_values_prima_dose,
+        y_values_seconda_dose,
+        y_values_monodose,
         "Somministrazione vaccini per fascia d'età",
-        "/graphs/vaccini/somministrazione_fascia_eta.jpg",
-        grid="y",
-        bottom=y_values_seconda_dose,
-        label1="Prima dose",
-        label2="Seconda dose",
-        footer=f"Ultimo aggiornamento: {last_update}"
+        f"Ultimo aggiornamento: {last_update}",
+        "/graphs/vaccini/somministrazione_fascia_eta.jpg"
     )
 
     summary += "Percentuali fascia anagrafica:\n"
@@ -1292,6 +1331,8 @@ def vaccini():
         summary += f"\n{denominazione_regione}\n"
 
         print("Grafico vaccinazione giornaliere, prima e seconda dose...")
+        dataframe = data["somministrazioni_vaccini"]["regioni"][regione]
+        janssen = dataframe[dataframe["fornitore"] == "Janssen"]
         somministrazioni = \
             data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")[
                 "totale"].sum().to_dict()
@@ -1299,14 +1340,28 @@ def vaccini():
             "prima_dose"].sum().to_dict()
         seconda_dose = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")[
             "seconda_dose"].sum().to_dict()
+        monodose = janssen.groupby("data_somministrazione")["prima_dose"].sum().to_dict()
+
+        for day in prima_dose:
+            if day in monodose.keys():
+                prima_dose[day] -= monodose[day]
+        
+        # TODO: Rimuovere quando tutte le regioni avranno fatto somministrazioni Janssen
+        if len(monodose) == 0:
+            end = max([list(x.keys())[-1] for x in [prima_dose, seconda_dose]])
+            monodose[end] = 0
+
+        adjusted = order(shape_adjust([prima_dose, seconda_dose, monodose]))
+
         stackplot(
-            somministrazioni.keys(),
-            prima_dose.values(),
-            seconda_dose.values(),
+            adjusted[0].keys(),
+            adjusted[0].values(),
+            adjusted[1].values(),
             f"Vaccinazioni giornaliere in {denominazione_regione}",
-            ["Prima dose", "Seconda dose"],
+            ["Prima dose", "Seconda dose", "Monodose"],
             f"/graphs/vaccini/vaccinazioni_giornaliere_dosi_{denominazione_regione}.jpg",
-            footer=f"Ultimo aggiornamento: {last_update}"
+            footer=f"Ultimo aggiornamento: {last_update}",
+            y3=adjusted[2].values()
         )
         today = list(somministrazioni.values())[-1]
         yesterday = list(somministrazioni.values())[-2]
@@ -1319,7 +1374,6 @@ def vaccini():
         delta_perc_3 = round((yeyesterday-last_week_3)/last_week_3*100, 0)
         summary += f"\nVaccinazioni giornaliere:\nOggi:{today} ({delta_perc_1:+}%)\nIeri:{yesterday} ({delta_perc_2:+}%)\nL'altro ieri: {yeyesterday} ({delta_perc_3:+}%)\n\n"
 
-        dataframe = data["somministrazioni_vaccini"]["regioni"][regione]
 
         print("Grafico somministrazioni giornaliere per fornitore")
         astrazeneca = dataframe[dataframe["fornitore"]
@@ -1335,11 +1389,7 @@ def vaccini():
         moderna = (moderna.groupby("data_somministrazione")["prima_dose"].sum(
         ) + moderna.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
 
-        janssen = dataframe[dataframe["fornitore"] == "Janssen"]
-        janssen = (janssen.groupby("data_somministrazione")["prima_dose"].sum(
-        ) + janssen.groupby("data_somministrazione")["seconda_dose"].sum()).to_dict()
-
-        adjusted = shape_adjust([pfizer, moderna, astrazeneca, janssen])
+        adjusted = shape_adjust([pfizer, moderna, astrazeneca, monodose])
 
         media_mobile_somministrazioni = create_media_mobile(
             somministrazioni.values())
@@ -1381,6 +1431,7 @@ def vaccini():
 
         y_values_prima_dose = []
         y_values_seconda_dose = []
+        y_values_monodose = []
         for fascia in FASCE_POPOLAZIONE:
             if fascia == "totale":
                 continue
@@ -1388,23 +1439,23 @@ def vaccini():
                                    == fascia]["prima_dose"].sum()
             seconda_dose = dataframe[dataframe["fascia_anagrafica"]
                                      == fascia]["seconda_dose"].sum()
-            perc_prima_dose = (prima_dose - seconda_dose) / \
+            monodose = janssen[janssen["fascia_anagrafica"] == fascia]["prima_dose"].sum()
+            perc_prima_dose = (prima_dose - seconda_dose - monodose) / \
                 FASCE_POPOLAZIONE[fascia][denominazione_regione]
             perc_seconda_dose = (
                 seconda_dose / FASCE_POPOLAZIONE[fascia][denominazione_regione])
             y_values_prima_dose.append(perc_prima_dose * 100)
             y_values_seconda_dose.append(perc_seconda_dose * 100)
+            y_values_monodose.append(perc_monodose * 100)
 
-        barplot(
+        grafico_vaccinati_fascia_anagrafica(
             data["anagrafica_vaccini_summary"]["fascia_anagrafica"],
             y_values_prima_dose,
+            y_values_seconda_dose,
+            y_values_monodose,
             f"Somministrazione vaccini per fascia d'età in {denominazione_regione}",
-            f"/graphs/vaccini/somministrazione_fascia_eta_{denominazione_regione}.jpg",
-            grid="y",
-            bottom=y_values_seconda_dose,
-            label1="Prima dose",
-            label2="Seconda dose",
-            footer=f"Ultimo aggiornamento: {last_update}"
+            f"Ultimo aggiornamento: {last_update}",
+            f"/graphs/vaccini/somministrazione_fascia_eta_{denominazione_regione}.jpg"
         )
 
         for i in range(len(data["anagrafica_vaccini_summary"]["fascia_anagrafica"])):

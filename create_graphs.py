@@ -319,25 +319,19 @@ FASCE_POPOLAZIONE = {
     }
 }
 
-# ultimo aggiornamento 3/3/21
+# ultimo aggiornamento 23/4/21
 CONSEGNE_VACCINI = {
     # comprende anche le dosi iniziali di PF/BT
     "Q1": {
         "Janssen": 0,
         "Moderna": 1330000,
-        "Pfizer/BioNTech": 7808000,
-        "AstraZeneca": 5352250
-    },
-    "Dosi aggiuntive": {
-        "Janssen": 0,
-        "Moderna": 0,
-        "Pfizer/BioNTech": 6642991,
-        "AstraZeneca": 0
+        "Pfizer/BioNTech": 8749260,
+        "AstraZeneca": 4116000
     },
     "Q2": {
         "Jannsen": 7307292,
         "Moderna": 4650000,
-        "Pfizer/BioNTech": 18180515,
+        "Pfizer/BioNTech": 32714370,
         "AstraZeneca": 10042500
     }
 }
@@ -690,15 +684,13 @@ def grafico_consegne_totale(consegne, consegne_previste, footer, output):
     ax.ticklabel_format(useOffset=False, style='plain')
     ax.bar(x_axis - 0.2, consegne.values(), 0.35, label="Consegne avvenute")
 
-    plt.title("Consegne totali vaccini")
+    plt.title("Consegne totali vaccini (al 23/4/2021")
 
     ax.grid()
 
-    ax.bar(x_axis + 0.2, consegne_previste["Q2"].values(), 0.35, label="Q2", bottom=np.array(list(
-        consegne_previste["Q1"].values()))+np.array(list(consegne_previste["Dosi aggiuntive"].values())))
-    ax.bar(x_axis + 0.2, consegne_previste["Q1"].values(), 0.35, label="Q1")
-    ax.bar(x_axis + 0.2, consegne_previste["Dosi aggiuntive"].values(
-    ), 0.35, label="Dosi aggiuntive (Q1/Q2)", bottom=list(consegne_previste["Q1"].values()))
+    ax.bar(x_axis + 0.2, consegne_previste["Q2"].values(), 0.35, label="Consegne previste Q2", bottom=np.array(list(
+        consegne_previste["Q1"].values())))
+    ax.bar(x_axis + 0.2, consegne_previste["Q1"].values(), 0.35, label="Consegne previste Q1")
 
     plt.xticks(x_axis, ["Janssen", "Moderna",
                "Pfizer/BioNTech", "AstraZeneca"])

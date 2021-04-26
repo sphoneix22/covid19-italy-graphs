@@ -741,7 +741,7 @@ def epidemia():
         "/graphs/epidemia/nuovi_positivi.jpg",
         media_mobile=create_media_mobile(data["nazionale"]["nuovi_positivi"]),
         legend=["Contagi giornalieri", "Media mobile settimanale"],
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     today = data["nazionale"]["nuovi_positivi"].iat[-1]
     last_week = data["nazionale"]["nuovi_positivi"].iat[-8]
@@ -759,7 +759,7 @@ def epidemia():
         ["Soglia critica TI", "Terapie intensive", "Ricoverati con sintomi"],
         "/graphs/epidemia/andamento_ospedalizzati.jpg",
         soglia=(TOTALE_TERAPIA_INTENSIVA["nazionale"] / 100) * 30,
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     summary += "Ospedalizzati ordinari: {}\nTerapie intensive: {}\n".format(
         data["nazionale"]["ricoverati_con_sintomi"].iat[-1], data["nazionale"]["terapia_intensiva"].iat[-1])
@@ -774,7 +774,7 @@ def epidemia():
         media_mobile=create_media_mobile(
             data["nazionale"]["ingressi_terapia_intensiva"]),
         legend=["Ingressi TI", "Media mobile settimanale"],
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     today = data["nazionale"]["ingressi_terapia_intensiva"].iat[-1]
     last_week = data["nazionale"]["ingressi_terapia_intensiva"].iat[-8]
@@ -792,7 +792,7 @@ def epidemia():
         data["nazionale"]["variazione_totale_positivi"],
         "Variazione giornaliera totale positivi",
         "/graphs/epidemia/variazione_totale_positivi.jpg",
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     summary += "Variazione totale totale positivi: {}\n".format(
         data["nazionale"]["variazione_totale_positivi"].iat[-1])
@@ -805,7 +805,7 @@ def epidemia():
         delta,
         "Variazione totale ospedalizzati",
         "/graphs/epidemia/variazione_totale_ospedalizzati.jpg",
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     summary += "Variazione totale ospedalizzati: {}\n".format(delta[-1])
 
@@ -817,7 +817,7 @@ def epidemia():
         delta,
         "Variazione occupazione TI",
         "/graphs/epidemia/variazione_ti.jpg",
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     summary += "Variazione TI: {}\n".format(delta[-1])
 
@@ -829,7 +829,7 @@ def epidemia():
         delta,
         "Variazione ospedalizzati ordinari",
         "/graphs/epidemia/variazione_ospedalizzati_ordinari.jpg",
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     summary += "Variazione ricoverati con sintomi: {}\n".format(delta[-1])
 
@@ -841,7 +841,7 @@ def epidemia():
         "Andamento deceduti",
         "/graphs/epidemia/deceduti.jpg",
         color="black",
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     summary += "Deceduti totali: {}\n".format(
         data["nazionale"]["deceduti"].iat[-1])
@@ -858,7 +858,7 @@ def epidemia():
             create_delta(data["nazionale"]["deceduti"])),
         legend=["Deceduti giornalieri", "Media mobile settimanale"],
         color="black",
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     today = delta[-1]
     last_week = delta[-8]
@@ -875,7 +875,7 @@ def epidemia():
         "Incidenza di nuovi positivi ogni 100000 abitanti\nnell'arco di 7 giorni",
         "/graphs/epidemia/incidenza_contagio.jpg",
         hline=250,
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     today = incidenza[-1]
     last_week = incidenza[-8]
@@ -889,7 +889,7 @@ def epidemia():
         data["monitoraggi_iss"]["rt_puntuale"],
         data["nazionale"]["nuovi_positivi"],
         "Andamento Rt nazionale",
-        f"Ultimo aggiornamento: {last_update}",
+        f"Fonte dati: ISS | Ultimo aggiornamento: {last_update}",
         "/graphs/epidemia/rt.jpg",
     )
 
@@ -907,7 +907,7 @@ def epidemia():
             media_mobile=create_media_mobile(
                 data["regioni"][regione]["nuovi_positivi"]),
             legend=["Contagi giornalieri", "Media mobile settimanale"],
-            footer=f"Ultimo aggiornamento: {last_update}"
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         today = data["regioni"][regione]["nuovi_positivi"].iat[-1]
         last_week = data["regioni"][regione]["nuovi_positivi"].iat[-8]
@@ -926,7 +926,7 @@ def epidemia():
             f"/graphs/epidemia/andamento_ospedalizzati_{denominazione_regione}.jpg",
             soglia=(
                 TOTALE_TERAPIA_INTENSIVA[denominazione_regione] / 100) * 30,
-            footer=f"Ultimo aggiornamento: {last_update}"
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         summary += "TI: {}\nRicoverati con sintomi: {}\n".format(data["regioni"][regione]["terapia_intensiva"].iat[-1],
                                                                  data["regioni"][regione]["ricoverati_con_sintomi"].iat[
@@ -942,7 +942,7 @@ def epidemia():
             media_mobile=create_media_mobile(
                 data["regioni"][regione]["ingressi_terapia_intensiva"]),
             legend=["Ingressi TI", "Media mobile settimanale"],
-            footer=f"Ultimo aggiornamento: {last_update}"
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         today = data["regioni"][regione]["ingressi_terapia_intensiva"].iat[-1]
         last_week = data["regioni"][regione]["ingressi_terapia_intensiva"].iat[-8]
@@ -960,7 +960,7 @@ def epidemia():
             data["regioni"][regione]["variazione_totale_positivi"],
             f"Variazione giornaliera totale positivi {denominazione_regione}",
             f"/graphs/epidemia/variazione_totale_positivi_{denominazione_regione}.jpg",
-            footer=f"Ultimo aggiornamento: {last_update}"
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         summary += "Variazione totale positivi: {}\n".format(
             data["regioni"][regione]["variazione_totale_positivi"].iat[-1])
@@ -972,7 +972,7 @@ def epidemia():
             create_delta(data["regioni"][regione]["totale_ospedalizzati"]),
             f"Variazione totale ospedalizzati {denominazione_regione}",
             f"/graphs/epidemia/variazione_totale_ospedalizzati_{denominazione_regione}.jpg",
-            footer=f"Ultimo aggiornamento: {last_update}"
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         summary += "Variazione totale ospedalizzati: {}\n".format(
             create_delta(data["regioni"][regione]["totale_ospedalizzati"])[-1])
@@ -984,7 +984,7 @@ def epidemia():
             create_delta(data["regioni"][regione]["terapia_intensiva"]),
             f"Variazione occupazione TI {denominazione_regione}",
             f"/graphs/epidemia/variazione_ti_{denominazione_regione}.jpg",
-            footer=f"Ultimo aggiornamento: {last_update}"
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         summary += "Variazione TI: {}\n".format(create_delta(
             data["regioni"][regione]["terapia_intensiva"])[-1])
@@ -996,7 +996,7 @@ def epidemia():
             create_delta(data["regioni"][regione]["ricoverati_con_sintomi"]),
             f"Variazione ospedalizzati ordinari {denominazione_regione}",
             f"/graphs/epidemia/variazione_ospedalizzati_ordinari_{denominazione_regione}.jpg",
-            footer=f"Ultimo aggiornamento: {last_update}"
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         summary += "Variazione ricoverati con sintomi: {}\n".format(
             create_delta(data["regioni"][regione]["ricoverati_con_sintomi"])[-1])
@@ -1009,7 +1009,7 @@ def epidemia():
             f"Andamento deceduti {denominazione_regione}",
             f"/graphs/epidemia/deceduti_{denominazione_regione}.jpg",
             color="black",
-            footer=f"Ultimo aggiornamento: {last_update}"
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         summary += "Deceduti totali: {}\n".format(
             data["regioni"][regione]["deceduti"].iat[-1])
@@ -1026,7 +1026,7 @@ def epidemia():
                 create_delta(data["regioni"][regione]["deceduti"])),
             legend=["Deceduti giornalieri", "Media mobile settimanale"],
             color="black",
-            footer=f"Ultimo aggiornamento: {last_update}"
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         today = delta[-1]
         last_week = delta[-8]
@@ -1046,7 +1046,7 @@ def epidemia():
             f"Incidenza di nuovi positivi ogni 100000 abitanti\nnell'arco di 7 giorni in {denominazione_regione}",
             f"/graphs/epidemia/incidenza_contagio_{denominazione_regione}.jpg",
             hline=250,
-            footer=f"Ultimo aggiornamento: {last_update}"
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         today = incidenza[-1]
         last_week = incidenza[-8]
@@ -1060,7 +1060,7 @@ def epidemia():
             data["monitoraggi_iss_regioni"][denominazione_regione]["rt_puntuale"],
             data["regioni"][regione]["nuovi_positivi"],
             f"Andamento Rt - {denominazione_regione}",
-            f"Ultimo aggiornamento: {last_update}",
+            f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
             f"/graphs/epidemia/rt_{denominazione_regione}.jpg",
         )
 
@@ -1084,7 +1084,7 @@ def vaccini():
         xticks=range(0, 100, 5),
         horizontal=True,
         grid="x",
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}"
     )
 
     summary += "Percentuale somministrazione:\n"
@@ -1112,7 +1112,7 @@ def vaccini():
         ],
         "Persone che hanno completato il ciclo di vaccinazione\nsul totale della popolazione",
         "/graphs/vaccini/percentuale_vaccinati.jpg",
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}"
     )
     summary += f"\nPercentuale popolazione vaccinata con la seconda dose: {vaccinati_seconda_dose} ({round((vaccinati_seconda_dose / popolazione_totale) * 100, 2)}%)\n"
 
@@ -1130,7 +1130,7 @@ def vaccini():
         ],
         "Persone che hanno ricevuto almeno una dose\nsul totale della popolazione",
         "/graphs/vaccini/percentuale_vaccinati_prima_dose.jpg",
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}"
     )
     summary += f"\nPercentuale popolazione vaccinata con la prima dose: {vaccinati_prima_dose} ({round((vaccinati_prima_dose / popolazione_totale) * 100, 2)}%)\n"
 
@@ -1154,7 +1154,7 @@ def vaccini():
         "Vaccinazioni giornaliere",
         ["Prima dose", "Seconda dose", "Monodose"],
         "/graphs/vaccini/vaccinazioni_giornaliere_dosi.jpg",
-        footer=f"Ultimo aggiornamento: {last_update}",
+        footer=f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
         y3=adjusted[2].values()
     )
     today = list(somministrazioni.values())[-1]
@@ -1195,7 +1195,7 @@ def vaccini():
         adjusted[3],
         [somministrazioni.keys(), media_mobile_somministrazioni],
         "Somministrazioni giornaliere per fornitore",
-        f"Ultimo aggiornamento: {last_update}",
+        f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
         "/graphs/vaccini/somministrazioni_giornaliere_fornitore.jpg"
     )
 
@@ -1217,7 +1217,7 @@ def vaccini():
         adjusted,
         [somministrazioni.keys(), media_mobile_somministrazioni],
         "Somministrazioni giornaliere per fascia d'età",
-        f"Ultimo aggiornamento: {last_update}",
+        f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
         "/graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica.jpg"
     )
 
@@ -1242,7 +1242,7 @@ def vaccini():
         y_values_seconda_dose,
         y_values_monodose,
         "Somministrazione vaccini per fascia d'età",
-        f"Ultimo aggiornamento: {last_update}",
+        f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
         "/graphs/vaccini/somministrazione_fascia_eta.jpg"
     )
 
@@ -1267,7 +1267,7 @@ def vaccini():
         grid="y",
         ylabel="in milioni di dosi",
         xticklabels=xlabels,
-        footer=f"Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}"
     )
 
     summary += "\nCategorie:\n"
@@ -1297,7 +1297,7 @@ def vaccini():
         adjusted[3],
         [consegne.keys(), media_mobile],
         "Consegne vaccini",
-        f"Ultimo aggiornamento: {last_update}",
+        f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
         "/graphs/vaccini/consegne_vaccini.jpg"
     )
     summary += f"\nMedia consegne vaccino:\n{media_mobile[-1]}\n\n"
@@ -1308,7 +1308,7 @@ def vaccini():
     grafico_consegne_totale(
         fornitori,
         CONSEGNE_VACCINI,
-        f"Ultimo aggiornamento: {last_update}",
+        f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
         "/graphs/vaccini/consegne_totali_vaccini.jpg"
     )
 
@@ -1352,7 +1352,7 @@ def vaccini():
             f"Vaccinazioni giornaliere in {denominazione_regione}",
             ["Prima dose", "Seconda dose", "Monodose"],
             f"/graphs/vaccini/vaccinazioni_giornaliere_dosi_{denominazione_regione}.jpg",
-            footer=f"Ultimo aggiornamento: {last_update}",
+            footer=f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
             y3=adjusted[2].values()
         )
         today = list(somministrazioni.values())[-1]
@@ -1393,7 +1393,7 @@ def vaccini():
             adjusted[3],
             [somministrazioni.keys(), media_mobile_somministrazioni],
             f"Somministrazioni giornaliere per fornitore - {denominazione_regione}",
-            f"Ultimo aggiornamento: {last_update}",
+            f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
             f"/graphs/vaccini/somministrazioni_giornaliere_fornitore_{denominazione_regione}.jpg"
         )
 
@@ -1415,7 +1415,7 @@ def vaccini():
             adjusted,
             [somministrazioni.keys(), media_mobile_somministrazioni],
             f"Somministrazioni giornaliere per fascia d'età - {denominazione_regione}",
-            f"Ultimo aggiornamento: {last_update}",
+            f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
             f"/graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_{denominazione_regione}.jpg"
         )
 
@@ -1446,7 +1446,7 @@ def vaccini():
             y_values_seconda_dose,
             y_values_monodose,
             f"Somministrazione vaccini per fascia d'età in {denominazione_regione}",
-            f"Ultimo aggiornamento: {last_update}",
+            f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
             f"/graphs/vaccini/somministrazione_fascia_eta_{denominazione_regione}.jpg"
         )
 
@@ -1471,7 +1471,7 @@ def vaccini():
             grid="y",
             ylabel="in milioni di dosi",
             xticklabels=xlabels,
-            footer=f"Ultimo aggiornamento: {last_update}"
+            footer=f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}"
         )
         summary += "\nCategorie:\n"
         for i in range(len(xlabels)):

@@ -441,6 +441,7 @@ def shape_adjust(data):
         current = current + timedelta(days=1)
     return data
 
+
 def order(data):
     start = min([list(x.keys())[0] for x in data])
     end = max([list(x.keys())[-1] for x in data])
@@ -724,6 +725,30 @@ def grafico_rt(x_rt, x_contagi, rt, contagi, title, footer, output):
     fig.savefig(CWD + output, dpi=200)
 
     plt.close('all')
+
+
+def grafico_vaccini_cumulativo(data, title, footer, output):
+    fig, ax = plt.subplots()
+
+    ax.plot(data[0].keys(), create_media_mobile(data[0].values()), label="16-19")
+    ax.plot(data[1].keys(), create_media_mobile(data[1].values()), label="20-29")
+    ax.plot(data[2].keys(), create_media_mobile(data[2].values()), label="30-39")
+    ax.plot(data[3].keys(), create_media_mobile(data[3].values()), label="40-49")
+    ax.plot(data[4].keys(), create_media_mobile(data[4].values()), label="50-59")
+    ax.plot(data[5].keys(), create_media_mobile(data[5].values()), label="60-69")
+    ax.plot(data[6].keys(), create_media_mobile(data[6].values()), label="70-79")
+    ax.plot(data[7].keys(), create_media_mobile(data[7].values()), label="80-89")
+    ax.plot(data[8].keys(), create_media_mobile(data[8].values()), label="90+")
+
+    plt.title(title)
+    plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
+    plt.legend()
+
+    fig.autofmt_xdate()
+    fig.savefig(CWD + output, dpi=200)
+
+    plt.close('all')
+
 
 ############################################################################################
 
@@ -1201,6 +1226,7 @@ def vaccini():
 
     print("Grafico somministrazioni giornaliere per fascia d'età")
     somministrazioni_fasce = []
+    prime_dosi_fasce = []
     for i in range(len(data["anagrafica_vaccini_summary"]["fascia_anagrafica"])):
         fascia = data["anagrafica_vaccini_summary"]["fascia_anagrafica"].iat[i]
         prima_dose = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]
@@ -1211,6 +1237,7 @@ def vaccini():
         for date in prima_dose.keys():
             result[date] = prima_dose[date] + seconda_dose[date]
         somministrazioni_fasce.append(result)
+        prime_dosi_fasce.append(prima_dose)
     adjusted = shape_adjust(somministrazioni_fasce)
 
     grafico_vaccini_fascia_eta(
@@ -1219,6 +1246,13 @@ def vaccini():
         "Somministrazioni giornaliere per fascia d'età",
         f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
         "/graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica.jpg"
+    )
+
+    grafico_vaccini_cumulativo(
+        prime_dosi_fasce,
+        "Prime dosi giornaliere per fascia d'età MM7",
+        f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
+        "/graphs/vaccini/prime_dosi_fascia.jpg"
     )
 
     print("Grafico fasce popolazione...")
@@ -1399,6 +1433,7 @@ def vaccini():
 
         print("Grafico somministrazioni giornaliere per fascia d'età")
         somministrazioni_fasce = []
+        prima_dose_fasce = []
         for i in range(len(data["anagrafica_vaccini_summary"]["fascia_anagrafica"])):
             fascia = data["anagrafica_vaccini_summary"]["fascia_anagrafica"].iat[i]
             prima_dose = data["somministrazioni_vaccini"]["regioni"][regione][data["somministrazioni_vaccini"]["regioni"]
@@ -1408,6 +1443,7 @@ def vaccini():
             result = {}
             for date in prima_dose.keys():
                 result[date] = prima_dose[date] + seconda_dose[date]
+            prima_dose_fasce.append(prima_dose)
             somministrazioni_fasce.append(result)
         adjusted = shape_adjust(somministrazioni_fasce)
 
@@ -1417,6 +1453,13 @@ def vaccini():
             f"Somministrazioni giornaliere per fascia d'età - {denominazione_regione}",
             f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
             f"/graphs/vaccini/somministrazioni_giornaliere_fascia_anagrafica_{denominazione_regione}.jpg"
+        )
+
+        grafico_vaccini_cumulativo(
+            prima_dose_fasce,
+            f"Prime dosi giornaliere per fascia d'età - {denominazione_regione} MM7",
+            f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}",
+            f"/graphs/vaccini/prime_dosi_fascia_{denominazione_regione}.jpg"
         )
 
         print("Grafico fasce popolazione...")

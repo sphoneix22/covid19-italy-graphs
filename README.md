@@ -267,6 +267,50 @@
 <img src="graphs/epidemia/nuovi_positivi_Valle%20d'Aosta.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Veneto
 <img src="graphs/epidemia/nuovi_positivi_Veneto.jpg" width="600" height="500"></img>
+### rt
+<img src="graphs/epidemia/rt.jpg" width="600" height="500"></img>
+### rt_Abruzzo
+<img src="graphs/epidemia/rt_Abruzzo.jpg" width="600" height="500"></img>
+### rt_Basilicata
+<img src="graphs/epidemia/rt_Basilicata.jpg" width="600" height="500"></img>
+### rt_Calabria
+<img src="graphs/epidemia/rt_Calabria.jpg" width="600" height="500"></img>
+### rt_Campania
+<img src="graphs/epidemia/rt_Campania.jpg" width="600" height="500"></img>
+### rt_Emilia-Romagna
+<img src="graphs/epidemia/rt_Emilia-Romagna.jpg" width="600" height="500"></img>
+### rt_Friuli%20Venezia%20Giulia
+<img src="graphs/epidemia/rt_Friuli%20Venezia%20Giulia.jpg" width="600" height="500"></img>
+### rt_Lazio
+<img src="graphs/epidemia/rt_Lazio.jpg" width="600" height="500"></img>
+### rt_Liguria
+<img src="graphs/epidemia/rt_Liguria.jpg" width="600" height="500"></img>
+### rt_Lombardia
+<img src="graphs/epidemia/rt_Lombardia.jpg" width="600" height="500"></img>
+### rt_Marche
+<img src="graphs/epidemia/rt_Marche.jpg" width="600" height="500"></img>
+### rt_Molise
+<img src="graphs/epidemia/rt_Molise.jpg" width="600" height="500"></img>
+### rt_P.A.%20Bolzano
+<img src="graphs/epidemia/rt_P.A.%20Bolzano.jpg" width="600" height="500"></img>
+### rt_P.A.%20Trento
+<img src="graphs/epidemia/rt_P.A.%20Trento.jpg" width="600" height="500"></img>
+### rt_Piemonte
+<img src="graphs/epidemia/rt_Piemonte.jpg" width="600" height="500"></img>
+### rt_Puglia
+<img src="graphs/epidemia/rt_Puglia.jpg" width="600" height="500"></img>
+### rt_Sardegna
+<img src="graphs/epidemia/rt_Sardegna.jpg" width="600" height="500"></img>
+### rt_Sicilia
+<img src="graphs/epidemia/rt_Sicilia.jpg" width="600" height="500"></img>
+### rt_Toscana
+<img src="graphs/epidemia/rt_Toscana.jpg" width="600" height="500"></img>
+### rt_Umbria
+<img src="graphs/epidemia/rt_Umbria.jpg" width="600" height="500"></img>
+### rt_Valle%20d'Aosta
+<img src="graphs/epidemia/rt_Valle%20d'Aosta.jpg" width="600" height="500"></img>
+### rt_Veneto
+<img src="graphs/epidemia/rt_Veneto.jpg" width="600" height="500"></img>
 ### variazione_ospedalizzati_ordinari
 <img src="graphs/epidemia/variazione_ospedalizzati_ordinari.jpg" width="600" height="500"></img>
 ### variazione_ospedalizzati_ordinari_Abruzzo
@@ -455,6 +499,50 @@
 <img src="graphs/vaccini/percentuale_vaccinati.jpg" width="600" height="500"></img>
 ### percentuale_vaccinati_prima_dose
 <img src="graphs/vaccini/percentuale_vaccinati_prima_dose.jpg" width="600" height="500"></img>
+### prime_dosi_fascia
+<img src="graphs/vaccini/prime_dosi_fascia.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Abruzzo
+<img src="graphs/vaccini/prime_dosi_fascia_Abruzzo.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Basilicata
+<img src="graphs/vaccini/prime_dosi_fascia_Basilicata.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Calabria
+<img src="graphs/vaccini/prime_dosi_fascia_Calabria.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Campania
+<img src="graphs/vaccini/prime_dosi_fascia_Campania.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Emilia-Romagna
+<img src="graphs/vaccini/prime_dosi_fascia_Emilia-Romagna.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Friuli%20Venezia%20Giulia
+<img src="graphs/vaccini/prime_dosi_fascia_Friuli%20Venezia%20Giulia.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Lazio
+<img src="graphs/vaccini/prime_dosi_fascia_Lazio.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Liguria
+<img src="graphs/vaccini/prime_dosi_fascia_Liguria.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Lombardia
+<img src="graphs/vaccini/prime_dosi_fascia_Lombardia.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Marche
+<img src="graphs/vaccini/prime_dosi_fascia_Marche.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Molise
+<img src="graphs/vaccini/prime_dosi_fascia_Molise.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_P.A.%20Bolzano
+<img src="graphs/vaccini/prime_dosi_fascia_P.A.%20Bolzano.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_P.A.%20Trento
+<img src="graphs/vaccini/prime_dosi_fascia_P.A.%20Trento.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Piemonte
+<img src="graphs/vaccini/prime_dosi_fascia_Piemonte.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Puglia
+<img src="graphs/vaccini/prime_dosi_fascia_Puglia.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Sardegna
+<img src="graphs/vaccini/prime_dosi_fascia_Sardegna.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Sicilia
+<img src="graphs/vaccini/prime_dosi_fascia_Sicilia.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Toscana
+<img src="graphs/vaccini/prime_dosi_fascia_Toscana.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Umbria
+<img src="graphs/vaccini/prime_dosi_fascia_Umbria.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Valle%20d'Aosta
+<img src="graphs/vaccini/prime_dosi_fascia_Valle%20d'Aosta.jpg" width="600" height="500"></img>
+### prime_dosi_fascia_Veneto
+<img src="graphs/vaccini/prime_dosi_fascia_Veneto.jpg" width="600" height="500"></img>
 ### somministrazione_categorie
 <img src="graphs/vaccini/somministrazione_categorie.jpg" width="600" height="500"></img>
 ### somministrazione_categorie_Abruzzo

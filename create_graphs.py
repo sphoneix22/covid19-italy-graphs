@@ -685,7 +685,7 @@ def grafico_consegne_totale(consegne, consegne_previste, footer, output):
     ax.ticklabel_format(useOffset=False, style='plain')
     ax.bar(x_axis - 0.2, consegne.values(), 0.35, label="Consegne avvenute")
 
-    plt.title("Consegne totali vaccini (al 23/4/2021")
+    plt.title("Consegne totali vaccini (al 23/4/2021)")
 
     ax.grid()
 

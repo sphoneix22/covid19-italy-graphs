@@ -1286,29 +1286,6 @@ def vaccini():
         fascia = data["anagrafica_vaccini_summary"]["fascia_anagrafica"].iat[i]
         summary += f"{fascia}: {y_values_seconda_dose[i]}% ({y_values_prima_dose[i]}%)\n"
 
-    print("Grafico somministrazione categorie...")
-    x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari", "categoria_personale_non_sanitario",
-                "categoria_ospiti_rsa", "categoria_over80", "categoria_70_79", "categoria_60_69", "categoria_soggetti_fragili", "categoria_forze_armate", "categoria_personale_scolastico"]
-    xlabels = ["Altro", "OSS", "Personale\nnon\nsanitario",
-               "RSA", "Over 80", "70-79", "60-69", "Soggetti\nfragili", "FA", "Personale\nscolastico"]
-    values_categorie = [data["anagrafica_vaccini_summary"][x].sum()
-                        for x in x_values]
-    barplot(
-        x_values,
-        values_categorie,
-        "Somministrazione vaccini per categoria",
-        "/graphs/vaccini/somministrazione_categorie.jpg",
-        grid="y",
-        ylabel="in milioni di dosi",
-        xticklabels=xlabels,
-        footer=f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}"
-    )
-
-    summary += "\nCategorie:\n"
-    for i in range(len(xlabels)):
-        categoria = xlabels[i]
-        summary += f"{categoria}: {values_categorie[i]} ({(values_categorie[i]/sum(somministrazioni.values()))*100}%)\n"
-
     print("Grafico consegne vaccino...")
     consegne = data["consegne_vaccini"].groupby(
         "data_consegna")["numero_dosi"].sum().to_dict()
@@ -1496,30 +1473,6 @@ def vaccini():
         for i in range(len(data["anagrafica_vaccini_summary"]["fascia_anagrafica"])):
             fascia = data["anagrafica_vaccini_summary"]["fascia_anagrafica"].iat[i]
             summary += f"{fascia}: {y_values_seconda_dose[i]}% ({y_values_prima_dose[i]} %)\n"
-
-        print("Grafico somministrazione categorie...")
-
-        x_values = ["categoria_altro", "categoria_operatori_sanitari_sociosanitari",
-                    "categoria_personale_non_sanitario", "categoria_ospiti_rsa", "categoria_over80", "categoria_70_79", "categoria_60_69", "categoria_soggetti_fragili",
-                    "categoria_forze_armate", "categoria_personale_scolastico"]
-        xlabels = ["Altro", "OSS", "Personale\nnon\nsanitario",
-                   "RSA", "Over 80", "70-79", "60-69", "Soggetti\nfragili", "FA", "Personale\nscolastico"]
-        values_categorie = [data["somministrazioni_vaccini"]
-                            ["regioni"][regione][x].sum() for x in x_values]
-        barplot(
-            x_values,
-            values_categorie,
-            f"Somministrazione vaccini per categoria in {denominazione_regione}",
-            f"/graphs/vaccini/somministrazione_categorie_{denominazione_regione}.jpg",
-            grid="y",
-            ylabel="in milioni di dosi",
-            xticklabels=xlabels,
-            footer=f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}"
-        )
-        summary += "\nCategorie:\n"
-        for i in range(len(xlabels)):
-            categoria = xlabels[i]
-            summary += f"{categoria}: {values_categorie[i]} ({(values_categorie[i]/sum(somministrazioni.values()))*100} %)\n"
 
     return summary
 

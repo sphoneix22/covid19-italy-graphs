@@ -543,50 +543,6 @@
 <img src="graphs/vaccini/prime_dosi_fascia_Valle%20d'Aosta.jpg" width="600" height="500"></img>
 ### prime_dosi_fascia_Veneto
 <img src="graphs/vaccini/prime_dosi_fascia_Veneto.jpg" width="600" height="500"></img>
-### somministrazione_categorie
-<img src="graphs/vaccini/somministrazione_categorie.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Abruzzo
-<img src="graphs/vaccini/somministrazione_categorie_Abruzzo.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Basilicata
-<img src="graphs/vaccini/somministrazione_categorie_Basilicata.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Calabria
-<img src="graphs/vaccini/somministrazione_categorie_Calabria.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Campania
-<img src="graphs/vaccini/somministrazione_categorie_Campania.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Emilia-Romagna
-<img src="graphs/vaccini/somministrazione_categorie_Emilia-Romagna.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Friuli%20Venezia%20Giulia
-<img src="graphs/vaccini/somministrazione_categorie_Friuli%20Venezia%20Giulia.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Lazio
-<img src="graphs/vaccini/somministrazione_categorie_Lazio.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Liguria
-<img src="graphs/vaccini/somministrazione_categorie_Liguria.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Lombardia
-<img src="graphs/vaccini/somministrazione_categorie_Lombardia.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Marche
-<img src="graphs/vaccini/somministrazione_categorie_Marche.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Molise
-<img src="graphs/vaccini/somministrazione_categorie_Molise.jpg" width="600" height="500"></img>
-### somministrazione_categorie_P.A.%20Bolzano
-<img src="graphs/vaccini/somministrazione_categorie_P.A.%20Bolzano.jpg" width="600" height="500"></img>
-### somministrazione_categorie_P.A.%20Trento
-<img src="graphs/vaccini/somministrazione_categorie_P.A.%20Trento.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Piemonte
-<img src="graphs/vaccini/somministrazione_categorie_Piemonte.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Puglia
-<img src="graphs/vaccini/somministrazione_categorie_Puglia.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Sardegna
-<img src="graphs/vaccini/somministrazione_categorie_Sardegna.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Sicilia
-<img src="graphs/vaccini/somministrazione_categorie_Sicilia.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Toscana
-<img src="graphs/vaccini/somministrazione_categorie_Toscana.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Umbria
-<img src="graphs/vaccini/somministrazione_categorie_Umbria.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Valle%20d'Aosta
-<img src="graphs/vaccini/somministrazione_categorie_Valle%20d'Aosta.jpg" width="600" height="500"></img>
-### somministrazione_categorie_Veneto
-<img src="graphs/vaccini/somministrazione_categorie_Veneto.jpg" width="600" height="500"></img>
 ### somministrazione_fascia_eta
 <img src="graphs/vaccini/somministrazione_fascia_eta.jpg" width="600" height="500"></img>
 ### somministrazione_fascia_eta_Abruzzo

@@ -77,29 +77,29 @@ REGIONI = [
 ]
 
 FASCE_POPOLAZIONE = {
-    "16-19": {
-        "nazionale": 2298846,
-        "Abruzzo": 46751,
-        "Basilicata": 22032,
-        "Calabria": 76743,
-        "Campania": 261694,
-        "Emilia-Romagna": 160045,
-        "Friuli Venezia Giulia": 42431,
-        "Lazio": 211964,
-        "Liguria": 51388,
-        "Lombardia": 377933,
-        "Marche": 55166,
-        "Molise": 10882,
-        "P.A. Bolzano": 23269,
-        "P.A. Trento": 22424,
-        "Piemonte": 153619,
-        "Puglia": 166541,
-        "Sardegna": 55615,
-        "Sicilia": 207885,
-        "Toscana": 130759,
-        "Umbria": 30749,
-        "Valle d'Aosta": 4706,
-        "Veneto": 186250
+    "12-19": {
+        "nazionale": 4574015,
+        "Abruzzo": 92684,
+        "Basilicata": 41943,
+        "Calabria": 149525,
+        "Campania": 509030,
+        "Emilia-Romagna": 324726,
+        "Friuli Venezia Giulia": 84946,
+        "Lazio": 429319,
+        "Liguria": 101710,
+        "Lombardia": 765276,
+        "Marche": 110094,
+        "Molise": 20956,
+        "P.A. Bolzano": 46311,
+        "P.A. Trento": 44701,
+        "Piemonte": 307148,
+        "Puglia": 321751,
+        "Sardegna": 109048,
+        "Sicilia": 404722,
+        "Toscana": 263891,
+        "Umbria": 62519,
+        "Valle d'Aosta": 9465,
+        "Veneto": 374250
     },
     "20-29": {
         "nazionale": 6084382,
@@ -607,7 +607,7 @@ def grafico_vaccini_fascia_eta(data, media_mobile, title, footer, output):
 
     xvalues = np.array(list(ordered_data[4].keys()))
     arrays = [np.array(list(x.values())) for x in ordered_data]
-    ax.bar(xvalues, arrays[0], label="16-19")
+    ax.bar(xvalues, arrays[0], label="12-19")
     ax.bar(xvalues, arrays[1], label="20-29", bottom=arrays[0])
     ax.bar(xvalues, arrays[2], label="30-39", bottom=arrays[0]+arrays[1])
     ax.bar(xvalues, arrays[3], label="40-49",
@@ -730,7 +730,7 @@ def grafico_rt(x_rt, x_contagi, rt, contagi, title, footer, output):
 def grafico_vaccini_cumulativo(data, title, footer, output):
     fig, ax = plt.subplots()
 
-    ax.plot(data[0].keys(), create_media_mobile(data[0].values()), label="16-19")
+    ax.plot(data[0].keys(), create_media_mobile(data[0].values()), label="12-19")
     ax.plot(data[1].keys(), create_media_mobile(data[1].values()), label="20-29")
     ax.plot(data[2].keys(), create_media_mobile(data[2].values()), label="30-39")
     ax.plot(data[3].keys(), create_media_mobile(data[3].values()), label="40-49")

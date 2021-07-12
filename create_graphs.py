@@ -1122,24 +1122,26 @@ def vaccini():
     
     janssen = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]
                                                             ["nazionale"]["fornitore"] == "Janssen"]
-    monodose = janssen["prima_dose"].sum()    
+    monodose = janssen["prima_dose"].sum()
+    pregressa_infezione = data["somministrazioni_vaccini"]["nazionale"]["pregressa_infezione"].sum()
     vaccinati_seconda_dose = data["anagrafica_vaccini_summary"]["seconda_dose"].sum(
     )
     popolazione_totale = FASCE_POPOLAZIONE["totale"]['nazionale']
+    completamente_vaccinati = vaccinati_seconda_dose+monodose+pregressa_infezione
     pieplot(
         [
             popolazione_totale,
-            vaccinati_seconda_dose+monodose
+            completamente_vaccinati
         ],
         [
             f"Totale popolazione\n ({popolazione_totale})",
-            f"Persone vaccinate\n ({vaccinati_seconda_dose}, {round((vaccinati_seconda_dose / popolazione_totale) * 100, 2)}%)"
+            f"Persone vaccinate\n ({completamente_vaccinati}, {round((completamente_vaccinati / popolazione_totale) * 100, 2)}%)"
         ],
         "Persone che hanno completato il ciclo di vaccinazione\nsul totale della popolazione",
         "/graphs/vaccini/percentuale_vaccinati.jpg",
         footer=f"Fonte dati: Covid19 Opendata Vaccini | Ultimo aggiornamento: {last_update}"
     )
-    summary += f"\nPercentuale popolazione vaccinata con la seconda dose: {vaccinati_seconda_dose} ({round((vaccinati_seconda_dose / popolazione_totale) * 100, 2)}%)\n"
+    summary += f"\nPercentuale popolazione che ha terminato il ciclo di vaccinazione: {completamente_vaccinati} ({round((completamente_vaccinati / popolazione_totale) * 100, 2)}%)\n"
 
     print("Grafico popolazione vaccinata prima dose...")
     vaccinati_prima_dose = data["anagrafica_vaccini_summary"]["prima_dose"].sum(
@@ -1166,10 +1168,14 @@ def vaccini():
         "prima_dose"].sum().to_dict()
     seconda_dose = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")[
         "seconda_dose"].sum().to_dict()
+    pregressa_infezione = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")["pregressa_infezione"].sum().to_dict()
     monodose = janssen.groupby("data_somministrazione")["prima_dose"].sum().to_dict()
     for day in prima_dose:
         if day in monodose.keys():
             prima_dose[day] -= monodose[day]
+    for day in seconda_dose:
+        if day in pregressa_infezione.keys():
+            seconda_dose[day] += pregressa_infezione[day]
     adjusted = shape_adjust([prima_dose, seconda_dose, monodose])
 
     stackplot(
@@ -1233,6 +1239,11 @@ def vaccini():
                                                                    ["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["prima_dose"].sum().to_dict()
         seconda_dose = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]
                                                                      ["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["seconda_dose"].sum().to_dict()
+        pregressa_infezione = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]
+                                                                     ["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["pregressa_infezione"].sum().to_dict()
+        for day in seconda_dose:
+            if day in pregressa_infezione.keys():
+                seconda_dose[day] += pregressa_infezione[day]
         result = {}
         for date in prima_dose.keys():
             result[date] = prima_dose[date] + seconda_dose[date]
@@ -1263,7 +1274,8 @@ def vaccini():
         janssen_fascia = janssen[janssen["fascia_anagrafica"] == row["fascia_anagrafica"]]["prima_dose"].sum()
         perc_prima_dose = (row["prima_dose"] - row["seconda_dose"] - janssen_fascia) / FASCE_POPOLAZIONE[row["fascia_anagrafica"]][
             "nazionale"]
-        perc_seconda_dose = row["seconda_dose"] / \
+        sec_dose = row["seconda_dose"] + row["pregressa_infezione"]
+        perc_seconda_dose = sec_dose / \
             FASCE_POPOLAZIONE[row["fascia_anagrafica"]]["nazionale"]
         perc_monodose = janssen_fascia / FASCE_POPOLAZIONE[row["fascia_anagrafica"]]["nazionale"]
         y_values_prima_dose.append(perc_prima_dose * 100)
@@ -1343,16 +1355,16 @@ def vaccini():
             "prima_dose"].sum().to_dict()
         seconda_dose = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")[
             "seconda_dose"].sum().to_dict()
+        pregressa_infezione = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")["pregressa_infezione"].sum().to_dict()
         monodose = janssen.groupby("data_somministrazione")["prima_dose"].sum().to_dict()
 
         for day in prima_dose:
             if day in monodose.keys():
                 prima_dose[day] -= monodose[day]
         
-        # TODO: Rimuovere quando tutte le regioni avranno fatto somministrazioni Janssen
-        if len(monodose) == 0:
-            end = max([list(x.keys())[-1] for x in [prima_dose, seconda_dose]])
-            monodose[end] = 0
+        for day in seconda_dose:
+            if day in pregressa_infezione.keys():
+                seconda_dose[day] += pregressa_infezione[day]
 
         adjusted = order(shape_adjust([prima_dose, seconda_dose, monodose]))
 
@@ -1417,6 +1429,12 @@ def vaccini():
                                                                               [regione]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["prima_dose"].sum().to_dict()
             seconda_dose = data["somministrazioni_vaccini"]["regioni"][regione][data["somministrazioni_vaccini"]["regioni"]
                                                                                 [regione]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["seconda_dose"].sum().to_dict()
+            pregressa_infezione = data["somministrazioni_vaccini"]["regioni"][regione][data["somministrazioni_vaccini"]["regioni"][regione]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["pregressa_infezione"].sum().to_dict()
+            
+            for day in seconda_dose:
+                if day in pregressa_infezione.keys():
+                    seconda_dose[day] += pregressa_infezione[day]
+            
             result = {}
             for date in prima_dose.keys():
                 result[date] = prima_dose[date] + seconda_dose[date]
@@ -1449,9 +1467,12 @@ def vaccini():
                 continue
             prima_dose = dataframe[dataframe["fascia_anagrafica"]
                                    == fascia]["prima_dose"].sum()
-            seconda_dose = dataframe[dataframe["fascia_anagrafica"]
+            sec_dose = dataframe[dataframe["fascia_anagrafica"]
                                      == fascia]["seconda_dose"].sum()
+            pregressa_infezione = dataframe[dataframe["fascia_anagrafica"]
+                                     == fascia]["pregressa_infezione"].sum()
             monodose = janssen[janssen["fascia_anagrafica"] == fascia]["prima_dose"].sum()
+            seconda_dose = sec_dose + pregressa_infezione
             perc_prima_dose = (prima_dose - seconda_dose - monodose) / \
                 FASCE_POPOLAZIONE[fascia][denominazione_regione]
             perc_seconda_dose = (

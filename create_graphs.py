@@ -918,6 +918,29 @@ def epidemia():
         "/graphs/epidemia/rt.jpg",
     )
 
+    print("Grafico growth rate")
+    fig, ax = plt.subplots()
+
+    deltas = [0, 0, 0, 0, 0, 0, 0]
+
+    i = 7
+    while i < len(data["nazionale"]):
+        day = data["nazionale"]["nuovi_positivi"].iat[i]
+        last_week = data["nazionale"]["nuovi_positivi"].iat[i-7]
+        delta = round((day-last_week)/last_week*100, 0)
+        deltas.append(delta)
+
+        i += 1
+
+    #ax2 = ax.twinx()
+
+    ax.plot(data["nazionale"]["data"], deltas)
+    print(deltas)
+
+    fig.savefig("test.jpg")
+        
+
+
     summary += "DATI REGIONI\n\n"
     for regione in data["regioni"].keys():
         denominazione_regione = data["regioni"][regione]["denominazione_regione"].iloc[0]

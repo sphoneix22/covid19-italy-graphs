@@ -361,7 +361,10 @@ def download_csv(name, url):
         for codice_regione in [x for x in range(1, 23) if x != 4]:
             data_regione = dataframe[dataframe["codice_regione"]
                                      == codice_regione]
-            data["regioni"][codice_regione] = data_regione
+            data["regioni"][codice_regione] = {"completo": data_regione}
+            data["regioni"][codice_regione]["maggio"] = data_regione[data_regione["data"] > datetime(year=2021, month=4, day=30)]
+    elif name == "nazionale":
+        data["nazionale"] = {"completo": dataframe, "maggio": dataframe[dataframe["data"] > datetime(year=2021, month=4, day=30)]}
     elif name == "somministrazioni_vaccini_summary":
         data["somministrazioni_vaccini_summary"] = {"nazionale": dataframe}
         data["somministrazioni_vaccini_summary"]["regioni"] = {}
@@ -460,7 +463,7 @@ def order(data):
 
 
 def plot(x, y, title, output, xlabel=None, ylabel=None, media_mobile=None, legend=None, color=None, grid="y",
-         hline=None, vline=None, marker=None, footer=None, alpha=0.8):
+         hline=None, vline=None, marker=None, footer=None, alpha=0.8, log=False):
     fig, ax = plt.subplots()
     line, = ax.plot(x, y, linestyle="solid", marker=marker, alpha=alpha)
     if media_mobile:
@@ -478,6 +481,9 @@ def plot(x, y, title, output, xlabel=None, ylabel=None, media_mobile=None, legen
 
     if vline:
         plt.axvline(vline, 0, 1, color="red")
+
+    if log:
+        plt.yscale("log")
 
     fig.autofmt_xdate()
     ax.set_title(title)
@@ -755,21 +761,31 @@ def grafico_vaccini_cumulativo(data, title, footer, output):
 
 def epidemia():
     os.makedirs(f"{CWD}/graphs/epidemia", exist_ok=True)
-    last_update = data["nazionale"]["data"].iat[-1]
+    last_update = data["nazionale"]["completo"]["data"].iat[-1]
     summary = f"DATI NAZIONALI {last_update}\n\n"
     # Grafico nuovi positivi
     print("Grafico nuovi positivi...")
     plot(
-        data["nazionale"]["data"],
-        data["nazionale"]["nuovi_positivi"],
+        data["nazionale"]["completo"]["data"],
+        data["nazionale"]["completo"]["nuovi_positivi"],
         "Andamento contagi giornalieri",
         "/graphs/epidemia/nuovi_positivi.jpg",
-        media_mobile=create_media_mobile(data["nazionale"]["nuovi_positivi"]),
+        media_mobile=create_media_mobile(data["nazionale"]["completo"]["nuovi_positivi"]),
         legend=["Contagi giornalieri", "Media mobile settimanale"],
         footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
-    today = data["nazionale"]["nuovi_positivi"].iat[-1]
-    last_week = data["nazionale"]["nuovi_positivi"].iat[-8]
+    plot(
+        data["nazionale"]["maggio"]["data"],
+        data["nazionale"]["maggio"]["nuovi_positivi"],
+        "Andamento contagi giornalieri (scala logaritmica)",
+        "/graphs/epidemia/nuovi_positivi_log.jpg",
+        media_mobile=create_media_mobile(data["nazionale"]["maggio"]["nuovi_positivi"]),
+        legend=["Contagi giornalieri", "Media mobile settimanale"],
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+        log=True
+    )
+    today = data["nazionale"]["completo"]["nuovi_positivi"].iat[-1]
+    last_week = data["nazionale"]["completo"]["nuovi_positivi"].iat[-8]
     delta = round((today-last_week)/last_week*100, 0)
     summary += "Nuovi positivi: {} ({:+}%)\n".format(
         today, delta)
@@ -777,9 +793,9 @@ def epidemia():
     # Stackplot ospedalizzati
     print("Grafico ospedalizzati...")
     stackplot(
-        data["nazionale"]["data"],
-        data["nazionale"]["terapia_intensiva"],
-        data["nazionale"]["ricoverati_con_sintomi"],
+        data["nazionale"]["completo"]["data"],
+        data["nazionale"]["completo"]["terapia_intensiva"],
+        data["nazionale"]["completo"]["ricoverati_con_sintomi"],
         "Andamento ospedalizzati",
         ["Soglia critica TI", "Terapie intensive", "Ricoverati con sintomi"],
         "/graphs/epidemia/andamento_ospedalizzati.jpg",
@@ -787,22 +803,33 @@ def epidemia():
         footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     summary += "Ospedalizzati ordinari: {}\nTerapie intensive: {}\n".format(
-        data["nazionale"]["ricoverati_con_sintomi"].iat[-1], data["nazionale"]["terapia_intensiva"].iat[-1])
+        data["nazionale"]["completo"]["ricoverati_con_sintomi"].iat[-1], data["nazionale"]["completo"]["terapia_intensiva"].iat[-1])
 
     # Grafico ingressi in terapia intensiva
     print("Grafico ingressi TI...")
     plot(
-        data["nazionale"]["data"],
-        data["nazionale"]["ingressi_terapia_intensiva"],
+        data["nazionale"]["completo"]["data"],
+        data["nazionale"]["completo"]["ingressi_terapia_intensiva"],
         "Ingressi giornalieri in terapia intensiva",
         "/graphs/epidemia/ingressi_ti.jpg",
         media_mobile=create_media_mobile(
-            data["nazionale"]["ingressi_terapia_intensiva"]),
+            data["nazionale"]["completo"]["ingressi_terapia_intensiva"]),
         legend=["Ingressi TI", "Media mobile settimanale"],
         footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
-    today = data["nazionale"]["ingressi_terapia_intensiva"].iat[-1]
-    last_week = data["nazionale"]["ingressi_terapia_intensiva"].iat[-8]
+    plot(
+        data["nazionale"]["maggio"]["data"],
+        data["nazionale"]["maggio"]["ingressi_terapia_intensiva"],
+        "Ingressi giornalieri in terapia intensiva (scala logaritmica)",
+        "/graphs/epidemia/ingressi_ti_log.jpg",
+        media_mobile=create_media_mobile(
+            data["nazionale"]["maggio"]["ingressi_terapia_intensiva"]),
+        legend=["Ingressi TI", "Media mobile settimanale"],
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+        log=True
+    )
+    today = data["nazionale"]["completo"]["ingressi_terapia_intensiva"].iat[-1]
+    last_week = data["nazionale"]["completo"]["ingressi_terapia_intensiva"].iat[-8]
     if last_week == 0:
         delta = 0
     else:
@@ -813,20 +840,20 @@ def epidemia():
     # Grafico variazione totale positivi
     print("Grafico variazione totale positivi...")
     deltaplot(
-        data["nazionale"]["data"],
-        data["nazionale"]["variazione_totale_positivi"],
+        data["nazionale"]["completo"]["data"],
+        data["nazionale"]["completo"]["variazione_totale_positivi"],
         "Variazione giornaliera totale positivi",
         "/graphs/epidemia/variazione_totale_positivi.jpg",
         footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     summary += "Variazione totale totale positivi: {}\n".format(
-        data["nazionale"]["variazione_totale_positivi"].iat[-1])
+        data["nazionale"]["completo"]["variazione_totale_positivi"].iat[-1])
 
     # Grafico variazione totale ospedalizzati
     print("Grafico variazione totale ospedalizzati...")
-    delta = create_delta(data["nazionale"]["totale_ospedalizzati"])
+    delta = create_delta(data["nazionale"]["completo"]["totale_ospedalizzati"])
     deltaplot(
-        data["nazionale"]["data"],
+        data["nazionale"]["completo"]["data"],
         delta,
         "Variazione totale ospedalizzati",
         "/graphs/epidemia/variazione_totale_ospedalizzati.jpg",
@@ -836,9 +863,9 @@ def epidemia():
 
     # Grafico variazione occupazione TI
     print("Grafico variazione TI")
-    delta = create_delta(data["nazionale"]["terapia_intensiva"])
+    delta = create_delta(data["nazionale"]["completo"]["terapia_intensiva"])
     deltaplot(
-        data["nazionale"]["data"],
+        data["nazionale"]["completo"]["data"],
         delta,
         "Variazione occupazione TI",
         "/graphs/epidemia/variazione_ti.jpg",
@@ -848,9 +875,9 @@ def epidemia():
 
     # Grafico variazione totale ospedalizzati
     print("Grafico variazione ricoverati con sintomi...")
-    delta = create_delta(data["nazionale"]["ricoverati_con_sintomi"])
+    delta = create_delta(data["nazionale"]["completo"]["ricoverati_con_sintomi"])
     deltaplot(
-        data["nazionale"]["data"],
+        data["nazionale"]["completo"]["data"],
         delta,
         "Variazione ospedalizzati ordinari",
         "/graphs/epidemia/variazione_ospedalizzati_ordinari.jpg",
@@ -861,29 +888,42 @@ def epidemia():
     # Grafico deceduti
     print("Grafico deceduti...")
     plot(
-        data["nazionale"]["data"],
-        data["nazionale"]["deceduti"],
+        data["nazionale"]["completo"]["data"],
+        data["nazionale"]["completo"]["deceduti"],
         "Andamento deceduti",
         "/graphs/epidemia/deceduti.jpg",
         color="black",
         footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     summary += "Deceduti totali: {}\n".format(
-        data["nazionale"]["deceduti"].iat[-1])
+        data["nazionale"]["completo"]["deceduti"].iat[-1])
 
     # Grafico deceduti giornalieri
     print("Grafico deceduti giornalieri...")
-    delta = create_delta(data["nazionale"]["deceduti"])
+    delta = create_delta(data["nazionale"]["completo"]["deceduti"])
     plot(
-        data["nazionale"]["data"],
+        data["nazionale"]["completo"]["data"],
         delta,
         "Deceduti giornalieri",
         "/graphs/epidemia/deceduti_giornalieri.jpg",
         media_mobile=create_media_mobile(
-            create_delta(data["nazionale"]["deceduti"])),
+            create_delta(data["nazionale"]["completo"]["deceduti"])),
         legend=["Deceduti giornalieri", "Media mobile settimanale"],
         color="black",
         footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
+    )
+    delta_maggio = create_delta(data["nazionale"]["maggio"]["deceduti"])
+    plot(
+        data["nazionale"]["maggio"]["data"],
+        delta_maggio,
+        "Deceduti giornalieri (scala logaritmica)",
+        "/graphs/epidemia/deceduti_giornalieri_log.jpg",
+        media_mobile=create_media_mobile(
+            create_delta(data["nazionale"]["maggio"]["deceduti"])),
+        legend=["Deceduti giornalieri", "Media mobile settimanale"],
+        color="black",
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+        log=True
     )
     today = delta[-1]
     last_week = delta[-8]
@@ -893,9 +933,9 @@ def epidemia():
 
     print("Grafico incidenza...")
     incidenza = create_incidenza(
-        data["nazionale"]["nuovi_positivi"], "nazionale")
+        data["nazionale"]["completo"]["nuovi_positivi"], "nazionale")
     plot(
-        data["nazionale"]["data"],
+        data["nazionale"]["completo"]["data"],
         incidenza,
         "Incidenza di nuovi positivi ogni 100000 abitanti\nnell'arco di 7 giorni",
         "/graphs/epidemia/incidenza_contagio.jpg",
@@ -910,9 +950,9 @@ def epidemia():
     print("Grafico rt")
     grafico_rt(
         data["monitoraggi_iss"]["fine_range"],
-        data["nazionale"]["data"],
+        data["nazionale"]["completo"]["data"],
         data["monitoraggi_iss"]["rt_puntuale"],
-        data["nazionale"]["nuovi_positivi"],
+        data["nazionale"]["completo"]["nuovi_positivi"],
         "Andamento Rt nazionale",
         f"Fonte dati: ISS | Ultimo aggiornamento: {last_update}",
         "/graphs/epidemia/rt.jpg",
@@ -924,9 +964,9 @@ def epidemia():
     deltas = [0, 0, 0, 0, 0, 0, 0]
 
     i = 7
-    while i < len(data["nazionale"]):
-        day = data["nazionale"]["nuovi_positivi"].iat[i]
-        last_week = data["nazionale"]["nuovi_positivi"].iat[i-7]
+    while i < len(data["nazionale"]["completo"]):
+        day = data["nazionale"]["completo"]["nuovi_positivi"].iat[i]
+        last_week = data["nazionale"]["completo"]["nuovi_positivi"].iat[i-7]
         delta = round((day-last_week)/last_week*100, 0)
         deltas.append(delta)
 
@@ -934,8 +974,7 @@ def epidemia():
 
     #ax2 = ax.twinx()
 
-    ax.plot(data["nazionale"]["data"], deltas)
-    print(deltas)
+    ax.plot(data["nazionale"]["completo"]["data"], deltas)
 
     fig.savefig("test.jpg")
         
@@ -943,22 +982,33 @@ def epidemia():
 
     summary += "DATI REGIONI\n\n"
     for regione in data["regioni"].keys():
-        denominazione_regione = data["regioni"][regione]["denominazione_regione"].iloc[0]
+        denominazione_regione = data["regioni"][regione]["completo"]["denominazione_regione"].iloc[0]
         summary += f"{denominazione_regione}\n"
         print(f"Regione {regione}...")
         print("Grafico nuovi positivi...")
         plot(
-            data["regioni"][regione]["data"],
-            data["regioni"][regione]["nuovi_positivi"],
+            data["regioni"][regione]["completo"]["data"],
+            data["regioni"][regione]["completo"]["nuovi_positivi"],
             f"Andamento contagi giornalieri {denominazione_regione}",
             f"/graphs/epidemia/nuovi_positivi_{denominazione_regione}.jpg",
             media_mobile=create_media_mobile(
-                data["regioni"][regione]["nuovi_positivi"]),
+                data["regioni"][regione]["completo"]["nuovi_positivi"]),
             legend=["Contagi giornalieri", "Media mobile settimanale"],
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
-        today = data["regioni"][regione]["nuovi_positivi"].iat[-1]
-        last_week = data["regioni"][regione]["nuovi_positivi"].iat[-8]
+        plot(
+            data["regioni"][regione]["maggio"]["data"],
+            data["regioni"][regione]["maggio"]["nuovi_positivi"],
+            f"Andamento contagi giornalieri {denominazione_regione} (scala log.)",
+            f"/graphs/epidemia/nuovi_positivi_{denominazione_regione}_log.jpg",
+            media_mobile=create_media_mobile(
+                data["regioni"][regione]["maggio"]["nuovi_positivi"]),
+            legend=["Contagi giornalieri", "Media mobile settimanale"],
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+            log=True
+        )
+        today = data["regioni"][regione]["completo"]["nuovi_positivi"].iat[-1]
+        last_week = data["regioni"][regione]["completo"]["nuovi_positivi"].iat[-8]
         delta = round((today-last_week)/last_week*100, 0)
         summary += "Nuovi positivi: {} ({:+}%)\n".format(
             today, delta)
@@ -966,9 +1016,9 @@ def epidemia():
         # Stackplot ospedalizzati
         print("Grafico ospedalizzati...")
         stackplot(
-            data["regioni"][regione]["data"],
-            data["regioni"][regione]["terapia_intensiva"],
-            data["regioni"][regione]["ricoverati_con_sintomi"],
+            data["regioni"][regione]["completo"]["data"],
+            data["regioni"][regione]["completo"]["terapia_intensiva"],
+            data["regioni"][regione]["completo"]["ricoverati_con_sintomi"],
             f"Andamento ospedalizzati {denominazione_regione}",
             ["Soglia critica TI", "Terapie intensive", "Ricoverati con sintomi"],
             f"/graphs/epidemia/andamento_ospedalizzati_{denominazione_regione}.jpg",
@@ -976,24 +1026,35 @@ def epidemia():
                 TOTALE_TERAPIA_INTENSIVA[denominazione_regione] / 100) * 30,
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
-        summary += "TI: {}\nRicoverati con sintomi: {}\n".format(data["regioni"][regione]["terapia_intensiva"].iat[-1],
-                                                                 data["regioni"][regione]["ricoverati_con_sintomi"].iat[
+        summary += "TI: {}\nRicoverati con sintomi: {}\n".format(data["regioni"][regione]["completo"]["terapia_intensiva"].iat[-1],
+                                                                 data["regioni"][regione]["completo"]["ricoverati_con_sintomi"].iat[
                                                                      -1])
 
         # Grafico ingressi in terapia intensiva
         print("Grafico ingressi TI...")
         plot(
-            data["regioni"][regione]["data"],
-            data["regioni"][regione]["ingressi_terapia_intensiva"],
+            data["regioni"][regione]["completo"]["data"],
+            data["regioni"][regione]["completo"]["ingressi_terapia_intensiva"],
             f"Ingressi giornalieri in terapia intensiva {denominazione_regione}",
             f"/graphs/epidemia/ingressi_ti_{denominazione_regione}.jpg",
             media_mobile=create_media_mobile(
-                data["regioni"][regione]["ingressi_terapia_intensiva"]),
+                data["regioni"][regione]["completo"]["ingressi_terapia_intensiva"]),
             legend=["Ingressi TI", "Media mobile settimanale"],
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
-        today = data["regioni"][regione]["ingressi_terapia_intensiva"].iat[-1]
-        last_week = data["regioni"][regione]["ingressi_terapia_intensiva"].iat[-8]
+        plot(
+            data["regioni"][regione]["maggio"]["data"],
+            data["regioni"][regione]["maggio"]["ingressi_terapia_intensiva"],
+            f"Ingressi giornalieri in terapia intensiva {denominazione_regione} (scala log.)",
+            f"/graphs/epidemia/ingressi_ti_{denominazione_regione}_log.jpg",
+            media_mobile=create_media_mobile(
+                data["regioni"][regione]["maggio"]["ingressi_terapia_intensiva"]),
+            legend=["Ingressi TI", "Media mobile settimanale"],
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+            log=True
+        )
+        today = data["regioni"][regione]["completo"]["ingressi_terapia_intensiva"].iat[-1]
+        last_week = data["regioni"][regione]["completo"]["ingressi_terapia_intensiva"].iat[-8]
         if last_week == 0:
             delta = 0
         else:
@@ -1004,77 +1065,90 @@ def epidemia():
         # Grafico variazione totale positivi
         print("Grafico variazione totale positivi...")
         deltaplot(
-            data["regioni"][regione]["data"],
-            data["regioni"][regione]["variazione_totale_positivi"],
+            data["regioni"][regione]["completo"]["data"],
+            data["regioni"][regione]["completo"]["variazione_totale_positivi"],
             f"Variazione giornaliera totale positivi {denominazione_regione}",
             f"/graphs/epidemia/variazione_totale_positivi_{denominazione_regione}.jpg",
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         summary += "Variazione totale positivi: {}\n".format(
-            data["regioni"][regione]["variazione_totale_positivi"].iat[-1])
+            data["regioni"][regione]["completo"]["variazione_totale_positivi"].iat[-1])
 
         # Grafico variazione totale ospedalizzati
         print("Grafico variazione totale ospedalizzati...")
         deltaplot(
-            data["regioni"][regione]["data"],
-            create_delta(data["regioni"][regione]["totale_ospedalizzati"]),
+            data["regioni"][regione]["completo"]["data"],
+            create_delta(data["regioni"][regione]["completo"]["totale_ospedalizzati"]),
             f"Variazione totale ospedalizzati {denominazione_regione}",
             f"/graphs/epidemia/variazione_totale_ospedalizzati_{denominazione_regione}.jpg",
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         summary += "Variazione totale ospedalizzati: {}\n".format(
-            create_delta(data["regioni"][regione]["totale_ospedalizzati"])[-1])
+            create_delta(data["regioni"][regione]["completo"]["totale_ospedalizzati"])[-1])
 
         # Grafico variazione occupazione TI
         print("Grafico variazione TI")
         deltaplot(
-            data["regioni"][regione]["data"],
-            create_delta(data["regioni"][regione]["terapia_intensiva"]),
+            data["regioni"][regione]["completo"]["data"],
+            create_delta(data["regioni"][regione]["completo"]["terapia_intensiva"]),
             f"Variazione occupazione TI {denominazione_regione}",
             f"/graphs/epidemia/variazione_ti_{denominazione_regione}.jpg",
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         summary += "Variazione TI: {}\n".format(create_delta(
-            data["regioni"][regione]["terapia_intensiva"])[-1])
+            data["regioni"][regione]["completo"]["terapia_intensiva"])[-1])
 
         # Grafico variazione totale ospedalizzati
         print("Grafico variazione ricoverati con sintomi...")
         deltaplot(
-            data["regioni"][regione]["data"],
-            create_delta(data["regioni"][regione]["ricoverati_con_sintomi"]),
+            data["regioni"][regione]["completo"]["data"],
+            create_delta(data["regioni"][regione]["completo"]["ricoverati_con_sintomi"]),
             f"Variazione ospedalizzati ordinari {denominazione_regione}",
             f"/graphs/epidemia/variazione_ospedalizzati_ordinari_{denominazione_regione}.jpg",
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         summary += "Variazione ricoverati con sintomi: {}\n".format(
-            create_delta(data["regioni"][regione]["ricoverati_con_sintomi"])[-1])
+            create_delta(data["regioni"][regione]["completo"]["ricoverati_con_sintomi"])[-1])
 
         # Grafico deceduti
         print("Grafico deceduti...")
         plot(
-            data["regioni"][regione]["data"],
-            data["regioni"][regione]["deceduti"],
+            data["regioni"][regione]["completo"]["data"],
+            data["regioni"][regione]["completo"]["deceduti"],
             f"Andamento deceduti {denominazione_regione}",
             f"/graphs/epidemia/deceduti_{denominazione_regione}.jpg",
             color="black",
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         summary += "Deceduti totali: {}\n".format(
-            data["regioni"][regione]["deceduti"].iat[-1])
+            data["regioni"][regione]["completo"]["deceduti"].iat[-1])
 
         # Grafico deceduti giornalieri
         print("Grafico deceduti giornalieri...")
-        delta = create_delta(data["regioni"][regione]["deceduti"])
+        delta = create_delta(data["regioni"][regione]["completo"]["deceduti"])
         plot(
-            data["regioni"][regione]["data"],
+            data["regioni"][regione]["completo"]["data"],
             delta,
             f"Deceduti giornalieri {denominazione_regione}",
             f"/graphs/epidemia/deceduti_giornalieri_{denominazione_regione}.jpg",
             media_mobile=create_media_mobile(
-                create_delta(data["regioni"][regione]["deceduti"])),
+                create_delta(data["regioni"][regione]["completo"]["deceduti"])),
             legend=["Deceduti giornalieri", "Media mobile settimanale"],
             color="black",
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
+        )
+        delta_maggio = create_delta(data["regioni"][regione]["maggio"]["deceduti"])
+        plot(
+            data["regioni"][regione]["maggio"]["data"],
+            delta_maggio,
+            f"Deceduti giornalieri {denominazione_regione} (scala log.)",
+            f"/graphs/epidemia/deceduti_giornalieri_{denominazione_regione}_log.jpg",
+            media_mobile=create_media_mobile(
+                create_delta(data["regioni"][regione]["maggio"]["deceduti"])),
+            legend=["Deceduti giornalieri", "Media mobile settimanale"],
+            color="black",
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+            log=True
         )
         today = delta[-1]
         last_week = delta[-8]
@@ -1087,9 +1161,9 @@ def epidemia():
 
         print("Grafico incidenza...")
         incidenza = create_incidenza(
-            data["regioni"][regione]["nuovi_positivi"], denominazione_regione)
+            data["regioni"][regione]["completo"]["nuovi_positivi"], denominazione_regione)
         plot(
-            data["regioni"][regione]["data"],
+            data["regioni"][regione]["completo"]["data"],
             incidenza,
             f"Incidenza di nuovi positivi ogni 100000 abitanti\nnell'arco di 7 giorni in {denominazione_regione}",
             f"/graphs/epidemia/incidenza_contagio_{denominazione_regione}.jpg",
@@ -1104,9 +1178,9 @@ def epidemia():
         print("Grafico rt")
         grafico_rt(
             data["monitoraggi_iss_regioni"][denominazione_regione]["fine_range"],
-            data["regioni"][regione]["data"],
+            data["regioni"][regione]["completo"]["data"],
             data["monitoraggi_iss_regioni"][denominazione_regione]["rt_puntuale"],
-            data["regioni"][regione]["nuovi_positivi"],
+            data["regioni"][regione]["completo"]["nuovi_positivi"],
             f"Andamento Rt - {denominazione_regione}",
             f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
             f"/graphs/epidemia/rt_{denominazione_regione}.jpg",
@@ -1365,7 +1439,7 @@ def vaccini():
     summary += "\nDATI REGIONALI\n\n"
     for regione in data["somministrazioni_vaccini_summary"]["regioni"].keys():
         print(f"Regione {regione}")
-        denominazione_regione = data["regioni"][regione]["denominazione_regione"].iloc[0]
+        denominazione_regione = data["regioni"][regione]["completo"]["denominazione_regione"].iloc[0]
         summary += f"\n{denominazione_regione}\n"
 
         print("Grafico vaccinazione giornaliere, prima e seconda dose...")

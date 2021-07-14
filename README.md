@@ -95,46 +95,90 @@
 <img src="graphs/epidemia/deceduti_giornalieri.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Abruzzo
 <img src="graphs/epidemia/deceduti_giornalieri_Abruzzo.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Abruzzo_log
+<img src="graphs/epidemia/deceduti_giornalieri_Abruzzo_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Basilicata
 <img src="graphs/epidemia/deceduti_giornalieri_Basilicata.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Basilicata_log
+<img src="graphs/epidemia/deceduti_giornalieri_Basilicata_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Calabria
 <img src="graphs/epidemia/deceduti_giornalieri_Calabria.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Calabria_log
+<img src="graphs/epidemia/deceduti_giornalieri_Calabria_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Campania
 <img src="graphs/epidemia/deceduti_giornalieri_Campania.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Campania_log
+<img src="graphs/epidemia/deceduti_giornalieri_Campania_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Emilia-Romagna
 <img src="graphs/epidemia/deceduti_giornalieri_Emilia-Romagna.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Emilia-Romagna_log
+<img src="graphs/epidemia/deceduti_giornalieri_Emilia-Romagna_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Friuli%20Venezia%20Giulia
 <img src="graphs/epidemia/deceduti_giornalieri_Friuli%20Venezia%20Giulia.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Friuli%20Venezia%20Giulia_log
+<img src="graphs/epidemia/deceduti_giornalieri_Friuli%20Venezia%20Giulia_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Lazio
 <img src="graphs/epidemia/deceduti_giornalieri_Lazio.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Lazio_log
+<img src="graphs/epidemia/deceduti_giornalieri_Lazio_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Liguria
 <img src="graphs/epidemia/deceduti_giornalieri_Liguria.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Liguria_log
+<img src="graphs/epidemia/deceduti_giornalieri_Liguria_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Lombardia
 <img src="graphs/epidemia/deceduti_giornalieri_Lombardia.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Lombardia_log
+<img src="graphs/epidemia/deceduti_giornalieri_Lombardia_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Marche
 <img src="graphs/epidemia/deceduti_giornalieri_Marche.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Marche_log
+<img src="graphs/epidemia/deceduti_giornalieri_Marche_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Molise
 <img src="graphs/epidemia/deceduti_giornalieri_Molise.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Molise_log
+<img src="graphs/epidemia/deceduti_giornalieri_Molise_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_P.A.%20Bolzano
 <img src="graphs/epidemia/deceduti_giornalieri_P.A.%20Bolzano.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_P.A.%20Bolzano_log
+<img src="graphs/epidemia/deceduti_giornalieri_P.A.%20Bolzano_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_P.A.%20Trento
 <img src="graphs/epidemia/deceduti_giornalieri_P.A.%20Trento.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_P.A.%20Trento_log
+<img src="graphs/epidemia/deceduti_giornalieri_P.A.%20Trento_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Piemonte
 <img src="graphs/epidemia/deceduti_giornalieri_Piemonte.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Piemonte_log
+<img src="graphs/epidemia/deceduti_giornalieri_Piemonte_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Puglia
 <img src="graphs/epidemia/deceduti_giornalieri_Puglia.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Puglia_log
+<img src="graphs/epidemia/deceduti_giornalieri_Puglia_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Sardegna
 <img src="graphs/epidemia/deceduti_giornalieri_Sardegna.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Sardegna_log
+<img src="graphs/epidemia/deceduti_giornalieri_Sardegna_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Sicilia
 <img src="graphs/epidemia/deceduti_giornalieri_Sicilia.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Sicilia_log
+<img src="graphs/epidemia/deceduti_giornalieri_Sicilia_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Toscana
 <img src="graphs/epidemia/deceduti_giornalieri_Toscana.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Toscana_log
+<img src="graphs/epidemia/deceduti_giornalieri_Toscana_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Umbria
 <img src="graphs/epidemia/deceduti_giornalieri_Umbria.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Umbria_log
+<img src="graphs/epidemia/deceduti_giornalieri_Umbria_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Valle%20d'Aosta
 <img src="graphs/epidemia/deceduti_giornalieri_Valle%20d'Aosta.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Valle%20d'Aosta_log
+<img src="graphs/epidemia/deceduti_giornalieri_Valle%20d'Aosta_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_Veneto
 <img src="graphs/epidemia/deceduti_giornalieri_Veneto.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_Veneto_log
+<img src="graphs/epidemia/deceduti_giornalieri_Veneto_log.jpg" width="600" height="500"></img>
+### deceduti_giornalieri_log
+<img src="graphs/epidemia/deceduti_giornalieri_log.jpg" width="600" height="500"></img>
 ### incidenza_contagio
 <img src="graphs/epidemia/incidenza_contagio.jpg" width="600" height="500"></img>
 ### incidenza_contagio_Abruzzo
@@ -183,90 +227,178 @@
 <img src="graphs/epidemia/ingressi_ti.jpg" width="600" height="500"></img>
 ### ingressi_ti_Abruzzo
 <img src="graphs/epidemia/ingressi_ti_Abruzzo.jpg" width="600" height="500"></img>
+### ingressi_ti_Abruzzo_log
+<img src="graphs/epidemia/ingressi_ti_Abruzzo_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Basilicata
 <img src="graphs/epidemia/ingressi_ti_Basilicata.jpg" width="600" height="500"></img>
+### ingressi_ti_Basilicata_log
+<img src="graphs/epidemia/ingressi_ti_Basilicata_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Calabria
 <img src="graphs/epidemia/ingressi_ti_Calabria.jpg" width="600" height="500"></img>
+### ingressi_ti_Calabria_log
+<img src="graphs/epidemia/ingressi_ti_Calabria_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Campania
 <img src="graphs/epidemia/ingressi_ti_Campania.jpg" width="600" height="500"></img>
+### ingressi_ti_Campania_log
+<img src="graphs/epidemia/ingressi_ti_Campania_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Emilia-Romagna
 <img src="graphs/epidemia/ingressi_ti_Emilia-Romagna.jpg" width="600" height="500"></img>
+### ingressi_ti_Emilia-Romagna_log
+<img src="graphs/epidemia/ingressi_ti_Emilia-Romagna_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Friuli%20Venezia%20Giulia
 <img src="graphs/epidemia/ingressi_ti_Friuli%20Venezia%20Giulia.jpg" width="600" height="500"></img>
+### ingressi_ti_Friuli%20Venezia%20Giulia_log
+<img src="graphs/epidemia/ingressi_ti_Friuli%20Venezia%20Giulia_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Lazio
 <img src="graphs/epidemia/ingressi_ti_Lazio.jpg" width="600" height="500"></img>
+### ingressi_ti_Lazio_log
+<img src="graphs/epidemia/ingressi_ti_Lazio_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Liguria
 <img src="graphs/epidemia/ingressi_ti_Liguria.jpg" width="600" height="500"></img>
+### ingressi_ti_Liguria_log
+<img src="graphs/epidemia/ingressi_ti_Liguria_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Lombardia
 <img src="graphs/epidemia/ingressi_ti_Lombardia.jpg" width="600" height="500"></img>
+### ingressi_ti_Lombardia_log
+<img src="graphs/epidemia/ingressi_ti_Lombardia_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Marche
 <img src="graphs/epidemia/ingressi_ti_Marche.jpg" width="600" height="500"></img>
+### ingressi_ti_Marche_log
+<img src="graphs/epidemia/ingressi_ti_Marche_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Molise
 <img src="graphs/epidemia/ingressi_ti_Molise.jpg" width="600" height="500"></img>
+### ingressi_ti_Molise_log
+<img src="graphs/epidemia/ingressi_ti_Molise_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_P.A.%20Bolzano
 <img src="graphs/epidemia/ingressi_ti_P.A.%20Bolzano.jpg" width="600" height="500"></img>
+### ingressi_ti_P.A.%20Bolzano_log
+<img src="graphs/epidemia/ingressi_ti_P.A.%20Bolzano_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_P.A.%20Trento
 <img src="graphs/epidemia/ingressi_ti_P.A.%20Trento.jpg" width="600" height="500"></img>
+### ingressi_ti_P.A.%20Trento_log
+<img src="graphs/epidemia/ingressi_ti_P.A.%20Trento_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Piemonte
 <img src="graphs/epidemia/ingressi_ti_Piemonte.jpg" width="600" height="500"></img>
+### ingressi_ti_Piemonte_log
+<img src="graphs/epidemia/ingressi_ti_Piemonte_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Puglia
 <img src="graphs/epidemia/ingressi_ti_Puglia.jpg" width="600" height="500"></img>
+### ingressi_ti_Puglia_log
+<img src="graphs/epidemia/ingressi_ti_Puglia_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Sardegna
 <img src="graphs/epidemia/ingressi_ti_Sardegna.jpg" width="600" height="500"></img>
+### ingressi_ti_Sardegna_log
+<img src="graphs/epidemia/ingressi_ti_Sardegna_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Sicilia
 <img src="graphs/epidemia/ingressi_ti_Sicilia.jpg" width="600" height="500"></img>
+### ingressi_ti_Sicilia_log
+<img src="graphs/epidemia/ingressi_ti_Sicilia_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Toscana
 <img src="graphs/epidemia/ingressi_ti_Toscana.jpg" width="600" height="500"></img>
+### ingressi_ti_Toscana_log
+<img src="graphs/epidemia/ingressi_ti_Toscana_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Umbria
 <img src="graphs/epidemia/ingressi_ti_Umbria.jpg" width="600" height="500"></img>
+### ingressi_ti_Umbria_log
+<img src="graphs/epidemia/ingressi_ti_Umbria_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Valle%20d'Aosta
 <img src="graphs/epidemia/ingressi_ti_Valle%20d'Aosta.jpg" width="600" height="500"></img>
+### ingressi_ti_Valle%20d'Aosta_log
+<img src="graphs/epidemia/ingressi_ti_Valle%20d'Aosta_log.jpg" width="600" height="500"></img>
 ### ingressi_ti_Veneto
 <img src="graphs/epidemia/ingressi_ti_Veneto.jpg" width="600" height="500"></img>
+### ingressi_ti_Veneto_log
+<img src="graphs/epidemia/ingressi_ti_Veneto_log.jpg" width="600" height="500"></img>
+### ingressi_ti_log
+<img src="graphs/epidemia/ingressi_ti_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi
 <img src="graphs/epidemia/nuovi_positivi.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Abruzzo
 <img src="graphs/epidemia/nuovi_positivi_Abruzzo.jpg" width="600" height="500"></img>
+### nuovi_positivi_Abruzzo_log
+<img src="graphs/epidemia/nuovi_positivi_Abruzzo_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Basilicata
 <img src="graphs/epidemia/nuovi_positivi_Basilicata.jpg" width="600" height="500"></img>
+### nuovi_positivi_Basilicata_log
+<img src="graphs/epidemia/nuovi_positivi_Basilicata_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Calabria
 <img src="graphs/epidemia/nuovi_positivi_Calabria.jpg" width="600" height="500"></img>
+### nuovi_positivi_Calabria_log
+<img src="graphs/epidemia/nuovi_positivi_Calabria_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Campania
 <img src="graphs/epidemia/nuovi_positivi_Campania.jpg" width="600" height="500"></img>
+### nuovi_positivi_Campania_log
+<img src="graphs/epidemia/nuovi_positivi_Campania_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Emilia-Romagna
 <img src="graphs/epidemia/nuovi_positivi_Emilia-Romagna.jpg" width="600" height="500"></img>
+### nuovi_positivi_Emilia-Romagna_log
+<img src="graphs/epidemia/nuovi_positivi_Emilia-Romagna_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Friuli%20Venezia%20Giulia
 <img src="graphs/epidemia/nuovi_positivi_Friuli%20Venezia%20Giulia.jpg" width="600" height="500"></img>
+### nuovi_positivi_Friuli%20Venezia%20Giulia_log
+<img src="graphs/epidemia/nuovi_positivi_Friuli%20Venezia%20Giulia_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Lazio
 <img src="graphs/epidemia/nuovi_positivi_Lazio.jpg" width="600" height="500"></img>
+### nuovi_positivi_Lazio_log
+<img src="graphs/epidemia/nuovi_positivi_Lazio_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Liguria
 <img src="graphs/epidemia/nuovi_positivi_Liguria.jpg" width="600" height="500"></img>
+### nuovi_positivi_Liguria_log
+<img src="graphs/epidemia/nuovi_positivi_Liguria_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Lombardia
 <img src="graphs/epidemia/nuovi_positivi_Lombardia.jpg" width="600" height="500"></img>
+### nuovi_positivi_Lombardia_log
+<img src="graphs/epidemia/nuovi_positivi_Lombardia_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Marche
 <img src="graphs/epidemia/nuovi_positivi_Marche.jpg" width="600" height="500"></img>
+### nuovi_positivi_Marche_log
+<img src="graphs/epidemia/nuovi_positivi_Marche_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Molise
 <img src="graphs/epidemia/nuovi_positivi_Molise.jpg" width="600" height="500"></img>
+### nuovi_positivi_Molise_log
+<img src="graphs/epidemia/nuovi_positivi_Molise_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_P.A.%20Bolzano
 <img src="graphs/epidemia/nuovi_positivi_P.A.%20Bolzano.jpg" width="600" height="500"></img>
+### nuovi_positivi_P.A.%20Bolzano_log
+<img src="graphs/epidemia/nuovi_positivi_P.A.%20Bolzano_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_P.A.%20Trento
 <img src="graphs/epidemia/nuovi_positivi_P.A.%20Trento.jpg" width="600" height="500"></img>
+### nuovi_positivi_P.A.%20Trento_log
+<img src="graphs/epidemia/nuovi_positivi_P.A.%20Trento_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Piemonte
 <img src="graphs/epidemia/nuovi_positivi_Piemonte.jpg" width="600" height="500"></img>
+### nuovi_positivi_Piemonte_log
+<img src="graphs/epidemia/nuovi_positivi_Piemonte_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Puglia
 <img src="graphs/epidemia/nuovi_positivi_Puglia.jpg" width="600" height="500"></img>
+### nuovi_positivi_Puglia_log
+<img src="graphs/epidemia/nuovi_positivi_Puglia_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Sardegna
 <img src="graphs/epidemia/nuovi_positivi_Sardegna.jpg" width="600" height="500"></img>
+### nuovi_positivi_Sardegna_log
+<img src="graphs/epidemia/nuovi_positivi_Sardegna_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Sicilia
 <img src="graphs/epidemia/nuovi_positivi_Sicilia.jpg" width="600" height="500"></img>
+### nuovi_positivi_Sicilia_log
+<img src="graphs/epidemia/nuovi_positivi_Sicilia_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Toscana
 <img src="graphs/epidemia/nuovi_positivi_Toscana.jpg" width="600" height="500"></img>
+### nuovi_positivi_Toscana_log
+<img src="graphs/epidemia/nuovi_positivi_Toscana_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Umbria
 <img src="graphs/epidemia/nuovi_positivi_Umbria.jpg" width="600" height="500"></img>
+### nuovi_positivi_Umbria_log
+<img src="graphs/epidemia/nuovi_positivi_Umbria_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Valle%20d'Aosta
 <img src="graphs/epidemia/nuovi_positivi_Valle%20d'Aosta.jpg" width="600" height="500"></img>
+### nuovi_positivi_Valle%20d'Aosta_log
+<img src="graphs/epidemia/nuovi_positivi_Valle%20d'Aosta_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_Veneto
 <img src="graphs/epidemia/nuovi_positivi_Veneto.jpg" width="600" height="500"></img>
+### nuovi_positivi_Veneto_log
+<img src="graphs/epidemia/nuovi_positivi_Veneto_log.jpg" width="600" height="500"></img>
+### nuovi_positivi_log
+<img src="graphs/epidemia/nuovi_positivi_log.jpg" width="600" height="500"></img>
 ### rt
 <img src="graphs/epidemia/rt.jpg" width="600" height="500"></img>
 ### rt_Abruzzo

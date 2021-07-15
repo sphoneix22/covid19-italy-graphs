@@ -443,6 +443,8 @@
 <img src="graphs/epidemia/rt_Valle%20d'Aosta.jpg" width="600" height="500"></img>
 ### rt_Veneto
 <img src="graphs/epidemia/rt_Veneto.jpg" width="600" height="500"></img>
+### tempo_raddoppio
+<img src="graphs/epidemia/tempo_raddoppio.jpg" width="600" height="500"></img>
 ### variazione_ospedalizzati_ordinari
 <img src="graphs/epidemia/variazione_ospedalizzati_ordinari.jpg" width="600" height="500"></img>
 ### variazione_ospedalizzati_ordinari_Abruzzo

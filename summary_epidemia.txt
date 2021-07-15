@@ -1,16 +1,17 @@
-DATI NAZIONALI 2021-07-14 17:00:00
+DATI NAZIONALI 2021-07-15 17:00:00
 
-Nuovi positivi: 2153 (+113.0%)
-Ospedalizzati ordinari: 1108
-Terapie intensive: 151
-Ingressi TI: 7.0 (-12.0%)
-Variazione totale totale positivi: 1051
-Variazione totale ospedalizzati: -26
-Variazione TI: -6
-Variazione ricoverati con sintomi: -20
-Deceduti totali: 127831
-Deceduti giornalieri: 23 (+64.0%)
-Incidenza: 17.01835473990857 (+75.0%)
+Nuovi positivi: 2455 (+76.0%)
+Tempo di raddoppio: 9.0 giorni
+Ospedalizzati ordinari: 1089
+Terapie intensive: 153
+Ingressi TI: 11.0 (+38.0%)
+Tempo di raddoppio: 2 giorniVariazione totale totale positivi: -800
+Variazione totale ospedalizzati: -17
+Variazione TI: 2
+Variazione ricoverati con sintomi: -19
+Deceduti totali: 127840
+Deceduti giornalieri: 9 (-31.0%)
+Incidenza: 18.79731773291773 (+77.0%)
 
 DATI REGIONI
 

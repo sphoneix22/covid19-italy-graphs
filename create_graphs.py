@@ -53,27 +53,27 @@ TOTALE_TERAPIA_INTENSIVA = {
 }
 
 REGIONI = [
-        "Abruzzo", 
-        "Basilicata",
-        "Calabria",
-        "Campania",
-        "Emilia-Romagna",
-        "Friuli Venezia Giulia",
-        "Lazio",
-        "Liguria",
-        "Lombardia",
-        "Marche",
-        "Molise",
-        "P.A. Bolzano",
-        "P.A. Trento", 
-        "Piemonte",
-        "Puglia",
-        "Sardegna",
-        "Sicilia",
-        "Toscana",
-        "Umbria",
-        "Valle d'Aosta",
-        "Veneto"
+    "Abruzzo",
+    "Basilicata",
+    "Calabria",
+    "Campania",
+    "Emilia-Romagna",
+    "Friuli Venezia Giulia",
+    "Lazio",
+    "Liguria",
+    "Lombardia",
+    "Marche",
+    "Molise",
+    "P.A. Bolzano",
+    "P.A. Trento",
+    "Piemonte",
+    "Puglia",
+    "Sardegna",
+    "Sicilia",
+    "Toscana",
+    "Umbria",
+    "Valle d'Aosta",
+    "Veneto"
 ]
 
 FASCE_POPOLAZIONE = {
@@ -362,9 +362,11 @@ def download_csv(name, url):
             data_regione = dataframe[dataframe["codice_regione"]
                                      == codice_regione]
             data["regioni"][codice_regione] = {"completo": data_regione}
-            data["regioni"][codice_regione]["maggio"] = data_regione[data_regione["data"] > datetime(year=2021, month=4, day=30)]
+            data["regioni"][codice_regione]["maggio"] = data_regione[data_regione["data"]
+                                                                     > datetime(year=2021, month=4, day=30)]
     elif name == "nazionale":
-        data["nazionale"] = {"completo": dataframe, "maggio": dataframe[dataframe["data"] > datetime(year=2021, month=4, day=30)]}
+        data["nazionale"] = {"completo": dataframe, "maggio": dataframe[dataframe["data"] > datetime(
+            year=2021, month=4, day=30)]}
     elif name == "somministrazioni_vaccini_summary":
         data["somministrazioni_vaccini_summary"] = {"nazionale": dataframe}
         data["somministrazioni_vaccini_summary"]["regioni"] = {}
@@ -586,14 +588,15 @@ def grafico_vaccinati_fascia_anagrafica(x, prima_dose, seconda_dose, monodose, t
 
     ax.bar(x, prima_dose, label="Prima dose")
     ax.bar(x, seconda_dose, bottom=prima_dose, label="Seconda dose")
-    ax.bar(x, monodose, bottom=np.array(prima_dose)+np.array(seconda_dose), label="Monodose")
+    ax.bar(x, monodose, bottom=np.array(prima_dose) +
+           np.array(seconda_dose), label="Monodose")
 
     ax.grid()
 
     plt.title(title)
     plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
     plt.legend()
-    
+
     fig.savefig(CWD + output, dpi=200)
 
     plt.close('all')
@@ -697,7 +700,8 @@ def grafico_consegne_totale(consegne, consegne_previste, footer, output):
 
     ax.bar(x_axis + 0.2, consegne_previste["Q2"].values(), 0.35, label="Consegne previste Q2", bottom=np.array(list(
         consegne_previste["Q1"].values())))
-    ax.bar(x_axis + 0.2, consegne_previste["Q1"].values(), 0.35, label="Consegne previste Q1")
+    ax.bar(x_axis + 0.2,
+           consegne_previste["Q1"].values(), 0.35, label="Consegne previste Q1")
 
     plt.xticks(x_axis, ["Janssen", "Moderna",
                "Pfizer/BioNTech", "AstraZeneca"])
@@ -716,7 +720,7 @@ def grafico_rt(x_rt, x_contagi, rt, contagi, title, footer, output):
     ax.set_ylabel("Positivi giornalieri")
     ax2 = ax.twinx()
     ax2.set_ylabel("Valore R")
-    
+
     ax.plot(x_contagi, contagi, alpha=0.4, linestyle="dashed")
     ax2.plot(x_rt, rt, marker=".")
     ax2.axhline(y=1, color="red", linestyle="dashed")
@@ -736,14 +740,22 @@ def grafico_rt(x_rt, x_contagi, rt, contagi, title, footer, output):
 def grafico_vaccini_cumulativo(data, title, footer, output):
     fig, ax = plt.subplots()
 
-    ax.plot(data[0].keys(), create_media_mobile(data[0].values()), label="12-19")
-    ax.plot(data[1].keys(), create_media_mobile(data[1].values()), label="20-29")
-    ax.plot(data[2].keys(), create_media_mobile(data[2].values()), label="30-39")
-    ax.plot(data[3].keys(), create_media_mobile(data[3].values()), label="40-49")
-    ax.plot(data[4].keys(), create_media_mobile(data[4].values()), label="50-59")
-    ax.plot(data[5].keys(), create_media_mobile(data[5].values()), label="60-69")
-    ax.plot(data[6].keys(), create_media_mobile(data[6].values()), label="70-79")
-    ax.plot(data[7].keys(), create_media_mobile(data[7].values()), label="80-89")
+    ax.plot(data[0].keys(), create_media_mobile(
+        data[0].values()), label="12-19")
+    ax.plot(data[1].keys(), create_media_mobile(
+        data[1].values()), label="20-29")
+    ax.plot(data[2].keys(), create_media_mobile(
+        data[2].values()), label="30-39")
+    ax.plot(data[3].keys(), create_media_mobile(
+        data[3].values()), label="40-49")
+    ax.plot(data[4].keys(), create_media_mobile(
+        data[4].values()), label="50-59")
+    ax.plot(data[5].keys(), create_media_mobile(
+        data[5].values()), label="60-69")
+    ax.plot(data[6].keys(), create_media_mobile(
+        data[6].values()), label="70-79")
+    ax.plot(data[7].keys(), create_media_mobile(
+        data[7].values()), label="80-89")
     ax.plot(data[8].keys(), create_media_mobile(data[8].values()), label="90+")
 
     plt.title(title)
@@ -770,7 +782,8 @@ def epidemia():
         data["nazionale"]["completo"]["nuovi_positivi"],
         "Andamento contagi giornalieri",
         "/graphs/epidemia/nuovi_positivi.jpg",
-        media_mobile=create_media_mobile(data["nazionale"]["completo"]["nuovi_positivi"]),
+        media_mobile=create_media_mobile(
+            data["nazionale"]["completo"]["nuovi_positivi"]),
         legend=["Contagi giornalieri", "Media mobile settimanale"],
         footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
@@ -779,7 +792,8 @@ def epidemia():
         data["nazionale"]["maggio"]["nuovi_positivi"],
         "Andamento contagi giornalieri (scala logaritmica)",
         "/graphs/epidemia/nuovi_positivi_log.jpg",
-        media_mobile=create_media_mobile(data["nazionale"]["maggio"]["nuovi_positivi"]),
+        media_mobile=create_media_mobile(
+            data["nazionale"]["maggio"]["nuovi_positivi"]),
         legend=["Contagi giornalieri", "Media mobile settimanale"],
         footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
         log=True
@@ -875,7 +889,8 @@ def epidemia():
 
     # Grafico variazione totale ospedalizzati
     print("Grafico variazione ricoverati con sintomi...")
-    delta = create_delta(data["nazionale"]["completo"]["ricoverati_con_sintomi"])
+    delta = create_delta(data["nazionale"]["completo"]
+                         ["ricoverati_con_sintomi"])
     deltaplot(
         data["nazionale"]["completo"]["data"],
         delta,
@@ -977,8 +992,6 @@ def epidemia():
     ax.plot(data["nazionale"]["completo"]["data"], deltas)
 
     fig.savefig("test.jpg")
-        
-
 
     summary += "DATI REGIONI\n\n"
     for regione in data["regioni"].keys():
@@ -1078,7 +1091,8 @@ def epidemia():
         print("Grafico variazione totale ospedalizzati...")
         deltaplot(
             data["regioni"][regione]["completo"]["data"],
-            create_delta(data["regioni"][regione]["completo"]["totale_ospedalizzati"]),
+            create_delta(data["regioni"][regione]["completo"]
+                         ["totale_ospedalizzati"]),
             f"Variazione totale ospedalizzati {denominazione_regione}",
             f"/graphs/epidemia/variazione_totale_ospedalizzati_{denominazione_regione}.jpg",
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
@@ -1090,7 +1104,8 @@ def epidemia():
         print("Grafico variazione TI")
         deltaplot(
             data["regioni"][regione]["completo"]["data"],
-            create_delta(data["regioni"][regione]["completo"]["terapia_intensiva"]),
+            create_delta(data["regioni"][regione]
+                         ["completo"]["terapia_intensiva"]),
             f"Variazione occupazione TI {denominazione_regione}",
             f"/graphs/epidemia/variazione_ti_{denominazione_regione}.jpg",
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
@@ -1102,7 +1117,8 @@ def epidemia():
         print("Grafico variazione ricoverati con sintomi...")
         deltaplot(
             data["regioni"][regione]["completo"]["data"],
-            create_delta(data["regioni"][regione]["completo"]["ricoverati_con_sintomi"]),
+            create_delta(data["regioni"][regione]["completo"]
+                         ["ricoverati_con_sintomi"]),
             f"Variazione ospedalizzati ordinari {denominazione_regione}",
             f"/graphs/epidemia/variazione_ospedalizzati_ordinari_{denominazione_regione}.jpg",
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
@@ -1137,7 +1153,8 @@ def epidemia():
             color="black",
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
-        delta_maggio = create_delta(data["regioni"][regione]["maggio"]["deceduti"])
+        delta_maggio = create_delta(
+            data["regioni"][regione]["maggio"]["deceduti"])
         plot(
             data["regioni"][regione]["maggio"]["data"],
             delta_maggio,
@@ -1216,11 +1233,12 @@ def vaccini():
         summary += f"{regione}: {perc}%\n"
 
     print("Grafico popolazione vaccinata seconda dose...")
-    
+
     janssen = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]
                                                             ["nazionale"]["fornitore"] == "Janssen"]
     monodose = janssen["prima_dose"].sum()
-    pregressa_infezione = data["somministrazioni_vaccini"]["nazionale"]["pregressa_infezione"].sum()
+    pregressa_infezione = data["somministrazioni_vaccini"]["nazionale"]["pregressa_infezione"].sum(
+    )
     vaccinati_seconda_dose = data["anagrafica_vaccini_summary"]["seconda_dose"].sum(
     )
     popolazione_totale = FASCE_POPOLAZIONE["totale"]['nazionale']
@@ -1265,8 +1283,10 @@ def vaccini():
         "prima_dose"].sum().to_dict()
     seconda_dose = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")[
         "seconda_dose"].sum().to_dict()
-    pregressa_infezione = data["somministrazioni_vaccini_summary"]["nazionale"].groupby("data_somministrazione")["pregressa_infezione"].sum().to_dict()
-    monodose = janssen.groupby("data_somministrazione")["prima_dose"].sum().to_dict()
+    pregressa_infezione = data["somministrazioni_vaccini_summary"]["nazionale"].groupby(
+        "data_somministrazione")["pregressa_infezione"].sum().to_dict()
+    monodose = janssen.groupby("data_somministrazione")[
+        "prima_dose"].sum().to_dict()
     for day in prima_dose:
         if day in monodose.keys():
             prima_dose[day] -= monodose[day]
@@ -1337,7 +1357,7 @@ def vaccini():
         seconda_dose = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]
                                                                      ["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["seconda_dose"].sum().to_dict()
         pregressa_infezione = data["somministrazioni_vaccini"]["nazionale"][data["somministrazioni_vaccini"]["nazionale"]
-                                                                     ["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["pregressa_infezione"].sum().to_dict()
+                                                                            ["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["pregressa_infezione"].sum().to_dict()
         for day in seconda_dose:
             if day in pregressa_infezione.keys():
                 seconda_dose[day] += pregressa_infezione[day]
@@ -1368,13 +1388,15 @@ def vaccini():
     y_values_seconda_dose = []
     y_values_monodose = []
     for index, row in data["anagrafica_vaccini_summary"].iterrows():
-        janssen_fascia = janssen[janssen["fascia_anagrafica"] == row["fascia_anagrafica"]]["prima_dose"].sum()
+        janssen_fascia = janssen[janssen["fascia_anagrafica"]
+                                 == row["fascia_anagrafica"]]["prima_dose"].sum()
         perc_prima_dose = (row["prima_dose"] - row["seconda_dose"] - janssen_fascia) / FASCE_POPOLAZIONE[row["fascia_anagrafica"]][
             "nazionale"]
         sec_dose = row["seconda_dose"] + row["pregressa_infezione"]
         perc_seconda_dose = sec_dose / \
             FASCE_POPOLAZIONE[row["fascia_anagrafica"]]["nazionale"]
-        perc_monodose = janssen_fascia / FASCE_POPOLAZIONE[row["fascia_anagrafica"]]["nazionale"]
+        perc_monodose = janssen_fascia / \
+            FASCE_POPOLAZIONE[row["fascia_anagrafica"]]["nazionale"]
         y_values_prima_dose.append(perc_prima_dose * 100)
         y_values_seconda_dose.append(perc_seconda_dose * 100)
         y_values_monodose.append(perc_monodose * 100)
@@ -1452,13 +1474,15 @@ def vaccini():
             "prima_dose"].sum().to_dict()
         seconda_dose = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")[
             "seconda_dose"].sum().to_dict()
-        pregressa_infezione = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby("data_somministrazione")["pregressa_infezione"].sum().to_dict()
-        monodose = janssen.groupby("data_somministrazione")["prima_dose"].sum().to_dict()
+        pregressa_infezione = data["somministrazioni_vaccini_summary"]["regioni"][regione].groupby(
+            "data_somministrazione")["pregressa_infezione"].sum().to_dict()
+        monodose = janssen.groupby("data_somministrazione")[
+            "prima_dose"].sum().to_dict()
 
         for day in prima_dose:
             if day in monodose.keys():
                 prima_dose[day] -= monodose[day]
-        
+
         for day in seconda_dose:
             if day in pregressa_infezione.keys():
                 seconda_dose[day] += pregressa_infezione[day]
@@ -1485,7 +1509,6 @@ def vaccini():
         delta_perc_2 = round((yesterday-last_week_2)/last_week_2*100, 0)
         delta_perc_3 = round((yeyesterday-last_week_3)/last_week_3*100, 0)
         summary += f"\nVaccinazioni giornaliere:\nOggi:{today} ({delta_perc_1:+}%)\nIeri:{yesterday} ({delta_perc_2:+}%)\nL'altro ieri: {yeyesterday} ({delta_perc_3:+}%)\n\n"
-
 
         print("Grafico somministrazioni giornaliere per fornitore")
         astrazeneca = dataframe[dataframe["fornitore"]
@@ -1526,12 +1549,13 @@ def vaccini():
                                                                               [regione]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["prima_dose"].sum().to_dict()
             seconda_dose = data["somministrazioni_vaccini"]["regioni"][regione][data["somministrazioni_vaccini"]["regioni"]
                                                                                 [regione]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["seconda_dose"].sum().to_dict()
-            pregressa_infezione = data["somministrazioni_vaccini"]["regioni"][regione][data["somministrazioni_vaccini"]["regioni"][regione]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["pregressa_infezione"].sum().to_dict()
-            
+            pregressa_infezione = data["somministrazioni_vaccini"]["regioni"][regione][data["somministrazioni_vaccini"]["regioni"]
+                                                                                       [regione]["fascia_anagrafica"] == fascia].groupby("data_somministrazione")["pregressa_infezione"].sum().to_dict()
+
             for day in seconda_dose:
                 if day in pregressa_infezione.keys():
                     seconda_dose[day] += pregressa_infezione[day]
-            
+
             result = {}
             for date in prima_dose.keys():
                 result[date] = prima_dose[date] + seconda_dose[date]
@@ -1565,10 +1589,11 @@ def vaccini():
             prima_dose = dataframe[dataframe["fascia_anagrafica"]
                                    == fascia]["prima_dose"].sum()
             sec_dose = dataframe[dataframe["fascia_anagrafica"]
-                                     == fascia]["seconda_dose"].sum()
+                                 == fascia]["seconda_dose"].sum()
             pregressa_infezione = dataframe[dataframe["fascia_anagrafica"]
-                                     == fascia]["pregressa_infezione"].sum()
-            monodose = janssen[janssen["fascia_anagrafica"] == fascia]["prima_dose"].sum()
+                                            == fascia]["pregressa_infezione"].sum()
+            monodose = janssen[janssen["fascia_anagrafica"]
+                               == fascia]["prima_dose"].sum()
             seconda_dose = sec_dose + pregressa_infezione
             perc_prima_dose = (prima_dose - seconda_dose - monodose) / \
                 FASCE_POPOLAZIONE[fascia][denominazione_regione]

@@ -6,6 +6,7 @@ import urllib.request as request
 import numpy as np
 from time import time
 from datetime import datetime, timedelta
+from math import log
 
 # COSTANTI
 ############################################################################################
@@ -767,6 +768,36 @@ def grafico_vaccini_cumulativo(data, title, footer, output):
 
     plt.close('all')
 
+def grafico_doubling_time(data, title, footer, output):
+    doubling_times = [0, 0, 0, 0, 0, 0, 0]
+
+    i = 7
+    while i < len(data[1]):
+        day = data[1].iat[i]
+        last_week = data[1].iat[i-7]
+        delta = (day-last_week)/last_week
+
+        if delta < 0:
+            doubling_time = 0
+        else:
+            doubling_time = (log(2)/log(1+delta))*7
+        doubling_times.append(doubling_time)
+
+        i += 1
+        
+    fig, ax = plt.subplots()
+
+    ax.plot(data[0], doubling_times)
+    ax.set_ylim([0,50])
+
+    plt.title(title)
+    plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
+
+    fig.autofmt_xdate()
+    fig.savefig(CWD + output, dpi=200)
+
+    plt.close('all')
+
 
 ############################################################################################
 
@@ -800,9 +831,12 @@ def epidemia():
     )
     today = data["nazionale"]["completo"]["nuovi_positivi"].iat[-1]
     last_week = data["nazionale"]["completo"]["nuovi_positivi"].iat[-8]
-    delta = round((today-last_week)/last_week*100, 0)
+    delta = (today-last_week)/last_week
+    delta_perc = round(delta*100, 0)
     summary += "Nuovi positivi: {} ({:+}%)\n".format(
-        today, delta)
+        today, delta_perc)
+    if delta >= 0:
+        summary += "Tempo di raddoppio: {} giorni\n".format(round(log(2)/log(1+delta)*7, 0))
 
     # Stackplot ospedalizzati
     print("Grafico ospedalizzati...")
@@ -846,10 +880,15 @@ def epidemia():
     last_week = data["nazionale"]["completo"]["ingressi_terapia_intensiva"].iat[-8]
     if last_week == 0:
         delta = 0
+        delta_perc = 0
     else:
-        delta = round((today-last_week)/last_week*100, 0)
+        delta = (today-last_week)/last_week
+        delta_perc = round(delta*100, 0)
     summary += "Ingressi TI: {} ({:+}%)\n".format(
-        today, delta)
+        today, delta_perc)
+
+    if delta >= 0:
+        summary += "Tempo di raddoppio: {} giorni".format(round(log(2)/log(1+delta)), 0)
 
     # Grafico variazione totale positivi
     print("Grafico variazione totale positivi...")
@@ -973,25 +1012,16 @@ def epidemia():
         "/graphs/epidemia/rt.jpg",
     )
 
-    print("Grafico growth rate")
-    fig, ax = plt.subplots()
-
-    deltas = [0, 0, 0, 0, 0, 0, 0]
-
-    i = 7
-    while i < len(data["nazionale"]["completo"]):
-        day = data["nazionale"]["completo"]["nuovi_positivi"].iat[i]
-        last_week = data["nazionale"]["completo"]["nuovi_positivi"].iat[i-7]
-        delta = round((day-last_week)/last_week*100, 0)
-        deltas.append(delta)
-
-        i += 1
-
-    #ax2 = ax.twinx()
-
-    ax.plot(data["nazionale"]["completo"]["data"], deltas)
-
-    fig.savefig("test.jpg")
+    print("Grafico doubling time")
+    grafico_doubling_time(
+        [
+            data["nazionale"]["maggio"]["data"],
+            data["nazionale"]["maggio"]["nuovi_positivi"]
+        ],
+        "Tempo di raddoppio",
+        f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+        "/graphs/epidemia/tempo_raddoppio.jpg"
+    )
 
     summary += "DATI REGIONI\n\n"
     for regione in data["regioni"].keys():

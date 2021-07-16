@@ -888,7 +888,7 @@ def epidemia():
         today, delta_perc)
 
     if delta >= 0:
-        summary += "Tempo di raddoppio: {} giorni".format(round(log(2)/log(1+delta)), 0)
+        summary += "Tempo di raddoppio: {} giorni\n".format(round(log(2)/log(1+delta)*7), 0)
 
     # Grafico variazione totale positivi
     print("Grafico variazione totale positivi...")

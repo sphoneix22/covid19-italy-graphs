@@ -838,7 +838,7 @@ def epidemia():
     if delta > 0:
         summary += "Tempo di raddoppio: {} giorni\n".format(round(log(2)/log(1+delta)*7, 0))
     elif delta < 0:
-        summary += "Tempo di dimezzamento: {} giorni\n".format(abs(round(log(2)/log(1+delta*7), 0)))
+        summary += "Tempo di dimezzamento: {} giorni\n".format(round(log(2)/log(1+abs(delta))*7, 0))
 
     # Stackplot ospedalizzati
     print("Grafico ospedalizzati...")
@@ -892,7 +892,7 @@ def epidemia():
     if delta > 0:
         summary += "Tempo di raddoppio: {} giorni\n".format(round(log(2)/log(1+delta)*7), 0)
     elif delta < 0:
-        summary += "Tempo di dimezzamento: {} giorni\n".format(abs(round(log(2)/log(1+delta*7), 0)))
+        summary += "Tempo di dimezzamento: {} giorni\n".format(round(log(2)/log(1+abs(delta))*7, 0))
 
     # Grafico variazione totale positivi
     print("Grafico variazione totale positivi...")
@@ -1024,6 +1024,15 @@ def epidemia():
         ],
         "Tempo di raddoppio",
         f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+        "/graphs/epidemia/tempo_raddoppio_maggio.jpg"
+    )
+    grafico_doubling_time(
+        [
+            data["nazionale"]["completo"]["data"],
+            data["nazionale"]["completo"]["nuovi_positivi"]
+        ],
+        "Tempo di raddoppio",
+        f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
         "/graphs/epidemia/tempo_raddoppio.jpg"
     )
 
@@ -1063,7 +1072,7 @@ def epidemia():
         if delta > 0:
             summary += "Tempo di raddoppio: {} giorni\n".format(round(log(2)/log(1+delta)*7, 0))
         elif delta < 0:
-            summary += "Tempo di dimezzamento: {} giorni\n".format(abs(round(log(2)/log(1+delta*7), 0)))
+            summary += "Tempo di dimezzamento: {} giorni\n".format(round(log(2)/log(1+abs(delta))*7, 0))
 
 
         # Stackplot ospedalizzati
@@ -1117,10 +1126,11 @@ def epidemia():
 
         summary += "Ingressi TI: {} ({:+}%)\n".format(
             today, delta)
+
         if delta > 0:
             summary += "Tempo di raddoppio: {} giorni\n".format(round(log(2)/log(1+delta)*7), 0)
         elif delta < 0:
-            summary += "Tempo di dimezzamento: {} giorni\n".format(abs(round(log(2)/log(1+delta)*7, 0)))
+            summary += "Tempo di dimezzamento: {} giorni\n".format(round(log(2)/log(1+abs(delta))*7, 0))
 
         # Grafico variazione totale positivi
         print("Grafico variazione totale positivi...")

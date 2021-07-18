@@ -777,21 +777,20 @@ def grafico_doubling_time(data, title, footer, output):
         last_week = data[1].iat[i-7]
         delta = (day-last_week)/last_week
 
-        if delta < 0:
-            doubling_time = 0
-        else:
-            doubling_time = (log(2)/log(1+delta))*7
-        doubling_times.append(doubling_time)
+        doubling_times.append((log(2)/log(1+delta))*7)
 
         i += 1
-        
+
     fig, ax = plt.subplots()
 
-    ax.plot(data[0], doubling_times)
-    ax.set_ylim([0,50])
+    ax.plot(data[0], doubling_times, linestyle="-", linewidth=3)
+
+    ax.set_yticks(np.arange(-30, 30, 5))
+    ax.set_ylim([-30, 30])
 
     plt.title(title)
     plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
+    plt.grid(True)
 
     fig.autofmt_xdate()
     fig.savefig(CWD + output, dpi=200)
@@ -1025,15 +1024,6 @@ def epidemia():
         "Tempo di raddoppio",
         f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
         "/graphs/epidemia/tempo_raddoppio_maggio.jpg"
-    )
-    grafico_doubling_time(
-        [
-            data["nazionale"]["completo"]["data"],
-            data["nazionale"]["completo"]["nuovi_positivi"]
-        ],
-        "Tempo di raddoppio",
-        f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
-        "/graphs/epidemia/tempo_raddoppio.jpg"
     )
 
     summary += "DATI REGIONI\n\n"

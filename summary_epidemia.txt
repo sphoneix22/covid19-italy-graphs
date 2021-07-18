@@ -18,6 +18,7 @@ DATI REGIONI
 
 Piemonte
 Nuovi positivi: 55 (+67.0%)
+Tempo di raddoppio: 9.0 giorni
 TI: 3
 Ricoverati con sintomi: 45
 Ingressi TI: 1.0 (+0%)
@@ -31,6 +32,7 @@ Incidenza: 10.182739583741668 (+84.0%)
 
 Valle d'Aosta
 Nuovi positivi: 2 (+inf%)
+Tempo di raddoppio: 0.0 giorni
 TI: 0
 Ricoverati con sintomi: 0
 Ingressi TI: 0.0 (+0%)
@@ -44,6 +46,7 @@ Incidenza: 7.997824591711054 (+150.0%)
 
 Lombardia
 Nuovi positivi: 438 (+114.0%)
+Tempo di raddoppio: 6.0 giorni
 TI: 31
 Ricoverati con sintomi: 136
 Ingressi TI: 2.0 (+0.0%)
@@ -57,6 +60,7 @@ Incidenza: 22.178782125576983 (+110.0%)
 
 Veneto
 Nuovi positivi: 424 (+170.0%)
+Tempo di raddoppio: 5.0 giorni
 TI: 10
 Ricoverati con sintomi: 44
 Ingressi TI: 0.0 (+0%)
@@ -70,6 +74,7 @@ Incidenza: 38.59292214415962 (+174.0%)
 
 Friuli Venezia Giulia
 Nuovi positivi: 30 (+7.0%)
+Tempo di raddoppio: 70.0 giorni
 TI: 0
 Ricoverati con sintomi: 8
 Ingressi TI: 0.0 (+0%)
@@ -83,6 +88,7 @@ Incidenza: 13.015910914794697 (+43.0%)
 
 Liguria
 Nuovi positivi: 55 (+112.0%)
+Tempo di raddoppio: 6.0 giorni
 TI: 5
 Ricoverati con sintomi: 11
 Ingressi TI: 0.0 (+0%)
@@ -96,6 +102,7 @@ Incidenza: 15.7395007692681 (+124.0%)
 
 Emilia-Romagna
 Nuovi positivi: 207 (+116.0%)
+Tempo di raddoppio: 6.0 giorni
 TI: 14
 Ricoverati con sintomi: 145
 Ingressi TI: 0.0 (+0%)
@@ -109,9 +116,11 @@ Incidenza: 21.90801813302916 (+91.0%)
 
 Toscana
 Nuovi positivi: 222 (+252.0%)
+Tempo di raddoppio: 4.0 giorni
 TI: 17
 Ricoverati con sintomi: 63
-Ingressi TI: 1.0 (-50.0%)
+Ingressi TI: 1.0 (-0.5%)
+Tempo di dimezzamento: 7.0 giorni
 Variazione totale positivi: 172
 Variazione totale ospedalizzati: 4
 Variazione TI: 1
@@ -122,6 +131,7 @@ Incidenza: 23.615084947956092 (+105.0%)
 
 Umbria
 Nuovi positivi: 30 (+76.0%)
+Tempo di raddoppio: 9.0 giorni
 TI: 1
 Ricoverati con sintomi: 6
 Ingressi TI: 0.0 (+0%)
@@ -135,6 +145,7 @@ Incidenza: 16.778427079921624 (+132.0%)
 
 Marche
 Nuovi positivi: 53 (+51.0%)
+Tempo di raddoppio: 12.0 giorni
 TI: 2
 Ricoverati con sintomi: 11
 Ingressi TI: 0.0 (+0%)
@@ -148,9 +159,11 @@ Incidenza: 18.113642613864737 (+18.0%)
 
 Lazio
 Nuovi positivi: 500 (+184.0%)
+Tempo di raddoppio: 5.0 giorni
 TI: 25
 Ricoverati con sintomi: 105
-Ingressi TI: 1.0 (-50.0%)
+Ingressi TI: 1.0 (-0.5%)
+Tempo di dimezzamento: 7.0 giorni
 Variazione totale positivi: 323
 Variazione totale ospedalizzati: 0
 Variazione TI: 0
@@ -174,6 +187,7 @@ Incidenza: 16.15220477595192 (-3.0%)
 
 Molise
 Nuovi positivi: 9 (+inf%)
+Tempo di raddoppio: 0.0 giorni
 TI: 0
 Ricoverati con sintomi: 0
 Ingressi TI: 0.0 (+0%)
@@ -187,6 +201,7 @@ Incidenza: 21.96222497304636 (+214.0%)
 
 Campania
 Nuovi positivi: 238 (+13.0%)
+Tempo di raddoppio: 39.0 giorni
 TI: 12
 Ricoverati con sintomi: 182
 Ingressi TI: 1.0 (+0%)
@@ -200,6 +215,7 @@ Incidenza: 21.673126880752108 (+13.0%)
 
 Puglia
 Nuovi positivi: 81 (+98.0%)
+Tempo di raddoppio: 7.0 giorni
 TI: 9
 Ricoverati con sintomi: 65
 Ingressi TI: 1.0 (+0%)
@@ -213,6 +229,7 @@ Incidenza: 9.182190597487418 (+24.0%)
 
 Basilicata
 Nuovi positivi: 11 (+22.0%)
+Tempo di raddoppio: 24.0 giorni
 TI: 0
 Ricoverati con sintomi: 14
 Ingressi TI: 0.0 (+0%)
@@ -226,6 +243,7 @@ Incidenza: 7.952947470781956 (-23.0%)
 
 Calabria
 Nuovi positivi: 51 (+219.0%)
+Tempo di raddoppio: 4.0 giorni
 TI: 4
 Ricoverati con sintomi: 48
 Ingressi TI: 1.0 (+0%)
@@ -239,6 +257,7 @@ Incidenza: 17.31684009904388 (+51.0%)
 
 Sicilia
 Nuovi positivi: 431 (+124.0%)
+Tempo di raddoppio: 6.0 giorni
 TI: 23
 Ricoverati con sintomi: 143
 Ingressi TI: 0.0 (+0%)
@@ -252,6 +271,7 @@ Incidenza: 40.305294659394626 (+92.0%)
 
 Sardegna
 Nuovi positivi: 190 (+342.0%)
+Tempo di raddoppio: 3.0 giorni
 TI: 4
 Ricoverati con sintomi: 56
 Ingressi TI: 1.0 (+0%)
@@ -265,6 +285,7 @@ Incidenza: 47.52978522866108 (+287.0%)
 
 P.A. Bolzano
 Nuovi positivi: 34 (+183.0%)
+Tempo di raddoppio: 5.0 giorni
 TI: 0
 Ricoverati con sintomi: 6
 Ingressi TI: 0.0 (+0%)
@@ -278,6 +299,7 @@ Incidenza: 20.276206997544328 (+96.0%)
 
 P.A. Trento
 Nuovi positivi: 26 (+271.0%)
+Tempo di raddoppio: 4.0 giorni
 TI: 1
 Ricoverati con sintomi: 1
 Ingressi TI: 0.0 (+0%)

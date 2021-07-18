@@ -835,8 +835,10 @@ def epidemia():
     delta_perc = round(delta*100, 0)
     summary += "Nuovi positivi: {} ({:+}%)\n".format(
         today, delta_perc)
-    if delta >= 0:
+    if delta > 0:
         summary += "Tempo di raddoppio: {} giorni\n".format(round(log(2)/log(1+delta)*7, 0))
+    elif delta < 0:
+        summary += "Tempo di dimezzamento: {} giorni\n".format(abs(round(log(2)/log(1+delta*7), 0)))
 
     # Stackplot ospedalizzati
     print("Grafico ospedalizzati...")
@@ -887,8 +889,10 @@ def epidemia():
     summary += "Ingressi TI: {} ({:+}%)\n".format(
         today, delta_perc)
 
-    if delta >= 0:
+    if delta > 0:
         summary += "Tempo di raddoppio: {} giorni\n".format(round(log(2)/log(1+delta)*7), 0)
+    elif delta < 0:
+        summary += "Tempo di dimezzamento: {} giorni\n".format(abs(round(log(2)/log(1+delta*7), 0)))
 
     # Grafico variazione totale positivi
     print("Grafico variazione totale positivi...")
@@ -1052,9 +1056,15 @@ def epidemia():
         )
         today = data["regioni"][regione]["completo"]["nuovi_positivi"].iat[-1]
         last_week = data["regioni"][regione]["completo"]["nuovi_positivi"].iat[-8]
-        delta = round((today-last_week)/last_week*100, 0)
+        delta = (today-last_week)/last_week
+        delta_perc = round(delta*100, 0)
         summary += "Nuovi positivi: {} ({:+}%)\n".format(
-            today, delta)
+            today, delta_perc)
+        if delta > 0:
+            summary += "Tempo di raddoppio: {} giorni\n".format(round(log(2)/log(1+delta)*7, 0))
+        elif delta < 0:
+            summary += "Tempo di dimezzamento: {} giorni\n".format(abs(round(log(2)/log(1+delta*7), 0)))
+
 
         # Stackplot ospedalizzati
         print("Grafico ospedalizzati...")
@@ -1100,10 +1110,17 @@ def epidemia():
         last_week = data["regioni"][regione]["completo"]["ingressi_terapia_intensiva"].iat[-8]
         if last_week == 0:
             delta = 0
+            delta_perc = 0
         else:
-            delta = round((today-last_week)/last_week*100, 0)
+            delta = (today-last_week)/last_week
+            delta_perc = round(delta*100, 0)
+
         summary += "Ingressi TI: {} ({:+}%)\n".format(
             today, delta)
+        if delta > 0:
+            summary += "Tempo di raddoppio: {} giorni\n".format(round(log(2)/log(1+delta)*7), 0)
+        elif delta < 0:
+            summary += "Tempo di dimezzamento: {} giorni\n".format(abs(round(log(2)/log(1+delta)*7, 0)))
 
         # Grafico variazione totale positivi
         print("Grafico variazione totale positivi...")

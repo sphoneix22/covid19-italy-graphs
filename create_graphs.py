@@ -768,8 +768,9 @@ def grafico_vaccini_cumulativo(data, title, footer, output):
 
     plt.close('all')
 
-def grafico_doubling_time(data, title, footer, output):
+def grafico_doubling_time(data, title, footer, output, growth=False):
     doubling_times = [0, 0, 0, 0, 0, 0, 0]
+    growth_rates = [0,0,0,0,0,0,0]
 
     i = 7
     while i < len(data[1]):
@@ -777,16 +778,19 @@ def grafico_doubling_time(data, title, footer, output):
         last_week = data[1].iat[i-7]
         delta = (day-last_week)/last_week
 
+        growth_rates.append(delta*100)
         doubling_times.append((log(2)/log(1+delta))*7)
 
         i += 1
 
     fig, ax = plt.subplots()
 
-    ax.plot(data[0], doubling_times, linestyle="-", linewidth=3)
-
-    ax.set_yticks(np.arange(-30, 30, 5))
-    ax.set_ylim([-30, 30])
+    if growth:
+        ax.plot(data[0], create_media_mobile(growth_rates), linestyle="-")
+    else:
+        ax.plot(data[0], doubling_times, linestyle="-", linewidth=3)
+        ax.set_yticks(np.arange(-30, 30, 5))
+        ax.set_ylim([-30, 30])
 
     plt.title(title)
     plt.figtext(0.99, 0.01, footer, horizontalalignment='right')
@@ -1024,6 +1028,16 @@ def epidemia():
         "Tempo di raddoppio",
         f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
         "/graphs/epidemia/tempo_raddoppio_maggio.jpg"
+    )
+    grafico_doubling_time(
+        [
+            data["nazionale"]["completo"]["data"],
+            data["nazionale"]["completo"]["nuovi_positivi"]
+        ],
+        "Growth rates",
+        f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+        "/graphs/epidemia/growth_rates.jpg",
+        growth=True
     )
 
     summary += "DATI REGIONI\n\n"

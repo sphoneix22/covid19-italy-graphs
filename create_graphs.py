@@ -809,6 +809,8 @@ def epidemia():
     os.makedirs(f"{CWD}/graphs/epidemia", exist_ok=True)
     last_update = data["nazionale"]["completo"]["data"].iat[-1]
     summary = f"DATI NAZIONALI {last_update}\n\n"
+    contagi_media = create_media_mobile(
+            data["nazionale"]["completo"]["nuovi_positivi"])
     # Grafico nuovi positivi
     print("Grafico nuovi positivi...")
     plot(
@@ -816,8 +818,7 @@ def epidemia():
         data["nazionale"]["completo"]["nuovi_positivi"],
         "Andamento contagi giornalieri",
         "/graphs/epidemia/nuovi_positivi.jpg",
-        media_mobile=create_media_mobile(
-            data["nazionale"]["completo"]["nuovi_positivi"]),
+        media_mobile=contagi_media,
         legend=["Contagi giornalieri", "Media mobile settimanale"],
         footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
@@ -843,6 +844,14 @@ def epidemia():
     elif delta < 0:
         summary += "Tempo di dimezzamento: {} giorni\n".format(round(log(2)/log(1+abs(delta))*7, 0))
 
+    today = contagi_media[-1]
+    last_week = contagi_media[-8]
+    delta = (today-last_week)/last_week
+    if delta > 0:
+        summary += "Tempo di raddoppio (media 7 giorni): {} giorni\n".format(round(log(2)/log(1+delta)*7, 0))
+    elif delta < 0:
+        summary += "Tempo di dimezzamento (media 7 giorni): {} giorni\n".format(round(log(2)/log(1+abs(delta))*7, 0))
+
     # Stackplot ospedalizzati
     print("Grafico ospedalizzati...")
     stackplot(
@@ -860,13 +869,14 @@ def epidemia():
 
     # Grafico ingressi in terapia intensiva
     print("Grafico ingressi TI...")
+    media_ti = create_media_mobile(
+            data["nazionale"]["completo"]["ingressi_terapia_intensiva"])
     plot(
         data["nazionale"]["completo"]["data"],
         data["nazionale"]["completo"]["ingressi_terapia_intensiva"],
         "Ingressi giornalieri in terapia intensiva",
         "/graphs/epidemia/ingressi_ti.jpg",
-        media_mobile=create_media_mobile(
-            data["nazionale"]["completo"]["ingressi_terapia_intensiva"]),
+        media_mobile=media_ti,
         legend=["Ingressi TI", "Media mobile settimanale"],
         footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
@@ -896,6 +906,19 @@ def epidemia():
         summary += "Tempo di raddoppio: {} giorni\n".format(round(log(2)/log(1+delta)*7), 0)
     elif delta < 0:
         summary += "Tempo di dimezzamento: {} giorni\n".format(round(log(2)/log(1+abs(delta))*7, 0))
+
+    today = media_ti[-1]
+    last_week = media_ti[-8]
+    if last_week == 0:
+        delta = 0
+        delta_perc = 0
+    else:
+        delta = (today-last_week)/last_week
+
+    if delta > 0:
+        summary += "Tempo di raddoppio (media 7 giorni): {} giorni\n".format(round(log(2)/log(1+delta)*7), 0)
+    elif delta < 0:
+        summary += "Tempo di dimezzamento (media 7 giorni): {} giorni\n".format(round(log(2)/log(1+abs(delta))*7, 0))
 
     # Grafico variazione totale positivi
     print("Grafico variazione totale positivi...")
@@ -1044,6 +1067,8 @@ def epidemia():
     for regione in data["regioni"].keys():
         denominazione_regione = data["regioni"][regione]["completo"]["denominazione_regione"].iloc[0]
         summary += f"{denominazione_regione}\n"
+        contagi_media = create_media_mobile(
+                data["regioni"][regione]["completo"]["nuovi_positivi"])
         print(f"Regione {regione}...")
         print("Grafico nuovi positivi...")
         plot(
@@ -1051,8 +1076,7 @@ def epidemia():
             data["regioni"][regione]["completo"]["nuovi_positivi"],
             f"Andamento contagi giornalieri {denominazione_regione}",
             f"/graphs/epidemia/nuovi_positivi_{denominazione_regione}.jpg",
-            media_mobile=create_media_mobile(
-                data["regioni"][regione]["completo"]["nuovi_positivi"]),
+            media_mobile=contagi_media,
             legend=["Contagi giornalieri", "Media mobile settimanale"],
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
@@ -1078,6 +1102,14 @@ def epidemia():
         elif delta < 0:
             summary += "Tempo di dimezzamento: {} giorni\n".format(round(log(2)/log(1+abs(delta))*7, 0))
 
+        today = contagi_media[-1]
+        last_week = contagi_media[-8]
+        delta = (today-last_week)/last_week
+        if delta > 0:
+            summary += "Tempo di raddoppio (media 7 giorni): {} giorni\n".format(round(log(2)/log(1+delta)*7, 0))
+        elif delta < 0:
+            summary += "Tempo di dimezzamento (media 7 giorni): {} giorni\n".format(round(log(2)/log(1+abs(delta))*7, 0))
+
 
         # Stackplot ospedalizzati
         print("Grafico ospedalizzati...")
@@ -1098,13 +1130,14 @@ def epidemia():
 
         # Grafico ingressi in terapia intensiva
         print("Grafico ingressi TI...")
+        media_ti = create_media_mobile(
+                data["regioni"][regione]["completo"]["ingressi_terapia_intensiva"])
         plot(
             data["regioni"][regione]["completo"]["data"],
             data["regioni"][regione]["completo"]["ingressi_terapia_intensiva"],
             f"Ingressi giornalieri in terapia intensiva {denominazione_regione}",
             f"/graphs/epidemia/ingressi_ti_{denominazione_regione}.jpg",
-            media_mobile=create_media_mobile(
-                data["regioni"][regione]["completo"]["ingressi_terapia_intensiva"]),
+            media_mobile=media_ti,
             legend=["Ingressi TI", "Media mobile settimanale"],
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
@@ -1135,6 +1168,19 @@ def epidemia():
             summary += "Tempo di raddoppio: {} giorni\n".format(round(log(2)/log(1+delta)*7), 0)
         elif delta < 0:
             summary += "Tempo di dimezzamento: {} giorni\n".format(round(log(2)/log(1+abs(delta))*7, 0))
+
+        today = media_ti[-1]
+        last_week = media_ti[-8]
+        if last_week == 0:
+            delta = 0
+            delta_perc = 0
+        else:
+            delta = (today-last_week)/last_week
+
+        if delta > 0:
+            summary += "Tempo di raddoppio (media 7 giorni): {} giorni\n".format(round(log(2)/log(1+delta)*7), 0)
+        elif delta < 0:
+            summary += "Tempo di dimezzamento (media 7 giorni): {} giorni\n".format(round(log(2)/log(1+abs(delta))*7, 0))
 
         # Grafico variazione totale positivi
         print("Grafico variazione totale positivi...")

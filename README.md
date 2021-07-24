@@ -3,50 +3,6 @@
 
 ## Epidemia
 
-### andamento_ospedalizzati
-<img src="graphs/epidemia/andamento_ospedalizzati.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Abruzzo
-<img src="graphs/epidemia/andamento_ospedalizzati_Abruzzo.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Basilicata
-<img src="graphs/epidemia/andamento_ospedalizzati_Basilicata.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Calabria
-<img src="graphs/epidemia/andamento_ospedalizzati_Calabria.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Campania
-<img src="graphs/epidemia/andamento_ospedalizzati_Campania.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Emilia-Romagna
-<img src="graphs/epidemia/andamento_ospedalizzati_Emilia-Romagna.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Friuli%20Venezia%20Giulia
-<img src="graphs/epidemia/andamento_ospedalizzati_Friuli%20Venezia%20Giulia.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Lazio
-<img src="graphs/epidemia/andamento_ospedalizzati_Lazio.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Liguria
-<img src="graphs/epidemia/andamento_ospedalizzati_Liguria.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Lombardia
-<img src="graphs/epidemia/andamento_ospedalizzati_Lombardia.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Marche
-<img src="graphs/epidemia/andamento_ospedalizzati_Marche.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Molise
-<img src="graphs/epidemia/andamento_ospedalizzati_Molise.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_P.A.%20Bolzano
-<img src="graphs/epidemia/andamento_ospedalizzati_P.A.%20Bolzano.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_P.A.%20Trento
-<img src="graphs/epidemia/andamento_ospedalizzati_P.A.%20Trento.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Piemonte
-<img src="graphs/epidemia/andamento_ospedalizzati_Piemonte.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Puglia
-<img src="graphs/epidemia/andamento_ospedalizzati_Puglia.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Sardegna
-<img src="graphs/epidemia/andamento_ospedalizzati_Sardegna.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Sicilia
-<img src="graphs/epidemia/andamento_ospedalizzati_Sicilia.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Toscana
-<img src="graphs/epidemia/andamento_ospedalizzati_Toscana.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Umbria
-<img src="graphs/epidemia/andamento_ospedalizzati_Umbria.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Valle%20d'Aosta
-<img src="graphs/epidemia/andamento_ospedalizzati_Valle%20d'Aosta.jpg" width="600" height="500"></img>
-### andamento_ospedalizzati_Veneto
-<img src="graphs/epidemia/andamento_ospedalizzati_Veneto.jpg" width="600" height="500"></img>
 ### deceduti
 <img src="graphs/epidemia/deceduti.jpg" width="600" height="500"></img>
 ### deceduti_Abruzzo
@@ -179,6 +135,8 @@
 <img src="graphs/epidemia/deceduti_giornalieri_Veneto_log.jpg" width="600" height="500"></img>
 ### deceduti_giornalieri_log
 <img src="graphs/epidemia/deceduti_giornalieri_log.jpg" width="600" height="500"></img>
+### growth_rates
+<img src="graphs/epidemia/growth_rates.jpg" width="600" height="500"></img>
 ### incidenza_contagio
 <img src="graphs/epidemia/incidenza_contagio.jpg" width="600" height="500"></img>
 ### incidenza_contagio_Abruzzo
@@ -399,6 +357,94 @@
 <img src="graphs/epidemia/nuovi_positivi_Veneto_log.jpg" width="600" height="500"></img>
 ### nuovi_positivi_log
 <img src="graphs/epidemia/nuovi_positivi_log.jpg" width="600" height="500"></img>
+### occupazione_am
+<img src="graphs/epidemia/occupazione_am.jpg" width="600" height="500"></img>
+### occupazione_am_Abruzzo
+<img src="graphs/epidemia/occupazione_am_Abruzzo.jpg" width="600" height="500"></img>
+### occupazione_am_Basilicata
+<img src="graphs/epidemia/occupazione_am_Basilicata.jpg" width="600" height="500"></img>
+### occupazione_am_Calabria
+<img src="graphs/epidemia/occupazione_am_Calabria.jpg" width="600" height="500"></img>
+### occupazione_am_Campania
+<img src="graphs/epidemia/occupazione_am_Campania.jpg" width="600" height="500"></img>
+### occupazione_am_Emilia-Romagna
+<img src="graphs/epidemia/occupazione_am_Emilia-Romagna.jpg" width="600" height="500"></img>
+### occupazione_am_Friuli%20Venezia%20Giulia
+<img src="graphs/epidemia/occupazione_am_Friuli%20Venezia%20Giulia.jpg" width="600" height="500"></img>
+### occupazione_am_Lazio
+<img src="graphs/epidemia/occupazione_am_Lazio.jpg" width="600" height="500"></img>
+### occupazione_am_Liguria
+<img src="graphs/epidemia/occupazione_am_Liguria.jpg" width="600" height="500"></img>
+### occupazione_am_Lombardia
+<img src="graphs/epidemia/occupazione_am_Lombardia.jpg" width="600" height="500"></img>
+### occupazione_am_Marche
+<img src="graphs/epidemia/occupazione_am_Marche.jpg" width="600" height="500"></img>
+### occupazione_am_Molise
+<img src="graphs/epidemia/occupazione_am_Molise.jpg" width="600" height="500"></img>
+### occupazione_am_P.A.%20Bolzano
+<img src="graphs/epidemia/occupazione_am_P.A.%20Bolzano.jpg" width="600" height="500"></img>
+### occupazione_am_P.A.%20Trento
+<img src="graphs/epidemia/occupazione_am_P.A.%20Trento.jpg" width="600" height="500"></img>
+### occupazione_am_Piemonte
+<img src="graphs/epidemia/occupazione_am_Piemonte.jpg" width="600" height="500"></img>
+### occupazione_am_Puglia
+<img src="graphs/epidemia/occupazione_am_Puglia.jpg" width="600" height="500"></img>
+### occupazione_am_Sardegna
+<img src="graphs/epidemia/occupazione_am_Sardegna.jpg" width="600" height="500"></img>
+### occupazione_am_Sicilia
+<img src="graphs/epidemia/occupazione_am_Sicilia.jpg" width="600" height="500"></img>
+### occupazione_am_Toscana
+<img src="graphs/epidemia/occupazione_am_Toscana.jpg" width="600" height="500"></img>
+### occupazione_am_Umbria
+<img src="graphs/epidemia/occupazione_am_Umbria.jpg" width="600" height="500"></img>
+### occupazione_am_Valle%20d'Aosta
+<img src="graphs/epidemia/occupazione_am_Valle%20d'Aosta.jpg" width="600" height="500"></img>
+### occupazione_am_Veneto
+<img src="graphs/epidemia/occupazione_am_Veneto.jpg" width="600" height="500"></img>
+### occupazione_ti
+<img src="graphs/epidemia/occupazione_ti.jpg" width="600" height="500"></img>
+### occupazione_ti_Abruzzo
+<img src="graphs/epidemia/occupazione_ti_Abruzzo.jpg" width="600" height="500"></img>
+### occupazione_ti_Basilicata
+<img src="graphs/epidemia/occupazione_ti_Basilicata.jpg" width="600" height="500"></img>
+### occupazione_ti_Calabria
+<img src="graphs/epidemia/occupazione_ti_Calabria.jpg" width="600" height="500"></img>
+### occupazione_ti_Campania
+<img src="graphs/epidemia/occupazione_ti_Campania.jpg" width="600" height="500"></img>
+### occupazione_ti_Emilia-Romagna
+<img src="graphs/epidemia/occupazione_ti_Emilia-Romagna.jpg" width="600" height="500"></img>
+### occupazione_ti_Friuli%20Venezia%20Giulia
+<img src="graphs/epidemia/occupazione_ti_Friuli%20Venezia%20Giulia.jpg" width="600" height="500"></img>
+### occupazione_ti_Lazio
+<img src="graphs/epidemia/occupazione_ti_Lazio.jpg" width="600" height="500"></img>
+### occupazione_ti_Liguria
+<img src="graphs/epidemia/occupazione_ti_Liguria.jpg" width="600" height="500"></img>
+### occupazione_ti_Lombardia
+<img src="graphs/epidemia/occupazione_ti_Lombardia.jpg" width="600" height="500"></img>
+### occupazione_ti_Marche
+<img src="graphs/epidemia/occupazione_ti_Marche.jpg" width="600" height="500"></img>
+### occupazione_ti_Molise
+<img src="graphs/epidemia/occupazione_ti_Molise.jpg" width="600" height="500"></img>
+### occupazione_ti_P.A.%20Bolzano
+<img src="graphs/epidemia/occupazione_ti_P.A.%20Bolzano.jpg" width="600" height="500"></img>
+### occupazione_ti_P.A.%20Trento
+<img src="graphs/epidemia/occupazione_ti_P.A.%20Trento.jpg" width="600" height="500"></img>
+### occupazione_ti_Piemonte
+<img src="graphs/epidemia/occupazione_ti_Piemonte.jpg" width="600" height="500"></img>
+### occupazione_ti_Puglia
+<img src="graphs/epidemia/occupazione_ti_Puglia.jpg" width="600" height="500"></img>
+### occupazione_ti_Sardegna
+<img src="graphs/epidemia/occupazione_ti_Sardegna.jpg" width="600" height="500"></img>
+### occupazione_ti_Sicilia
+<img src="graphs/epidemia/occupazione_ti_Sicilia.jpg" width="600" height="500"></img>
+### occupazione_ti_Toscana
+<img src="graphs/epidemia/occupazione_ti_Toscana.jpg" width="600" height="500"></img>
+### occupazione_ti_Umbria
+<img src="graphs/epidemia/occupazione_ti_Umbria.jpg" width="600" height="500"></img>
+### occupazione_ti_Valle%20d'Aosta
+<img src="graphs/epidemia/occupazione_ti_Valle%20d'Aosta.jpg" width="600" height="500"></img>
+### occupazione_ti_Veneto
+<img src="graphs/epidemia/occupazione_ti_Veneto.jpg" width="600" height="500"></img>
 ### rt
 <img src="graphs/epidemia/rt.jpg" width="600" height="500"></img>
 ### rt_Abruzzo
@@ -443,8 +489,6 @@
 <img src="graphs/epidemia/rt_Valle%20d'Aosta.jpg" width="600" height="500"></img>
 ### rt_Veneto
 <img src="graphs/epidemia/rt_Veneto.jpg" width="600" height="500"></img>
-### tempo_raddoppio
-<img src="graphs/epidemia/tempo_raddoppio.jpg" width="600" height="500"></img>
 ### tempo_raddoppio_maggio
 <img src="graphs/epidemia/tempo_raddoppio_maggio.jpg" width="600" height="500"></img>
 ### variazione_ospedalizzati_ordinari

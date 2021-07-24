@@ -871,9 +871,9 @@ def epidemia():
     )
     summary += "Ospedalizzati ordinari: {} ({}%)\nTerapie intensive: {} ({}%)\n".format(
         data["nazionale"]["completo"]["ricoverati_con_sintomi"].iat[-1],
-        data["nazionale"]["completo"]["ricoverati_con_sintomi"].iat[-1] * 100 / data["agenas"]["PL in Area Non Critica"].sum(),
+        round(data["nazionale"]["completo"]["ricoverati_con_sintomi"].iat[-1] * 100 / data["agenas"]["PL in Area Non Critica"].sum(), 1),
         data["nazionale"]["completo"]["terapia_intensiva"].iat[-1],
-        data["nazionale"]["completo"]["terapia_intensiva"].iat[-1] * 100 / data["agenas"]["PL in Terapia Intensiva"].sum()
+        round(data["nazionale"]["completo"]["terapia_intensiva"].iat[-1] * 100 / data["agenas"]["PL in Terapia Intensiva"].sum(), 1)
         )
 
     # Grafico ingressi in terapia intensiva
@@ -1032,7 +1032,8 @@ def epidemia():
         incidenza,
         "Incidenza di nuovi positivi ogni 100000 abitanti\nnell'arco di 7 giorni",
         "/graphs/epidemia/incidenza_contagio.jpg",
-        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+        hline={50: ["", "orange"], 150: ["", "red"]}
     )
     today = incidenza[-1]
     last_week = incidenza[-8]
@@ -1138,11 +1139,13 @@ def epidemia():
             hline=create_soglie(denominazione_regione, ti=False)
         )
         agenas = data["agenas"][data["agenas"]["Regioni"] == denominazione_regione]
+        occupazione_ti = round(data["regioni"][regione]["completo"]["terapia_intensiva"].iat[-1] * 100 / agenas["PL in Terapia Intensiva"].sum(), 1)
+        occupazione_am = round(data["regioni"][regione]["completo"]["ricoverati_con_sintomi"].iat[-1] * 100 / agenas["PL in Area Non Critica"].sum(), 1)
         summary += "TI: {} ({}%)\nRicoverati con sintomi: {} ({}%)\n".format(
             data["regioni"][regione]["completo"]["terapia_intensiva"].iat[-1],
-            data["regioni"][regione]["completo"]["terapia_intensiva"].iat[-1] * 100 / agenas["PL in Terapia Intensiva"],
+            occupazione_ti,
             data["regioni"][regione]["completo"]["ricoverati_con_sintomi"].iat[-1],
-            data["regioni"][regione]["completo"]["ricoverati_con_sintomi"].iat[-1] * 100 / agenas["PL in Area Non Critica"]
+            occupazione_am
             )
 
         # Grafico ingressi in terapia intensiva
@@ -1308,12 +1311,13 @@ def epidemia():
             incidenza,
             f"Incidenza di nuovi positivi ogni 100000 abitanti\nnell'arco di 7 giorni in {denominazione_regione}",
             f"/graphs/epidemia/incidenza_contagio_{denominazione_regione}.jpg",
-            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+            hline={50: ["", "orange"], 150: ["", "red"]}
         )
         today = incidenza[-1]
         last_week = incidenza[-8]
         delta_perc = round((today-last_week)/last_week*100, 0)
-        summary += f"Incidenza: {incidenza[-1]} ({delta_perc:+}%)\n\n"
+        summary += f"Incidenza: {incidenza[-1]} ({delta_perc:+}%)\n"
 
         print("Grafico rt")
         grafico_rt(
@@ -1325,6 +1329,25 @@ def epidemia():
             f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
             f"/graphs/epidemia/rt_{denominazione_regione}.jpg",
         )
+
+        if today < 50:
+            colore = "Bianca"
+        elif 50 < today < 150:
+            if occupazione_am < 15 or occupazione_ti < 10:
+                colore = "Bianca"
+            else:
+                colore = "Gialla"
+        elif today > 150:
+            if occupazione_am < 15 or occupazione_ti < 10:
+                colore = "Bianca"
+            elif occupazione_am < 30 or occupazione_ti < 20:
+                colore = "Gialla"
+            elif occupazione_am < 40 or occupazione_ti < 30:
+                colore = "Arancione"
+            else:
+                colore = "Rossa"
+
+        summary += f"Colore: {colore}\n\n"
 
     return summary
 

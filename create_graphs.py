@@ -21,37 +21,13 @@ URLS = {
     "consegne_vaccini": "https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/consegne-vaccini-latest.csv",
     "somministrazioni_vaccini": "https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-latest.csv",
     "monitoraggi_iss": "https://raw.githubusercontent.com/sphoneix22/monitoraggi-ISS/main/dati/monitoraggio-nazionale.csv",
-    "monitoraggi_iss_regioni": "https://raw.githubusercontent.com/sphoneix22/monitoraggi-ISS/main/dati/monitoraggio-regioni.csv"
+    "monitoraggi_iss_regioni": "https://raw.githubusercontent.com/sphoneix22/monitoraggi-ISS/main/dati/monitoraggio-regioni.csv",
+    "agenas": "https://raw.githubusercontent.com/ondata/covid19italia/master/webservices/agenas/processing/postiletto-e-ricoverati-areaNonCritica_date_dw.csv"
 }
 
 # Colonne che necessitano la conversione in formato datetime (tutti i csv)
 DATETIME_COLUMNS = ["data", "data_somministrazione",
                     "data_consegna", "inizio_range", "fine_range", "data_report"]
-
-TOTALE_TERAPIA_INTENSIVA = {
-    "nazionale": 9059,
-    "Abruzzo": 215,
-    "Basilicata": 88,
-    "Calabria": 152,
-    "Campania": 620,
-    "Emilia-Romagna": 760,
-    "Friuli Venezia Giulia": 175,
-    "Lazio": 943,
-    "Liguria": 222,
-    "Lombardia": 1416,
-    "Marche": 240,
-    "Molise": 17,
-    "P.A. Bolzano": 100,
-    "P.A. Trento": 90,
-    "Piemonte": 628,
-    "Puglia": 659,
-    "Sardegna": 208,
-    "Sicilia": 834,
-    "Toscana": 601,
-    "Umbria": 139,
-    "Valle d'Aosta": 20,
-    "Veneto": 1000
-}
 
 REGIONI = [
     "Abruzzo",
@@ -460,6 +436,28 @@ def order(data):
         current += timedelta(days=1)
     return new_data
 
+def create_soglie(regione, ti=True):
+    result = {}
+    if regione == "nazionale":
+        pl_ti = data["agenas"]["PL in Terapia Intensiva"].sum()
+        pl_am = data["agenas"]["PL in Area Non Critica"].sum()
+    else:
+        regione_df = data["agenas"][data["agenas"]["Regioni"] == regione]
+        pl_ti = regione_df["PL in Terapia Intensiva"].sum()
+        pl_am = regione_df["PL in Area Non Critica"].sum()
+
+    if ti:
+        result[pl_ti / 100 * 30] = ["30% occupazione", "red"]
+        result[pl_ti / 100 * 20] = ["20% occupazione", "orange"]
+        result[pl_ti / 100 * 10] = ["10% occupazione", "yellow"]
+    else:
+        result[pl_am / 100 * 40] = ["40% occupazione", "red"]
+        result[pl_am / 100 * 30] = ["30% occupazione", "orange"]
+        result[pl_am / 100 * 15] = ["15% occupazione", "yellow"]
+
+    return result
+
+
 
 # GRAFICI
 ############################################################################################
@@ -480,7 +478,10 @@ def plot(x, y, title, output, xlabel=None, ylabel=None, media_mobile=None, legen
         ax.grid(axis=grid)
 
     if hline:
-        plt.axhline(hline, 0, 1, color="red")
+        for el in hline:
+            plt.axhline(el, 0, 1, label=hline[el][0], color=hline[el][1])
+        plt.fill_between(x, y, color='#539ecd')
+        plt.legend(loc=1, fontsize="small")
 
     if vline:
         plt.axvline(vline, 0, 1, color="red")
@@ -498,7 +499,7 @@ def plot(x, y, title, output, xlabel=None, ylabel=None, media_mobile=None, legen
     plt.close('all')
 
 
-def stackplot(x, y1, y2, title, label, output, soglia=None, yticks=None, footer=None, y3=None):
+def stackplot(x, y1, y2, title, label, output, yticks=None, footer=None, y3=None):
     fig, ax = plt.subplots()
 
     if y3:
@@ -506,8 +507,6 @@ def stackplot(x, y1, y2, title, label, output, soglia=None, yticks=None, footer=
     else:
         ax.stackplot(x, y1, y2, labels=label)
 
-    if soglia:
-        ax.axhline(soglia, color="red")
     if yticks:
         ax.set_yticks(yticks)
     ax.set_title(title)
@@ -854,18 +853,28 @@ def epidemia():
 
     # Stackplot ospedalizzati
     print("Grafico ospedalizzati...")
-    stackplot(
+    plot(
+        data["nazionale"]["completo"]["data"],
+        data["nazionale"]["completo"]["ricoverati_con_sintomi"],
+        "Occupazione area medica",
+        "/graphs/epidemia/occupazione_am.jpg",
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+        hline=create_soglie("nazionale", ti=False)
+    )
+    plot(
         data["nazionale"]["completo"]["data"],
         data["nazionale"]["completo"]["terapia_intensiva"],
-        data["nazionale"]["completo"]["ricoverati_con_sintomi"],
-        "Andamento ospedalizzati",
-        ["Soglia critica TI", "Terapie intensive", "Ricoverati con sintomi"],
-        "/graphs/epidemia/andamento_ospedalizzati.jpg",
-        soglia=(TOTALE_TERAPIA_INTENSIVA["nazionale"] / 100) * 30,
-        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
+        "Occupazione TI",
+        "/graphs/epidemia/occupazione_ti.jpg",
+        footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+        hline=create_soglie("nazionale")
     )
-    summary += "Ospedalizzati ordinari: {}\nTerapie intensive: {}\n".format(
-        data["nazionale"]["completo"]["ricoverati_con_sintomi"].iat[-1], data["nazionale"]["completo"]["terapia_intensiva"].iat[-1])
+    summary += "Ospedalizzati ordinari: {} ({}%)\nTerapie intensive: {} ({}%)\n".format(
+        data["nazionale"]["completo"]["ricoverati_con_sintomi"].iat[-1],
+        data["nazionale"]["completo"]["ricoverati_con_sintomi"].iat[-1] * 100 / data["agenas"]["PL in Area Non Critica"].sum(),
+        data["nazionale"]["completo"]["terapia_intensiva"].iat[-1],
+        data["nazionale"]["completo"]["terapia_intensiva"].iat[-1] * 100 / data["agenas"]["PL in Terapia Intensiva"].sum()
+        )
 
     # Grafico ingressi in terapia intensiva
     print("Grafico ingressi TI...")
@@ -1023,7 +1032,6 @@ def epidemia():
         incidenza,
         "Incidenza di nuovi positivi ogni 100000 abitanti\nnell'arco di 7 giorni",
         "/graphs/epidemia/incidenza_contagio.jpg",
-        hline=250,
         footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
     )
     today = incidenza[-1]
@@ -1113,20 +1121,29 @@ def epidemia():
 
         # Stackplot ospedalizzati
         print("Grafico ospedalizzati...")
-        stackplot(
+        plot(
             data["regioni"][regione]["completo"]["data"],
             data["regioni"][regione]["completo"]["terapia_intensiva"],
-            data["regioni"][regione]["completo"]["ricoverati_con_sintomi"],
-            f"Andamento ospedalizzati {denominazione_regione}",
-            ["Soglia critica TI", "Terapie intensive", "Ricoverati con sintomi"],
-            f"/graphs/epidemia/andamento_ospedalizzati_{denominazione_regione}.jpg",
-            soglia=(
-                TOTALE_TERAPIA_INTENSIVA[denominazione_regione] / 100) * 30,
-            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
+            f"Occupazione TI - {denominazione_regione}",
+            f"/graphs/epidemia/occupazione_ti_{denominazione_regione}.jpg",
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+            hline=create_soglie(denominazione_regione)
         )
-        summary += "TI: {}\nRicoverati con sintomi: {}\n".format(data["regioni"][regione]["completo"]["terapia_intensiva"].iat[-1],
-                                                                 data["regioni"][regione]["completo"]["ricoverati_con_sintomi"].iat[
-                                                                     -1])
+        plot(
+            data["regioni"][regione]["completo"]["data"],
+            data["regioni"][regione]["completo"]["ricoverati_con_sintomi"],
+            f"Occupazione Area Medica - {denominazione_regione}",
+            f"/graphs/epidemia/occupazione_am_{denominazione_regione}.jpg",
+            footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}",
+            hline=create_soglie(denominazione_regione, ti=False)
+        )
+        agenas = data["agenas"][data["agenas"]["Regioni"] == denominazione_regione]
+        summary += "TI: {} ({}%)\nRicoverati con sintomi: {} ({}%)\n".format(
+            data["regioni"][regione]["completo"]["terapia_intensiva"].iat[-1],
+            data["regioni"][regione]["completo"]["terapia_intensiva"].iat[-1] * 100 / agenas["PL in Terapia Intensiva"],
+            data["regioni"][regione]["completo"]["ricoverati_con_sintomi"].iat[-1],
+            data["regioni"][regione]["completo"]["ricoverati_con_sintomi"].iat[-1] * 100 / agenas["PL in Area Non Critica"]
+            )
 
         # Grafico ingressi in terapia intensiva
         print("Grafico ingressi TI...")
@@ -1291,7 +1308,6 @@ def epidemia():
             incidenza,
             f"Incidenza di nuovi positivi ogni 100000 abitanti\nnell'arco di 7 giorni in {denominazione_regione}",
             f"/graphs/epidemia/incidenza_contagio_{denominazione_regione}.jpg",
-            hline=250,
             footer=f"Fonte dati: PCM-DPC | Ultimo aggiornamento: {last_update}"
         )
         today = incidenza[-1]

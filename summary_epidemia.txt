@@ -1,374 +1,373 @@
-DATI NAZIONALI 2021-07-28 17:00:00
+DATI NAZIONALI 2021-08-04 17:00:00
 
-Nuovi positivi: 5696 (+34.0%)
-Tempo di raddoppio: 17.0 giorni
-Tempo di raddoppio (media 7 giorni): 11.0 giorni
-Ospedalizzati ordinari: 1685 (3.0%)
-Terapie intensive: 183 (2.1%)
-Ingressi TI: 9.0 (+0.0%)
-Tempo di raddoppio (media 7 giorni): 18 giorni
-Variazione totale totale positivi: 3851
-Variazione totale ospedalizzati: 68
-Variazione TI: -6
-Variazione ricoverati con sintomi: 74
-Deceduti totali: 128010
-Deceduti giornalieri: 15 (-29.0%)
-Incidenza: 56.03146588160242 (+56.0%)
+Nuovi positivi: 6596 (+16.0%)
+Tempo di raddoppio: 33.0 giorni
+Tempo di raddoppio (media 7 giorni): 30.0 giorni
+Ospedalizzati ordinari: 2309 (4.2%)
+Terapie intensive: 260 (3.0%)
+Ingressi TI: 14.0 (+56.0%)
+Tempo di raddoppio: 11 giorni
+Tempo di raddoppio (media 7 giorni): 10 giorni
+Variazione totale totale positivi: 3004
+Variazione totale ospedalizzati: 115
+Variazione TI: 2
+Variazione ricoverati con sintomi: 113
+Deceduti totali: 128136
+Deceduti giornalieri: 21 (+40.0%)
+Incidenza: 65.81827737094687 (+17.0%)
 
 DATI REGIONI
 
 Piemonte
-Nuovi positivi: 150 (+12.0%)
-Tempo di raddoppio: 43.0 giorni
-Tempo di raddoppio (media 7 giorni): 10.0 giorni
-TI: 3 (0.5%)
-Ricoverati con sintomi: 68 (1.2%)
-Ingressi TI: 0.0 (-1.0%)
-Tempo di dimezzamento: 7.0 giorni
-Tempo di dimezzamento (media 7 giorni): 8.0 giorni
-Variazione totale positivi: 84
-Variazione totale ospedalizzati: 1
-Variazione TI: 0
-Variazione ricoverati con sintomi: 1
-Deceduti totali: 11699
+Nuovi positivi: 257 (+71.0%)
+Tempo di raddoppio: 9.0 giorni
+Tempo di raddoppio (media 7 giorni): 11.0 giorni
+TI: 5 (0.8%)
+Ricoverati con sintomi: 86 (1.5%)
+Ingressi TI: 0.0 (+0%)
+Tempo di raddoppio (media 7 giorni): 4 giorni
+Variazione totale positivi: 121
+Variazione totale ospedalizzati: 4
+Variazione TI: -2
+Variazione ricoverati con sintomi: 6
+Deceduti totali: 11700
 Deceduti giornalieri: 0 (+0%)
-Incidenza: 22.8705722769232 (+65.0%)
+Incidenza: 35.55840497010473 (+55.0%)
 Colore: Bianca
 
 Valle d'Aosta
-Nuovi positivi: 3 (+200.0%)
+Nuovi positivi: 9 (+200.0%)
 Tempo di raddoppio: 4.0 giorni
-Tempo di raddoppio (media 7 giorni): 5.0 giorni
+Tempo di raddoppio (media 7 giorni): 10.0 giorni
 TI: 0 (0.0%)
-Ricoverati con sintomi: 1 (1.5%)
+Ricoverati con sintomi: 4 (6.0%)
 Ingressi TI: 0.0 (+0%)
-Variazione totale positivi: 0
-Variazione totale ospedalizzati: 0
-Variazione TI: 0
-Variazione ricoverati con sintomi: 0
-Deceduti totali: 473
-Deceduti giornalieri: 0 (+0%)
-Incidenza: 27.99238607098869 (+169.0%)
-Colore: Bianca
-
-Lombardia
-Nuovi positivi: 720 (+28.0%)
-Tempo di raddoppio: 20.0 giorni
-Tempo di raddoppio (media 7 giorni): 16.0 giorni
-TI: 29 (2.0%)
-Ricoverati con sintomi: 194 (3.0%)
-Ingressi TI: 0.0 (-1.0%)
-Tempo di dimezzamento: 7.0 giorni
-Tempo di dimezzamento (media 7 giorni): 46.0 giorni
-Variazione totale positivi: 476
-Variazione totale ospedalizzati: 14
-Variazione TI: 0
-Variazione ricoverati con sintomi: 14
-Deceduti totali: 33819
-Deceduti giornalieri: 1 (-67.0%)
-Incidenza: 37.66603421236702 (+37.0%)
-Colore: Bianca
-
-Veneto
-Nuovi positivi: 544 (+19.0%)
-Tempo di raddoppio: 28.0 giorni
-Tempo di raddoppio (media 7 giorni): 12.0 giorni
-TI: 16 (1.6%)
-Ricoverati con sintomi: 99 (1.6%)
-Ingressi TI: 0.0 (-1.0%)
-Tempo di dimezzamento: 7.0 giorni
-Tempo di raddoppio (media 7 giorni): 27 giorni
-Variazione totale positivi: 235
-Variazione totale ospedalizzati: 8
-Variazione TI: 0
-Variazione ricoverati con sintomi: 8
-Deceduti totali: 11634
-Deceduti giornalieri: 0 (-100.0%)
-Incidenza: 88.66329325312509 (+52.0%)
-Colore: Bianca
-
-Friuli Venezia Giulia
-Nuovi positivi: 75 (-18.0%)
-Tempo di dimezzamento: 29.0 giorni
-Tempo di raddoppio (media 7 giorni): 6.0 giorni
-TI: 1 (0.6%)
-Ricoverati con sintomi: 10 (0.8%)
-Ingressi TI: 0.0 (+0%)
-Variazione totale positivi: 28
-Variazione totale ospedalizzati: -1
-Variazione TI: -1
-Variazione ricoverati con sintomi: 0
-Deceduti totali: 3790
-Deceduti giornalieri: 1 (+0%)
-Incidenza: 33.5760759266997 (+112.0%)
-Colore: Bianca
-
-Liguria
-Nuovi positivi: 144 (+31.0%)
-Tempo di raddoppio: 18.0 giorni
-Tempo di raddoppio (media 7 giorni): 8.0 giorni
-TI: 6 (2.8%)
-Ricoverati con sintomi: 37 (2.2%)
-Ingressi TI: 0.0 (+0%)
-Tempo di dimezzamento (media 7 giorni): 9.0 giorni
-Variazione totale positivi: 87
-Variazione totale ospedalizzati: 2
-Variazione TI: 0
-Variazione ricoverati con sintomi: 2
-Deceduti totali: 4360
-Deceduti giornalieri: 0 (-100.0%)
-Incidenza: 54.30127765397494 (+90.0%)
-Colore: Bianca
-
-Emilia-Romagna
-Nuovi positivi: 419 (+29.0%)
-Tempo di raddoppio: 19.0 giorni
-Tempo di raddoppio (media 7 giorni): 7.0 giorni
-TI: 13 (1.7%)
-Ricoverati con sintomi: 169 (2.6%)
-Ingressi TI: 5.0 (+4.0%)
-Tempo di raddoppio: 3 giorni
-Tempo di raddoppio (media 7 giorni): 6 giorni
-Variazione totale positivi: 326
-Variazione totale ospedalizzati: 11
-Variazione TI: 4
-Variazione ricoverati con sintomi: 7
-Deceduti totali: 13281
-Deceduti giornalieri: 2 (+100.0%)
-Incidenza: 70.3610275622133 (+100.0%)
-Colore: Bianca
-
-Toscana
-Nuovi positivi: 661 (+116.0%)
-Tempo di raddoppio: 6.0 giorni
-Tempo di raddoppio (media 7 giorni): 6.0 giorni
-TI: 16 (2.8%)
-Ricoverati con sintomi: 105 (2.1%)
-Ingressi TI: 0.0 (+0%)
-Tempo di raddoppio (media 7 giorni): 6 giorni
-Variazione totale positivi: 523
-Variazione totale ospedalizzati: -7
-Variazione TI: -3
-Variazione ricoverati con sintomi: -4
-Deceduti totali: 6910
-Deceduti giornalieri: 2 (+0%)
-Incidenza: 87.25665562192033 (+119.0%)
-Colore: Bianca
-
-Umbria
-Nuovi positivi: 143 (+86.0%)
-Tempo di raddoppio: 8.0 giorni
-Tempo di raddoppio (media 7 giorni): 7.0 giorni
-TI: 2 (2.1%)
-Ricoverati con sintomi: 13 (1.9%)
-Ingressi TI: 0.0 (+0%)
-Variazione totale positivi: 121
+Variazione totale positivi: 8
 Variazione totale ospedalizzati: 1
 Variazione TI: 0
 Variazione ricoverati con sintomi: 1
-Deceduti totali: 1424
+Deceduti totali: 473
 Deceduti giornalieri: 0 (+0%)
-Incidenza: 74.69847672567846 (+93.0%)
+Incidenza: 45.58760017275301 (+63.0%)
 Colore: Bianca
 
-Marche
-Nuovi positivi: 162 (+122.0%)
-Tempo di raddoppio: 6.0 giorni
-Tempo di raddoppio (media 7 giorni): 8.0 giorni
-TI: 4 (1.9%)
-Ricoverati con sintomi: 17 (1.8%)
-Ingressi TI: 0.0 (-1.0%)
-Tempo di dimezzamento: 7.0 giorni
-Variazione totale positivi: 114
-Variazione totale ospedalizzati: 5
-Variazione TI: 0
-Variazione ricoverati con sintomi: 5
-Deceduti totali: 3039
-Deceduti giornalieri: 0 (-100.0%)
-Incidenza: 45.01967379577331 (+91.0%)
-Colore: Bianca
-
-Lazio
-Nuovi positivi: 772 (+25.0%)
-Tempo di raddoppio: 21.0 giorni
-Tempo di raddoppio (media 7 giorni): 13.0 giorni
-TI: 36 (3.8%)
-Ricoverati con sintomi: 262 (4.1%)
+Lombardia
+Nuovi positivi: 806 (+12.0%)
+Tempo di raddoppio: 43.0 giorni
+Tempo di raddoppio (media 7 giorni): 34.0 giorni
+TI: 32 (2.3%)
+Ricoverati con sintomi: 247 (3.9%)
 Ingressi TI: 1.0 (+0%)
-Tempo di raddoppio (media 7 giorni): 7 giorni
-Variazione totale positivi: 692
-Variazione totale ospedalizzati: 9
-Variazione TI: 1
-Variazione ricoverati con sintomi: 8
-Deceduti totali: 8396
-Deceduti giornalieri: 2 (+0%)
-Incidenza: 87.14839202877148 (+43.0%)
+Tempo di raddoppio (media 7 giorni): 9 giorni
+Variazione totale positivi: 455
+Variazione totale ospedalizzati: 10
+Variazione TI: 0
+Variazione ricoverati con sintomi: 10
+Deceduti totali: 33834
+Deceduti giornalieri: 4 (+300.0%)
+Incidenza: 43.440096645239805 (+15.0%)
 Colore: Bianca
 
-Abruzzo
-Nuovi positivi: 141 (+117.0%)
-Tempo di raddoppio: 6.0 giorni
-Tempo di raddoppio (media 7 giorni): 11.0 giorni
-TI: 0 (0.0%)
-Ricoverati con sintomi: 26 (2.0%)
+Veneto
+Nuovi positivi: 779 (+43.0%)
+Tempo di raddoppio: 14.0 giorni
+Tempo di raddoppio (media 7 giorni): 47.0 giorni
+TI: 16 (1.6%)
+Ricoverati con sintomi: 137 (2.3%)
 Ingressi TI: 0.0 (+0%)
-Variazione totale positivi: 99
+Tempo di raddoppio (media 7 giorni): 61 giorni
+Variazione totale positivi: 233
+Variazione totale ospedalizzati: 12
+Variazione TI: 0
+Variazione ricoverati con sintomi: 12
+Deceduti totali: 11644
+Deceduti giornalieri: 1 (+0%)
+Incidenza: 98.31664765030999 (+11.0%)
+Colore: Bianca
+
+Friuli Venezia Giulia
+Nuovi positivi: 133 (+77.0%)
+Tempo di raddoppio: 8.0 giorni
+Tempo di raddoppio (media 7 giorni): 13.0 giorni
+TI: 4 (2.3%)
+Ricoverati con sintomi: 21 (1.6%)
+Ingressi TI: 0.0 (+0%)
+Tempo di raddoppio (media 7 giorni): 12 giorni
+Variazione totale positivi: 42
+Variazione totale ospedalizzati: -1
+Variazione TI: 0
+Variazione ricoverati con sintomi: -1
+Deceduti totali: 3790
+Deceduti giornalieri: 0 (-100.0%)
+Incidenza: 48.167160773858086 (+43.0%)
+Colore: Bianca
+
+Liguria
+Nuovi positivi: 152 (+6.0%)
+Tempo di raddoppio: 90.0 giorni
+Tempo di raddoppio (media 7 giorni): 368.0 giorni
+TI: 12 (5.6%)
+Ricoverati con sintomi: 35 (2.1%)
+Ingressi TI: 1.0 (+0%)
+Tempo di raddoppio (media 7 giorni): 2 giorni
+Variazione totale positivi: -24
 Variazione totale ospedalizzati: 2
 Variazione TI: 0
 Variazione ricoverati con sintomi: 2
-Deceduti totali: 2514
+Deceduti totali: 4366
 Deceduti giornalieri: 0 (+0%)
-Incidenza: 33.7727918042631 (+53.0%)
+Incidenza: 55.022671439233065 (+1.0%)
+Colore: Bianca
+
+Emilia-Romagna
+Nuovi positivi: 495 (+18.0%)
+Tempo di raddoppio: 29.0 giorni
+Tempo di raddoppio (media 7 giorni): 27.0 giorni
+TI: 22 (2.9%)
+Ricoverati con sintomi: 256 (3.9%)
+Ingressi TI: 0.0 (-1.0%)
+Tempo di dimezzamento: 7.0 giorni
+Tempo di raddoppio (media 7 giorni): 61 giorni
+Variazione totale positivi: 360
+Variazione totale ospedalizzati: 9
+Variazione TI: 0
+Variazione ricoverati con sintomi: 9
+Deceduti totali: 13286
+Deceduti giornalieri: 1 (-50.0%)
+Incidenza: 84.29434788812753 (+20.0%)
+Colore: Bianca
+
+Toscana
+Nuovi positivi: 765 (+16.0%)
+Tempo di raddoppio: 33.0 giorni
+Tempo di raddoppio (media 7 giorni): 16.0 giorni
+TI: 21 (3.7%)
+Ricoverati con sintomi: 177 (3.5%)
+Ingressi TI: 0.0 (+0%)
+Tempo di raddoppio (media 7 giorni): 8 giorni
+Variazione totale positivi: 528
+Variazione totale ospedalizzati: 5
+Variazione TI: -2
+Variazione ricoverati con sintomi: 7
+Deceduti totali: 6921
+Deceduti giornalieri: 2 (+0.0%)
+Incidenza: 117.91293562316608 (+35.0%)
+Colore: Bianca
+
+Umbria
+Nuovi positivi: 187 (+31.0%)
+Tempo di raddoppio: 18.0 giorni
+Tempo di raddoppio (media 7 giorni): 33.0 giorni
+TI: 2 (2.2%)
+Ricoverati con sintomi: 20 (2.9%)
+Ingressi TI: 0.0 (+0%)
+Tempo di dimezzamento (media 7 giorni): 7.0 giorni
+Variazione totale positivi: 111
+Variazione totale ospedalizzati: 3
+Variazione TI: 0
+Variazione ricoverati con sintomi: 3
+Deceduti totali: 1424
+Deceduti giornalieri: 0 (+0%)
+Incidenza: 86.65023300178702 (+16.0%)
+Colore: Bianca
+
+Marche
+Nuovi positivi: 211 (+30.0%)
+Tempo di raddoppio: 18.0 giorni
+Tempo di raddoppio (media 7 giorni): 15.0 giorni
+TI: 5 (2.4%)
+Ricoverati con sintomi: 37 (3.9%)
+Ingressi TI: 0.0 (+0%)
+Tempo di raddoppio (media 7 giorni): 7 giorni
+Variazione totale positivi: 150
+Variazione totale ospedalizzati: 4
+Variazione TI: 0
+Variazione ricoverati con sintomi: 4
+Deceduti totali: 3039
+Deceduti giornalieri: 0 (+0%)
+Incidenza: 62.40612637769457 (+39.0%)
+Colore: Bianca
+
+Lazio
+Nuovi positivi: 513 (-34.0%)
+Tempo di dimezzamento: 17.0 giorni
+Tempo di dimezzamento (media 7 giorni): 37.0 giorni
+TI: 51 (5.4%)
+Ricoverati con sintomi: 379 (5.9%)
+Ingressi TI: 1.0 (+0.0%)
+Tempo di raddoppio (media 7 giorni): 9 giorni
+Variazione totale positivi: 512
+Variazione totale ospedalizzati: 23
+Variazione TI: 1
+Variazione ricoverati con sintomi: 22
+Deceduti totali: 8410
+Deceduti giornalieri: 1 (-50.0%)
+Incidenza: 74.86491651753914 (-14.0%)
+Colore: Bianca
+
+Abruzzo
+Nuovi positivi: 126 (-11.0%)
+Tempo di dimezzamento: 48.0 giorni
+Tempo di raddoppio (media 7 giorni): 26.0 giorni
+TI: 1 (0.6%)
+Ricoverati con sintomi: 39 (2.9%)
+Ingressi TI: 0.0 (+0%)
+Variazione totale positivi: 63
+Variazione totale ospedalizzati: -3
+Variazione TI: 0
+Variazione ricoverati con sintomi: -3
+Deceduti totali: 2515
+Deceduti giornalieri: 0 (+0%)
+Incidenza: 40.72828668385962 (+21.0%)
 Colore: Bianca
 
 Molise
-Nuovi positivi: 14 (-7.0%)
-Tempo di dimezzamento: 75.0 giorni
-Tempo di dimezzamento (media 7 giorni): 24.0 giorni
-TI: 0 (0.0%)
+Nuovi positivi: 15 (+7.0%)
+Tempo di raddoppio: 70.0 giorni
+Tempo di raddoppio (media 7 giorni): 41.0 giorni
+TI: 1 (2.6%)
 Ricoverati con sintomi: 1 (0.6%)
 Ingressi TI: 0.0 (+0%)
-Variazione totale positivi: -12
+Variazione totale positivi: 7
 Variazione totale ospedalizzati: 0
 Variazione TI: 0
 Variazione ricoverati con sintomi: 0
 Deceduti totali: 492
 Deceduti giornalieri: 0 (+0%)
-Incidenza: 18.634615128645397 (-22.0%)
+Incidenza: 20.963942019726073 (+13.0%)
 Colore: Bianca
 
 Campania
-Nuovi positivi: 345 (+18.0%)
-Tempo di raddoppio: 29.0 giorni
-Tempo di raddoppio (media 7 giorni): 24.0 giorni
-TI: 9 (1.6%)
-Ricoverati con sintomi: 188 (4.9%)
-Ingressi TI: 0.0 (+0%)
-Tempo di dimezzamento (media 7 giorni): 11.0 giorni
-Variazione totale positivi: 126
-Variazione totale ospedalizzati: -1
-Variazione TI: -1
-Variazione ricoverati con sintomi: 0
-Deceduti totali: 7585
-Deceduti giornalieri: 0 (-100.0%)
-Incidenza: 34.155307386387214 (+22.0%)
+Nuovi positivi: 496 (+44.0%)
+Tempo di raddoppio: 13.0 giorni
+Tempo di raddoppio (media 7 giorni): 16.0 giorni
+TI: 12 (2.2%)
+Ricoverati con sintomi: 239 (6.2%)
+Ingressi TI: 1.0 (+0%)
+Tempo di raddoppio (media 7 giorni): 9 giorni
+Variazione totale positivi: -305
+Variazione totale ospedalizzati: 17
+Variazione TI: 1
+Variazione ricoverati con sintomi: 16
+Deceduti totali: 7604
+Deceduti giornalieri: 2 (+0%)
+Incidenza: 46.112290956301344 (+35.0%)
 Colore: Bianca
 
 Puglia
-Nuovi positivi: 163 (+17.0%)
-Tempo di raddoppio: 30.0 giorni
-Tempo di raddoppio (media 7 giorni): 8.0 giorni
-TI: 9 (1.9%)
-Ricoverati con sintomi: 75 (2.7%)
-Ingressi TI: 1.0 (+0%)
-Tempo di raddoppio (media 7 giorni): 22 giorni
-Variazione totale positivi: 93
-Variazione totale ospedalizzati: -4
-Variazione TI: -1
-Variazione ricoverati con sintomi: -3
-Deceduti totali: 6669
-Deceduti giornalieri: 1 (-80.0%)
-Incidenza: 23.726982866234707 (+86.0%)
+Nuovi positivi: 236 (+45.0%)
+Tempo di raddoppio: 13.0 giorni
+Tempo di raddoppio (media 7 giorni): 15.0 giorni
+TI: 12 (2.6%)
+Ricoverati con sintomi: 84 (3.0%)
+Ingressi TI: 1.0 (+0.0%)
+Variazione totale positivi: 144
+Variazione totale ospedalizzati: 2
+Variazione TI: 0
+Variazione ricoverati con sintomi: 2
+Deceduti totali: 6671
+Deceduti giornalieri: 0 (-100.0%)
+Incidenza: 32.985059336428634 (+39.0%)
 Colore: Bianca
 
 Basilicata
-Nuovi positivi: 15 (-48.0%)
-Tempo di dimezzamento: 12.0 giorni
-Tempo di raddoppio (media 7 giorni): 18.0 giorni
-TI: 0 (0.0%)
-Ricoverati con sintomi: 12 (3.5%)
+Nuovi positivi: 50 (+233.0%)
+Tempo di raddoppio: 4.0 giorni
+Tempo di raddoppio (media 7 giorni): 6.0 giorni
+TI: 1 (1.1%)
+Ricoverati con sintomi: 19 (5.8%)
 Ingressi TI: 0.0 (+0%)
-Variazione totale positivi: 7
-Variazione totale ospedalizzati: -1
+Variazione totale positivi: 27
+Variazione totale ospedalizzati: 0
 Variazione TI: 0
-Variazione ricoverati con sintomi: -1
-Deceduti totali: 591
+Variazione ricoverati con sintomi: 0
+Deceduti totali: 592
 Deceduti giornalieri: 0 (+0%)
-Incidenza: 21.870605544650378 (+30.0%)
+Incidenza: 50.42891691700377 (+131.0%)
 Colore: Bianca
 
 Calabria
-Nuovi positivi: 145 (+104.0%)
-Tempo di raddoppio: 7.0 giorni
-Tempo di raddoppio (media 7 giorni): 7.0 giorni
-TI: 4 (2.6%)
-Ricoverati con sintomi: 59 (7.2%)
-Ingressi TI: 0.0 (-1.0%)
-Tempo di dimezzamento: 7.0 giorni
-Tempo di dimezzamento (media 7 giorni): 22.0 giorni
-Variazione totale positivi: 67
-Variazione totale ospedalizzati: 4
-Variazione TI: -1
-Variazione ricoverati con sintomi: 5
-Deceduti totali: 1254
-Deceduti giornalieri: 0 (+0%)
-Incidenza: 38.910094978644324 (+104.0%)
+Nuovi positivi: 151 (+4.0%)
+Tempo di raddoppio: 120.0 giorni
+Tempo di raddoppio (media 7 giorni): 27.0 giorni
+TI: 5 (3.0%)
+Ricoverati con sintomi: 74 (9.6%)
+Ingressi TI: 1.0 (+0%)
+Tempo di raddoppio (media 7 giorni): 9 giorni
+Variazione totale positivi: -93
+Variazione totale ospedalizzati: 3
+Variazione TI: 0
+Variazione ricoverati con sintomi: 3
+Deceduti totali: 1260
+Deceduti giornalieri: 3 (+0%)
+Incidenza: 46.45981489987382 (+19.0%)
 Colore: Bianca
 
 Sicilia
-Nuovi positivi: 627 (+14.0%)
-Tempo di raddoppio: 37.0 giorni
-Tempo di raddoppio (media 7 giorni): 22.0 giorni
-TI: 26 (4.0%)
-Ricoverati con sintomi: 263 (9.0%)
-Ingressi TI: 1.0 (+0%)
-Tempo di raddoppio (media 7 giorni): 5 giorni
-Variazione totale positivi: 435
-Variazione totale ospedalizzati: 25
-Variazione TI: -4
-Variazione ricoverati con sintomi: 29
-Deceduti totali: 6036
-Deceduti giornalieri: 6 (-33.0%)
-Incidenza: 76.26213004764845 (+25.0%)
+Nuovi positivi: 808 (+29.0%)
+Tempo di raddoppio: 19.0 giorni
+Tempo di raddoppio (media 7 giorni): 19.0 giorni
+TI: 36 (5.0%)
+Ricoverati con sintomi: 351 (11.9%)
+Ingressi TI: 6.0 (+5.0%)
+Tempo di raddoppio: 3 giorni
+Tempo di raddoppio (media 7 giorni): 80 giorni
+Variazione totale positivi: 338
+Variazione totale ospedalizzati: 17
+Variazione TI: 4
+Variazione ricoverati con sintomi: 13
+Deceduti totali: 6062
+Deceduti giornalieri: 6 (+0.0%)
+Incidenza: 98.53772801207722 (+29.0%)
 Colore: Bianca
 
 Sardegna
-Nuovi positivi: 403 (+47.0%)
-Tempo di raddoppio: 13.0 giorni
-Tempo di raddoppio (media 7 giorni): 9.0 giorni
-TI: 9 (4.2%)
-Ricoverati con sintomi: 69 (4.3%)
-Ingressi TI: 1.0 (+0.0%)
-Tempo di raddoppio (media 7 giorni): 10 giorni
-Variazione totale positivi: 329
-Variazione totale ospedalizzati: -1
+Nuovi positivi: 350 (-13.0%)
+Tempo di dimezzamento: 39.0 giorni
+Tempo di raddoppio (media 7 giorni): 107.0 giorni
+TI: 19 (9.7%)
+Ricoverati con sintomi: 87 (5.4%)
+Ingressi TI: 2.0 (+1.0%)
+Tempo di raddoppio: 7 giorni
+Tempo di raddoppio (media 7 giorni): 6 giorni
+Variazione totale positivi: 280
+Variazione totale ospedalizzati: 7
 Variazione TI: 0
-Variazione ricoverati con sintomi: -1
-Deceduti totali: 1498
-Deceduti giornalieri: 0 (+0%)
-Incidenza: 124.71914922925428 (+69.0%)
+Variazione ricoverati con sintomi: 7
+Deceduti totali: 1506
+Deceduti giornalieri: 1 (+0%)
+Incidenza: 130.48973673090634 (+5.0%)
 Colore: Bianca
 
 P.A. Bolzano
-Nuovi positivi: 25 (-7.0%)
-Tempo di dimezzamento: 68.0 giorni
-Tempo di dimezzamento (media 7 giorni): 75.0 giorni
-TI: 0 (0.0%)
-Ricoverati con sintomi: 11 (2.8%)
+Nuovi positivi: 28 (+12.0%)
+Tempo di raddoppio: 43.0 giorni
+Tempo di raddoppio (media 7 giorni): 36.0 giorni
+TI: 2 (2.0%)
+Ricoverati con sintomi: 8 (2.0%)
 Ingressi TI: 0.0 (+0%)
-Variazione totale positivi: 14
-Variazione totale ospedalizzati: 1
+Variazione totale positivi: 20
+Variazione totale ospedalizzati: 0
 Variazione TI: 0
-Variazione ricoverati con sintomi: 1
-Deceduti totali: 1183
-Deceduti giornalieri: 0 (-100.0%)
-Incidenza: 26.096229376469086 (-7.0%)
+Variazione ricoverati con sintomi: 0
+Deceduti totali: 1184
+Deceduti giornalieri: 0 (+0%)
+Incidenza: 29.851082524162482 (+14.0%)
 Colore: Bianca
 
 P.A. Trento
-Nuovi positivi: 25 (-42.0%)
-Tempo di dimezzamento: 14.0 giorni
-Tempo di raddoppio (media 7 giorni): 17.0 giorni
-TI: 0 (0.0%)
-Ricoverati con sintomi: 6 (1.2%)
+Nuovi positivi: 29 (+16.0%)
+Tempo di raddoppio: 33.0 giorni
+Tempo di dimezzamento (media 7 giorni): 43.0 giorni
+TI: 1 (1.1%)
+Ricoverati con sintomi: 8 (1.5%)
 Ingressi TI: 0.0 (+0%)
-Tempo di dimezzamento (media 7 giorni): 7.0 giorni
-Variazione totale positivi: 7
+Variazione totale positivi: 27
 Variazione totale ospedalizzati: 0
 Variazione TI: 0
 Variazione ricoverati con sintomi: 0
 Deceduti totali: 1363
 Deceduti giornalieri: 0 (+0%)
-Incidenza: 44.73575652014484 (+33.0%)
+Incidenza: 39.41880185176697 (-12.0%)
 Colore: Bianca
 
